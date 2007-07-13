@@ -18,7 +18,7 @@
 <?php } else { ?>
 <form method="post" action="<?php echo get_url('files', 'save'); ?>">
   <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
-  <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;"><?php echo $content; ?></textarea><br />
+  <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;"><?php echo htmlentities($content) ?></textarea><br />
   <p><input type="submit" name="save" accesskey="s" value="Save (Alt+S)" />
    or <a href="<?php echo get_url('files', 'browse', $progres_path); ?>">Cancel</a>
   </p>

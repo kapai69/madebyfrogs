@@ -9,14 +9,14 @@
     </p>
     <p class="content">
       <label for="snippet_content">Body</label>
-      <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%"><?php echo $snippet->content ?></textarea>
+      <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%"><?php echo htmlentities($snippet->content) ?></textarea>
     </p>
     <p>
       <label for="snippet_filter">Filter</label>
       <select id="snippet[filter_id]" name="snippet[filter_id]">
         <option value=""<?php if($snippet->filter_id == '') echo ' selected="selected"'; ?>>&#8212; none &#8212;</option>
 <?php foreach ($filters as $filter) { ?>
-        <option value="<?php echo$filter?>"<?php if($snippet->filter_id == $filter) echo ' selected="selected"'; ?>><?php echo$filter?></option>
+        <option value="<?php echo$filter?>"<?php if($snippet->filter_id == $filter) echo ' selected="selected"'; ?>><?php echo $filter ?></option>
 <?php } // foreach ?>
       </select>
     </p>

@@ -17,7 +17,7 @@
     </div>
     <p class="content">
       <label for="layout_content">Body</label>
-      <textarea class="textarea" cols="40" id="layout_content" name="layout[content]" rows="20" style="width: 100%"><?php echo $layout->content ?></textarea>
+      <textarea class="textarea" cols="40" id="layout_content" name="layout[content]" rows="20" style="width: 100%"><?php echo htmlentities($layout->content) ?></textarea>
     </p>
     <p class="clear">&nbsp;</p>
 <?php if (isset($layout->updated_on)) { ?>

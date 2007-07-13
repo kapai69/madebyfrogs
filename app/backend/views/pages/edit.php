@@ -67,7 +67,7 @@
 <?php } // foreach ?>
       </select>
     </p>
-    <div><textarea class="textarea" id="part[<?php echo ($index_part-1) ?>][content]" name="part[<?php echo ($index_part-1) ?>][content]" style="width: 100%"><?php echo $page_part->content; ?></textarea></div>
+    <div><textarea class="textarea" id="part[<?php echo ($index_part-1) ?>][content]" name="part[<?php echo ($index_part-1) ?>][content]" style="width: 100%"><?php echo htmlentities($page_part->content) ?></textarea></div>
   </div>
 </div>
 <?php $index_part++; } // foreach (page_parts) ?>

@@ -56,7 +56,7 @@
         <input id="create_file_name" maxlength="255" name="file[name]" type="text" value="" /> 
         <input id="create_file_button" name="commit" type="submit" value="Create file" />
       </div>
-      <p><a class="close-link" href="javascript: Element.hide('create-file-popup');">Close</a></p>
+      <p><a class="close-link" href="#" onclick="Element.hide('create-file-popup'); return false;">Close</a></p>
     </form>
   </div>
   <div class="popup" id="create-directory-popup" style="display:none;">
@@ -67,7 +67,7 @@
         <input id="create_directory_name" maxlength="255" name="directory[name]" type="text" value="" /> 
         <input id="file_button" name="commit" type="submit" value="Create dir" />
       </div>
-      <p><a class="close-link" href="javascript: Element.hide('create-directory-popup');">Close</a></p>
+      <p><a class="close-link" href="#" onclick="Element.hide('create-directory-popup'); return false;">Close</a></p>
     </form>
   </div>
   <div class="popup" id="upload-file-popup" style="display:none;">
@@ -78,7 +78,7 @@
         <input id="upload_file" name="upload_file" type="file" />
         <input id="upload_file_button" name="commit" type="submit" value="Upload" />
       </div>
-      <p><a class="close-link" href="javascript: Element.hide('upload-file-popup');">Close</a></p>
+      <p><a class="close-link" href="#" onclick="Element.hide('upload-file-popup'); return false;">Close</a></p>
     </form>
   </div>
   <div class="popup" id="chmod-popup" style="display:none;">
@@ -89,7 +89,7 @@
         <input id="chmod_file_mode" maxlength="4" name="file[mode]" type="text" value="" /> 
         <input id="chmod_file_button" name="commit" type="submit" value="Change mode" />
       </div>
-      <p><a class="close-link" href="javascript: Element.hide('chmod-popup');">Close</a></p>
+      <p><a class="close-link" href="#" onclick="Element.hide('chmod-popup'); return false;">Close</a></p>
     </form>
   </div>
 </div>

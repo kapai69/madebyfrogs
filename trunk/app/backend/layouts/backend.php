@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title>Frog - Publishing for Small Teams</title>
+    <title><?php echo ADMIN_TITLE ?> - <?php echo ADMIN_SUBTITLE ?></title>
     
     <base href="<?php echo substr(BASE_URL, -1, 1) == '?' ? substr(BASE_URL, 0, strlen(BASE_URL)-1): BASE_URL.'/'; ?>" />
     <link href="stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
@@ -24,8 +24,8 @@
   </head>
   <body>
     <div id="header">
-      <div id="site-title"><a href="<?php echo get_url() ?>">Frog</a></div>
-      <div id="site-subtitle">Publishing for Small Teams</div>
+      <div id="site-title"><a href="<?php echo get_url() ?>"><?php echo ADMIN_TITLE ?></a></div>
+      <div id="site-subtitle"><?php echo ADMIN_SUBTITLE ?></div>
       <div id="navigation">
 <?php $ctrl = get_controller(); if ($ctrl == 'pages') { ?>
         <strong><a href="<?php echo get_url('pages') ?>">Pages</a></strong> <span class="separator"> | </span>
@@ -68,7 +68,7 @@
     <hr class="hidden" />
     <div id="footer">
       <p>
-      This site was made with PHP and is powered by Frog version <?php echo FROG_VERSION; ?><br />
+      This site was made with PHP and is powered by <a href="http://www.philworks.com/frog/">Frog</a> version <?php echo FROG_VERSION ?><br />
 <?php if (DEBUG) { ?>
       Page rendered in <?php echo execution_time() ?> seconds<br />
       Memory usage: <?php echo memory_usage() ?>

@@ -7,13 +7,13 @@ include '../env/core/Template.php';
 include 'sql.functions.php';
 
 if (file_exists($config_file)) {
-include $config_file;
+  include $config_file;
 }
 
 $msg = '';
 
 // lets install this nice little CMS
-if (isset($_POST['commit']) && (!file_exists($config_file) || is_writable($config_file)) && !defined('DEBUG')) {
+if ( ! defined('DEBUG') && isset($_POST['commit']) && ((file_exists($config_file) && is_writable($config_file)) || is_writable('../config'))) {
  
     $config_tmpl = new Template('config.tmpl');
     
@@ -64,12 +64,14 @@ if (isset($_POST['commit']) && (!file_exists($config_file) || is_writable($confi
     <div id="main">
       <div id="content">
               <!-- Content -->
-        <h1>Installation of Frog</h1>
+        <h1>Frog Installation</h1>
 
 <p style="color: red">
-<?php if (!is_writable($config_file)) { ?>
+<?php if (file_exists($config_file) && ! is_writable($config_file)) { ?>
   <strong>error</strong>: config/config.php must be writable<br />
-<?php } // if ?>
+<?php } else if ( ! file_exists($config_file) && ! is_writable('../config')) { ?>
+  <strong>error</strong>: config/ must be writable<br /> 
+<?php } ?>
 <?php if (!is_writable('../public/')) { ?>
   <strong>error</strong>: public/ must be writable<br />
 <?php } // if ?>
@@ -78,6 +80,22 @@ if (isset($_POST['commit']) && (!file_exists($config_file) || is_writable($confi
 <?php if (!defined('DEBUG')) { ?>
 <form action="index.php" method="post">
   <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td colspan="3"><h3>Site information</h3></td>
+    </tr>
+    <tr>
+      <td class="label"><label class="optional" for="config_admin_site_title">Admin Site title</label></td>
+      <td class="field"><input class="textbox" id="config_admin_site_title" maxlength="40" name="config[admin_title]" size="40" type="text" value="Frog" /></td>
+      <td class="help">Optional. Changes the title shown in backend.</td>
+    </tr>
+    <tr>
+      <td class="label"><label class="optional" for="config_admin_site_subtitle">Admin Site subtitle</label></td>
+      <td class="field"><input class="textbox" id="config_admin_site_subtitle" maxlength="40" name="config[admin_subtitle]" size="40" type="text" value="Publishing for Small Teams" /></td>
+      <td class="help">Optional. Changes the subtitle shown in backend.</td>
+    </tr>
+    <tr>
+      <td colspan="3"><h3>Database information</h3></td>
+    </tr>
     <tr>
       <td class="label"><label for="user_name">Database server</label></td>
       <td class="field"><input class="textbox" id="user_name" maxlength="100" name="config[db_host]" size="100" type="text" value="localhost" /></td>

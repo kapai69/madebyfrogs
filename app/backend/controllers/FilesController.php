@@ -48,22 +48,16 @@ class FilesController extends Controller
         $this->assignToView('dir', $this->path);
         $this->assignToView('files', $this->_getListFiles());
         $this->render();
-    } // index
+    } // browse
 
     function view()
     {
         $content = '';
         $filename = join('/',get_params());
         $file = FILES_DIR.'/'.$filename;
-        if (!$this->_isImage($file)) {
-            if (file_exists($file)) {
-                // get content and make some changes to display
-                $content = file_get_contents($file);
-                $content = preg_replace("/&shy;|&amp;shy;/","\\xad", $content);
-                $content = str_replace('<','&lt;', $content);
-                $content = str_replace('>','&gt;', $content);
-            }
-        } // if
+        if ( ! $this->_isImage($file) && file_exists($file)) {
+            $content = file_get_contents($file);
+        }
 
         $this->setLayout('backend');
         $this->setView('files/view');
@@ -71,7 +65,7 @@ class FilesController extends Controller
         $this->assignToView('filename', $filename);
         $this->assignToView('content', $content);
         $this->render();
-    } // index
+    }
 
     function save()
     {
@@ -92,7 +86,7 @@ class FilesController extends Controller
         }
         
         redirect_to(get_url('files', 'browse', substr($data['name'], 0, strrpos($data['name'], '/'))));
-    } // save
+    }
     
     function create_file()
     {
@@ -167,7 +161,7 @@ class FilesController extends Controller
             }
         }
         redirect_to(get_url('files', 'browse', $path));
-    } // upload
+    }
 
     function chmod()
     {
@@ -199,7 +193,7 @@ class FilesController extends Controller
     {
         $path = join('/', get_params());
         return str_replace('..', '', $path);
-    } // _getPath
+    }
     
     function _getListFiles()
     { 
@@ -300,6 +294,6 @@ class FilesController extends Controller
         if (!@is_file($file)) return false;
         else if (!@exif_imagetype($file)) return false;
         else return true;
-    } // _isImage
+    }
 
-} // FilesController
+} // end FilesController class

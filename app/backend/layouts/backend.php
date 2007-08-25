@@ -12,8 +12,10 @@
     <script src="javascripts/string.js" type="text/javascript"></script>
     <script src="javascripts/effects.js" type="text/javascript"></script>
     <script src="javascripts/controls.js" type="text/javascript"></script>
+    <script src="javascripts/dragdrop.js" type="text/javascript"></script>
     <script src="javascripts/tabcontrol.js" type="text/javascript"></script>
     <script src="javascripts/ruledtable.js" type="text/javascript"></script>
+    <script src="javascripts/ruledlist.js" type="text/javascript"></script>
     <script src="javascripts/sitemap.js?021" type="text/javascript"></script>
 <?php echo include_javascript() ?>
 

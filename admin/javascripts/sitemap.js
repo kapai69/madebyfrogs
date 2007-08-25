@@ -1,23 +1,24 @@
 var SiteMap = Class.create();
-SiteMap.prototype = Object.extend({}, RuledTable.prototype); // Inherit from RuledTable
+SiteMap.prototype = Object.extend({}, RuledList.prototype); // Inherit from RuledList
 
 Object.extend(SiteMap.prototype, {
-
-  ruledTableInitialize: RuledTable.prototype.initialize,
+  
+  ruledListInitialize: RuledList.prototype.initialize,
   
   initialize: function(id, expanded) {
-    this.ruledTableInitialize(id);
+    this.ruledListInitialize(id);
     this.expandedRows = expanded;
   },
   
   onRowSetup: function(row) {
-    Event.observe(row, 'click', this.onMouseClickRow.bindAsEventListener(this), false);
+    var toggler = row.getElementsByTagName('img')[0];
+    Event.observe(toggler, 'click', this.onMouseClickRow.bindAsEventListener(this), false);
   },
   
   onMouseClickRow: function(event) {
     var element = Event.element(event);
     if (this.isExpander(element)) {
-      var row = Event.findElement(event, 'tr');
+      var row = Event.findElement(event, 'li');
       if (this.hasChildren(row)) {
         this.toggleBranch(row, element);
       }
@@ -37,7 +38,7 @@ Object.extend(SiteMap.prototype, {
   },
   
   isRow: function(element) {
-    return element.tagName && (element.tagName.strip().downcase() == 'tr');
+    return element.tagName && (element.tagName.strip().downcase() == 'li');
   },
   
   extractLevel: function(row) {
@@ -46,7 +47,7 @@ Object.extend(SiteMap.prototype, {
   },
   
   extractPageId: function(row) {
-    if (/page-(\d+)/i.test(row.id))
+    if (/page_(\d+)/i.test(row.id))
       return RegExp.$1.toInteger();
   },
   
@@ -57,7 +58,7 @@ Object.extend(SiteMap.prototype, {
       expanders.push(image);
     }.bind(this));
     return expanders.first();
-  },     
+  },
   
   saveExpandedCookie: function() {
     document.cookie = "expanded_rows=" + this.expandedRows.uniq().join(",");
@@ -65,59 +66,54 @@ Object.extend(SiteMap.prototype, {
   
   hideBranch: function(row, img) {
     var level = this.extractLevel(row);
-    var sibling = row.nextSibling;
-    while (sibling != null) {
-      if (this.isRow(sibling)) {
-        if (this.extractLevel(sibling) <= level) break;
-        Element.hide(sibling);
-      }
-      sibling = sibling.nextSibling;
+    
+    for (var i = row.childNodes.length-1; i>=0; i--) {
+        if (row.childNodes[i].nodeName == 'UL') {
+            Element.hide(row.childNodes[i]);
+            break;
+        }
     }
+
     var pageId = this.extractPageId(row);
     var newExpanded = [];
-    for (i = 0; i < this.expandedRows.length; i++)
-      if (this.expandedRows[i] != pageId)
+    
+    for (i = 0; i < this.expandedRows.length; i++) {
+      if (this.expandedRows[i] != pageId) {
         newExpanded.push(this.expandedRows[i]);
+      }
+    }
+    
     this.expandedRows = newExpanded;
     this.saveExpandedCookie();
-    if (img == null)
+    
+    if (img == null) {
       img = this.getExpanderImageForRow(row);
+    }
+    
     img.src = img.src.replace(/collapse/, 'expand');
-    Element.removeClassName(row, 'children-visible');
-    Element.addClassName(row, 'children-hidden');
+    row.className = row.className.replace(/children-visible/, 'children-hidden');
   },
   
   showBranchInternal: function(row, img) {
     var level = this.extractLevel(row);
-    var sibling = row.nextSibling;
     var children = false;
-    var childOwningSiblings = [];        
-    while (sibling != null) {
-      if (this.isRow(sibling)) {
-        var siblingLevel = this.extractLevel(sibling);
-        if (siblingLevel <= level) break;
-        if (siblingLevel == level + 1) {
-          Element.show(sibling);
-          if (sibling.className.match(/children-visible/)) {
-            childOwningSiblings.push(sibling);
-          } else {
-            this.hideBranch(sibling);
-          }
+
+    for (var i=row.childNodes.length-1; i>=0; i--) {
+        if (row.childNodes[i].nodeName == 'UL') {
+            Element.show(row.childNodes[i]);
+            children = true;
+            break;
         }
-        children = true;
-      }
-      sibling = sibling.nextSibling;
     }
+
     if ( ! children)
       this.getBranch(row);
+
     if (img == null)
-      img = this.getExpanderImageForRow(row);          
+      img = this.getExpanderImageForRow(row);
+
     img.src = img.src.replace(/expand/, 'collapse');
-    for (i=0; i < childOwningSiblings.length; i++) {
-        this.showBranch(childOwningSiblings[i], null);            
-    }        
-    Element.removeClassName(row, 'children-hidden');
-    Element.addClassName(row, 'children-visible');
+    row.className = row.className.replace(/children-hidden/, 'children-visible');
   },
   
   showBranch: function(row, img) {
@@ -133,22 +129,15 @@ Object.extend(SiteMap.prototype, {
       row,
       '?/pages/children/' + id + '/' + level,
       {
+        evalScripts: true,
         asynchronous: true,
-        insertion: Insertion.After,
+        insertion: Insertion.EndOfRow,
         onLoading: function(request) {
           Element.show('busy-' + id);
           this.updating = true;
         }.bind(this),
         onComplete: function(request) {
-          var sibling = row.nextSibling;
-          while (sibling != null) {
-            if (this.isRow(sibling)) {
-              var siblingLevel = this.extractLevel(sibling);
-              if (siblingLevel <= level) break;
-              this.setupRow(sibling);
-            }
-            sibling = sibling.nextSibling;
-          }
+          this.setupRow(row);
           this.updating = false;
           Effect.Fade('busy-' + id);
         }.bind(this)
@@ -167,3 +156,15 @@ Object.extend(SiteMap.prototype, {
   }
 
 });
+
+Insertion.EndOfRow = Class.create();
+Insertion.EndOfRow.prototype = {
+  initialize: function(element, content) {
+    this.element = $(element);
+    this.content = content.stripScripts();
+
+    this.element.innerHTML += this.content;
+
+    setTimeout(function() {content.evalScripts()}, 10);
+  }
+};

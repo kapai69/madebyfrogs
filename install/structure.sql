@@ -73,6 +73,7 @@ CREATE TABLE `{TABLEPREFIX}pages` (
   `nleft` int(11) unsigned NOT NULL,
   `nright` int(11) unsigned NOT NULL,
   `nlevel` tinyint(4) unsigned NOT NULL,
+  `position` mediumint(6) unsigned NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

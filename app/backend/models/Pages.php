@@ -60,7 +60,7 @@ class Pages extends NestedTree
 
     public function childrenOf($id)
     {
-        return $this->find(array('where' => 'parent_id='.$id, 'order' => 'created_on'));
+        return $this->find(array('where' => 'parent_id='.$id, 'order' => 'position, created_on'));
     }
     
     public function hasChildren($id)

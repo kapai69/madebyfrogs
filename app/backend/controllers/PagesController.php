@@ -287,6 +287,26 @@ class PagesController extends Controller
         $this->displayView();
     }
     
+    /**
+     * Ajax action to reorder (page->position) a page 
+     *
+     * all the child of the new page->parent_id have to be updated
+     * and all nested tree has to be rebuild
+     */
+    function reorder($parent_id)
+    {
+        parse_str($_POST['data']);
+
+        foreach ($pages as $position => $page_id) {
+            $this->pages->save(array(
+                'id' => (int) $page_id,
+                'position' => (int) $position,
+                'parent_id' => (int) $parent_id
+            ));
+        }
+        $this->pages->rebuild();
+    }
+    
     //
     // private methods
     //

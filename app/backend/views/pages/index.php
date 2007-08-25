@@ -1,29 +1,30 @@
 <?php use_helper('page'); ?>
 <h1>Pages</h1>
 
-<table id="site-map" class="index" cellpadding="0" cellspacing="0" border="0">
-  <thead>
-    <tr>
-      <th class="page">Page</th>
-      <th class="status">Status</th>
-      <th class="modify" colspan="2">Modify</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr id="page-1" class="node level-0 children-visible">
-      <td class="page" style="padding-left: 4px">
+<div id="site-map-def">
+    <div class="page">Page</div>
+    <div class="status">Status</div>
+    <div class="modify">Modify</div>
+    <div class="order">Order</div>
+</div>
+
+<ul id="site-map-root">
+    <li id="page_root" class="node level-0">
+      <div class="page" style="padding-left: 4px">
         <span class="w1">
-          <img align="center" alt="toggle children" class="expander" src="images/collapse.png" title="" /><a href="<?php echo get_url('pages/edit/1'); ?>" title="/"><img align="center" alt="page-icon" class="icon" src="images/page.png" title="" /> <span class="title"><?php echo $root->title; ?></span></a> 
-          <img align="center" alt="" class="busy" id="busy-1" src="images/spinner.gif" style="display: none;" title="" />
+          <a href="<?php echo get_url('pages/edit/1'); ?>" title="/"><img align="center" alt="page-icon" class="icon" src="images/page.png" title="" /> <span class="title"><?php echo $root->title; ?></span></a>
         </span>
-      </td>
-      <td class="status published-status">Published</td>
-      <td class="add-child"><a href="<?php echo get_url('pages/add/1'); ?>"><img alt="add child" src="images/add-child.png" /></a></td>
-      <td class="remove"><img alt="remove page" src="images/remove-disabled.png" /></td>
-    </tr>
-    <?php echo $content_children; ?>
-  </tbody>
-</table>
+      </div>
+      <div class="status published-status">Published</div>
+      <div class="modify">
+          <a href="<?php echo get_url('pages/add/1'); ?>"><img alt="add child" src="images/add-child.png" /></a></td>
+          <img class="remove" alt="remove page" src="images/remove-disabled.png" />
+          <img src="images/drag-disabled.png" alt="drag and drop disable" />
+      </div>
+    </li>
+</ul>
+
+<?php echo $content_children; ?>
 
 <script type="text/javascript">
 // <![CDATA[

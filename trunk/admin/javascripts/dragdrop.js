@@ -763,7 +763,7 @@ var Sortable = {
   
   _tree: function(element, options, parent) {
     var children = Sortable.findElements(element, options) || [];
-  
+
     for (var i = 0; i < children.length; ++i) {
       var match = children[i].id.match(options.format);
 

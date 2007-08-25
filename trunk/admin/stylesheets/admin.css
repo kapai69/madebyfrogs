@@ -177,16 +177,16 @@ h1 {
 #content table.index .status {
   width: 8em;
 }
-#content table.index td.status {
+#site-map .status {
   color: #9eb3bf;
 }
-#content table.index td.status.draft-status {
+#site-map .status.draft-status {
   color: #c00;
 }
-#content table.index td.status.published-status {
+#site-map .status.published-status {
   color: black;
 }
-#content table.index td.status.hidden-stats {
+#site-map .status.hidden-stats {
   color: #0c0;
 }
 
@@ -212,40 +212,42 @@ h1 {
   margin-left: .5em;
 }
 
-#content table.index .node.level-0 .page,
-#content table.index .node.level-1 .page,
-#content table.index .node.level-2 .page {
+#site-map-root .node.level-0 .page,
+#site-map .node.level-1 .page,
+#site-map .node.level-2 .page {
   font-size: 120%;
   font-weight: bold;
 }
-#content table.index .node.level-1 .page {
-  margin-left: 30px;
+#site-map .node.level-1 .page {
+  margin-left: 10px;
 }
-#content table.index .node.level-2 .page {
-  margin-left: 60px;
+#site-map .node.level-2 .page {
+  margin-left: 40px;
 }
-#content table.index .node.level-3 .page{
+#site-map .node.level-3 .page {
   font-size: 120%;
-  margin-left: 90px;
+  margin-left: 70px;
 }
-#content table.index .node.level-4 .page{
+#site-map .node.level-4 .page {
   font-size: 115%;
-  margin-left: 120px;
+  margin-left: 100px;
 }
-#content table.index .node.level-5 .page{
+#site-map .node.level-5 .page {
   font-size: 105%;
-  margin-left: 150px;
+  margin-left: 130px;
 }
-#content table.index .node.level-6 .page{
-  margin-left: 180px;
+#site-map .node.level-6 .page {
+  margin-left: 160px;
 }
-#content table.index .node.level-7 .page{
-  margin-left: 210px;
+#site-map .node.level-7 .page {
+  margin-left: 190px;
 }
-#content table.index .node .page a {
+#site-map-root .node .page a,
+#site-map .node .page a {
   text-decoration: none;
 }
-#content table.index .node .page a .title, #content table.index .node .page a:visited .title,
+#site-map-root .page a .title,
+#site-map .page a .title, #site-map .node .page a:visited .title,
 #content table.index .node .snippet a, #content table.index .node .snippet a:visited,
 #content table.index .node .layout a, #content table.index .node .layout a:visited,
 #content table.index .node .user a, #content table.index .node .user a:visited {
@@ -253,12 +255,13 @@ h1 {
   text-decoration: none;
 }
 
-#content table.index .node.virtual .page a .title, #content table.index .node.virtual .page a:visited .title {
+#site-map .node.virtual .page a .title, #site-map .node.virtual .page a:visited .title {
   color: #9eb3bf;
 }
 
-#content table.index .node .page a:hover .title, 
-#content table.index .node .page a:visited:hover .title,
+#site-map-root .node .page a:hover .title,
+#site-map .node .page a:hover .title, 
+#site-map .node .page a:visited:hover .title,
 #content table.index .node .snippet a:hover, 
 #content table.index .node .snippet a:visited:hover,
 #content table.index .node .layout a:hover, 
@@ -275,24 +278,26 @@ h1 {
   padding: 3em;
   text-align: center;
 }
-#content table.index .node .page .info {
+#site-map .node .page .info {
   color: #9eb3bf;
   font-style: italic;
   font-weight: normal;
 }
-#content table.index .no-children .w1 {
+#site-map .no-children .w1 {
   padding-left: 23px;
 }
-#content table.index .page .title,
-#content table.index .page .info {
+#site-map .page .title,
+#site-map .page .info {
   position: relative;
   top: 2px;
 }
-#content table.index .page img.expander {
+#site-map .page img.expander {
   padding: 3px;
   padding-top: 6px;
   padding-bottom: 6px;
 }
+#site-map .handle { cursor: move; }
+
 #content table.index .even:hover,
 #content table.index .odd:hover,
 #content table.index .even.hover,
@@ -300,7 +305,47 @@ h1 {
   background: #D6E8AA;
 }
 
-/* form elements */
+/* site map */
+
+#site-map-def { position: relative; }
+#site-map-def .page {}
+#site-map-def .status { position: absolute; top: 0px; right: 250px; width: 46px }
+#site-map-def .modify { position: absolute; top: 0px; right: 70px; width: 138px }
+#site-map-def .order  { position: absolute; top: 0px; right: 5px; width: 50px }
+#site-map-def div {
+    background-color: #f5f5f5;
+    font-size: 90%;
+    font-weight: normal;
+    padding: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+#site-map-root {
+    list-style: none;
+    margin: 0; 
+    padding: 0;
+    font-size: 90%;
+}
+#site-map {
+    list-style: none;
+    margin: 0; 
+    padding: 0;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 90%;
+}
+#site-map-root li,
+#site-map li {
+    padding: 2px 0;
+    position: relative;
+    border-top: 1px solid #eaeaea;
+}
+#site-map ul {list-style: none; margin: 2px 0 0; padding:0; }
+#site-map .page, #site-map-root .page {}
+#site-map .status, #site-map-root .status { position: absolute; top: 7px; right: 250px; width: 50px }
+#site-map .modify, #site-map-root .modify { position: absolute; top: 7px; right: 5px; width: 210px }
+
+/* form elements 450 471-6515 */
 
 #content .form-area {
   background-color: #EAF4D5;

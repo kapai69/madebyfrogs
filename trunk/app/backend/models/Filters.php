@@ -16,7 +16,8 @@ class Filters
         $filters = array();
         if ($handle = opendir(ROOT.'/filters/')) {
             while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != "..") {
+                // bug fix: ignore cache file (strating with a .) and both (. and ..)
+                if (strpos($file, '.') !== 0) {
                     $filters[] = substr($file, 0, strlen($file)-4);
                 }
             }

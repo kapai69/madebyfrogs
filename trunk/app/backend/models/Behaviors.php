@@ -17,7 +17,8 @@ class Behaviors
         $dir = ROOT.'/behaviors/';
         if ($handle = opendir($dir)) {
             while (false !== ($file = readdir($handle))) {
-                if ($file != "." && $file != "..") {
+                // bug fix: ignore cache file (strating with a .) and both (. and ..)
+                if (strpos($file, '.') !== 0) {
                     if (is_dir($dir.$file)) {
                         $behaviors[] = $file;
                     }

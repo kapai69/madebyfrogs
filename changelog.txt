@@ -1,3 +1,10 @@
+0.2.1
+  drag and drop sortable page position (order)
+  fontend page->children() now search first for the position and then for id
+
+0.1.7
+  bug fixe filter and behavior listing now exclude all hidden files
+
 0.1.6
   bug fixe edit page with a ended textarea stop display the reste of the content
   bug fixe same as before but for snippet and layout too

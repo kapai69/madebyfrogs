@@ -111,8 +111,7 @@ class Page
         
         // Collect attributes...
         $where   = array_var($arguments, 'where', '');
-        $order   = array_var($arguments, 'order', 'asc');
-        $by      = array_var($arguments, 'by', 'id');
+        $order   = array_var($arguments, 'order', 'position, id');
         $offset  = (int) array_var($arguments, 'offset', 0);
         $limit   = (int) array_var($arguments, 'limit', 0);
 
@@ -121,13 +120,12 @@ class Page
         $limitString = $limit > 0 ? "limit $offset, $limit" : '';
 
         // Prepare SQL
-        //$sql = "select * from ".TABLE_PREFIX."pages where parent_id='{}' and (status_id=50 or status_id=100) $whereString order by $by $order $limitString";
         $sql = 'select pages.*, creator.name as created_by_name, updator.name as updated_by_name '
              . 'from '.TABLE_PREFIX.'pages as pages '
              . 'left join '.TABLE_PREFIX.'users as creator on creator.id = pages.created_by_id '
              . 'left join '.TABLE_PREFIX.'users as updator on updator.id = pages.updated_by_id '
              . 'where parent_id = '.$this->id.' and (status_id=50 or status_id=100 or status_id=101) '
-             . "$whereString order by $by $order $limitString";
+             . "$whereString order by $order $limitString";
 
 
         $pages = array();

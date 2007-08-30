@@ -10,6 +10,6 @@
 <?php } // foreach ?>
 </select>
     </p>
-    <div><textarea class="textarea" id="part[<?php echo ($index-1) ?>][content]" name="part[<?php echo ($index-1) ?>][content]" style="width: 100%"><?php if(isset($content)) echo htmlentities($content); ?></textarea></div>
+    <div><textarea class="textarea" id="part[<?php echo ($index-1) ?>][content]" name="part[<?php echo ($index-1) ?>][content]" style="width: 100%"><?php if(isset($content)) echo htmlentities($content, ENT_COMPAT, 'UTF-8'); ?></textarea></div>
   </div>
 </div>

@@ -112,15 +112,21 @@ function assignParts($page_id)
 
 function url_match($url)
 {
-    if (CURRENT_URI == $url || CURRENT_URI . '/' == $url) return true;
+    $url = trim($url, '/');
+    $current_url_trimmed = trim (CURRENT_URI, '/');
+    if ($current_url_trimmed == $url) return true;
+    
     return false;
 }
   
 function url_start_with($url)
 {
-    if (CURRENT_URI == $url) return true;
+    $url = trim($url, '/');
+    $current_url_trimmed = trim (CURRENT_URI, '/');
     
-    if (strpos(CURRENT_URI, $url) === 0) {
+    if ($current_url_trimmed == $url) return true;
+    
+    if (strpos($current_url_trimmed, $url) === 0) {
         return true;
     }
     return false;
@@ -130,20 +136,6 @@ function main()
 {
     // get the uri string from the query
     $uri = $_SERVER['QUERY_STRING'];
-
-    // here is a small hack to add more flexibility for those who need get
-    // and named variable from the query. simply use :var_name=var_value
-    // and $_GET['var_name'] = var_value; gona be avalaible like magic
-    /*if (strpos($uri, ':') !== false) {
-        $exploded_uri = explode(':', $uri);
-        $uri = array_shift($exploded_uri);
-        if (count($exploded_uri)) {
-            foreach ($exploded_uri as $get) {
-                list($key, $value) = explode('=', $get);
-                $_GET[$key] = $value;
-            }
-        }
-    }*/
     
     // real integration of GET
     if (strpos($uri, '?') !== false) {

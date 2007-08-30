@@ -76,14 +76,24 @@ class Page
     function breadcrumbs($separator='&gt;')
     {
         $url = BASE_URL;
-        $out = '<ul class="breadcrumb">';
+        /*$out = '<ul class="breadcrumb">';
         foreach ($this->paths as $path) {
             $url .= ($path['slug']=='/') ? $path['slug'] : $path['slug'].'/';
             $out .= '<li><a href="'.$url.'" title="'.$path['breadcrumb'].'">'.$path['breadcrumb'].'</a></li><span class="separator">'.$separator.'</span>';
         } // foreach
 
         $out .= '<li>'.$this->breadcrumb.'</li></ul>'."\n";
+        echo $out;*/
+
+        $out = '<div class="breadcrumb">';
+        foreach ($this->paths as $path) {
+            $url .= ($path['slug']=='/') ? $path['slug'] : $path['slug'].'/';
+            $out .= '<a href="'.$url.'" title="'.$path['breadcrumb'].'">'.$path['breadcrumb'].'</a> <span class="breadcrumb-separator">'.$separator.'</span> ';
+        } // foreach
+
+        $out .= '<span class="breadcrumb-current">'.$this->breadcrumb.'</span></div>'."\n";
         echo $out;
+        
     } // breadcrumbs
 
     function content($part='body', $inherit=false)

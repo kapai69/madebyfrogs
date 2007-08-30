@@ -9,7 +9,7 @@
     </p>
     <p class="content">
       <label for="snippet_content">Body</label>
-      <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%"><?php echo htmlentities($snippet->content) ?></textarea>
+      <textarea class="textarea" cols="40" id="snippet_content" name="snippet[content]" rows="20" style="width: 100%"><?php echo htmlentities($snippet->content, ENT_COMPAT, 'UTF-8') ?></textarea>
     </p>
     <p>
       <label for="snippet_filter">Filter</label>

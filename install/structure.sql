@@ -5,7 +5,7 @@
 CREATE TABLE `{TABLEPREFIX}layouts` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(100) default NULL,
-  `content_type` varchar(80) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `content_type` varchar(80) default NULL,
   `content` text,
   `created_on` datetime default NULL,
   `updated_on` datetime default NULL,

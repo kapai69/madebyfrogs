@@ -82,7 +82,7 @@
           <span class="separator"> | </span>
           <a href="<?php echo get_url('logout') ?>">Log Out</a>
           <span class="separator"> | </span>
-          <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, 'a')); ?>">View Site</a>
+          <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, 'a')); ?>" target="_blank">View Site</a>
       </p>
     </div>
   </body>

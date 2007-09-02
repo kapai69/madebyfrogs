@@ -40,7 +40,10 @@ class Page
     function id() { echo $this->id; }
     function title() { echo $this->title; }
     function breadcrumb() { echo $this->breadcrumb; }
-    function author() { echo $this->created_by_name; }
+    function author() { echo $this->author; }
+    function authorId() { echo $this->author_id; }
+    function updator() { echo $this->updator; }
+    function updatorId() { echo $this->updator_id; }
     function slug() { echo $this->slug; }
     function url() { echo BASE_URL . $this->url; }
 
@@ -89,12 +92,17 @@ class Page
         foreach ($this->paths as $path) {
             $url .= ($path['slug']=='/') ? $path['slug'] : $path['slug'].'/';
             $out .= '<a href="'.$url.'" title="'.$path['breadcrumb'].'">'.$path['breadcrumb'].'</a> <span class="breadcrumb-separator">'.$separator.'</span> ';
-        } // foreach
+        }
 
         $out .= '<span class="breadcrumb-current">'.$this->breadcrumb.'</span></div>'."\n";
         echo $out;
         
     } // breadcrumbs
+
+    function hasContent($part)
+    {
+        return isset($this->part->$part);
+    }
 
     function content($part='body', $inherit=false)
     {
@@ -107,12 +115,12 @@ class Page
                 global $filters;
                 $filter = $filters->get($part->filter_id);
                 $part->content = $filter->apply($part->content);
-            } //if
+            }
         
             eval('?>'.$part->content);
         } else if ($inherit && isset($this->parent)) {
             $this->parent->content($part, true);
-        } // if
+        }
     } // content
 
     function children($arguments=null)
@@ -130,13 +138,12 @@ class Page
         $limitString = $limit > 0 ? "limit $offset, $limit" : '';
 
         // Prepare SQL
-        $sql = 'select pages.*, creator.name as created_by_name, updator.name as updated_by_name '
+        $sql = 'select pages.*, author.name as author, author.id as author_id, updator.name as updator, updator.id as updator_id '
              . 'from '.TABLE_PREFIX.'pages as pages '
-             . 'left join '.TABLE_PREFIX.'users as creator on creator.id = pages.created_by_id '
+             . 'left join '.TABLE_PREFIX.'users as author on author.id = pages.created_by_id '
              . 'left join '.TABLE_PREFIX.'users as updator on updator.id = pages.updated_by_id '
              . 'where parent_id = '.$this->id.' and (status_id=50 or status_id=100 or status_id=101) '
              . "$whereString order by $order $limitString";
-
 
         $pages = array();
 
@@ -149,8 +156,8 @@ class Page
                 // assignParts
                 $page->part = assignParts($page->id);
                 $pages[] = $page;
-            } // while
-        } // if
+            }
+        }
 
         return $pages;
     } // children
@@ -159,7 +166,7 @@ class Page
     {
         // return all pages finded
         return findPageByUrls($uri, $includeParents);
-    } // find
+    }
 
     function includeSnippet($name)
     {
@@ -176,20 +183,16 @@ class Page
                 global $filters;
                 $filter = $filters->get($snippet->filter_id);
                 $snippet->content = $filter->apply($snippet->content);
-            } //if
+            }
             // run it!!
             eval('?>'.$snippet->content); /*eval('?>'.$snippet->content.'<?');*/
-        } // if
+        }
     } // includeSnippet
-
-    /**
-     * EXTRAS
-     */
 
     function executionTime()
     {
         Benchmark::getInstance()->display();
-    } // executionTime
+    }
 
     /**
      * PRIVATES
@@ -216,7 +219,7 @@ class Page
 
             // execute the layout code
             eval('?>'.$layout->content.'<?');
-        } // if
+        }
     } // _executeLayout
 
     /**

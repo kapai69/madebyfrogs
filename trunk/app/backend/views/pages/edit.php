@@ -38,16 +38,16 @@
     <p class="more-or-less">
 
       <small>
-        <a href="javascript:Element.toggle('extended-metadata', 'more-extended-metadata', 'less-extended-metadata')" id="more-extended-metadata">More</a>
-        <a href="javascript:Element.toggle('extended-metadata', 'more-extended-metadata', 'less-extended-metadata')" style="display: none" id="less-extended-metadata">Less</a>
+        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" id="more-extended-metadata">More</a>
+        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" style="display: none" id="less-extended-metadata">Less</a>
       </small>
     </p>
     <div id="tab-control">
       <div id="tabs" class="tabs">
         <div id="tab-toolbar">
 
-          <a href="javascript: toggle_add_part_popup()" title="Add Tab"><img alt="Plus" src="images/plus.png" /></a>
-          <a href="javascript: tabControl.removeTab(tabControl.selected)" onclick="return confirm('Delete the current tab?');" title="Remove Tab"><img alt="Minus" src="images/minus.png" /></a>
+          <a href="#" onclick="toggle_add_part_popup(); return false;" title="Add Tab"><img alt="Plus" src="images/plus.png" /></a>
+          <a href="#" onclick="if(confirm('Delete the current tab?')) { tabControl.removeTab(tabControl.selected) }; return false;" title="Remove Tab"><img alt="Minus" src="images/minus.png" /></a>
         </div>
       </div>
       <div id="page_parts">

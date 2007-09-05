@@ -218,7 +218,7 @@ class Page
             header('Content-Type: '.$layout->content_type.'; charset='.DEFAULT_CHARSET);
 
             // execute the layout code
-            eval('?>'.$layout->content.'<?');
+            eval('?>'.$layout->content); /* eval('?>'.$layout->content.'<?'); */
         }
     } // _executeLayout
 

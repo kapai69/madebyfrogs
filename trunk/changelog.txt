@@ -1,6 +1,11 @@
 0.2.1
   drag and drop sortable page position (order)
   fontend page->children() now search first for the position and then for id
+  bug fixe htmlentities now use utf8
+  bug fixe url_match and url_start_with '/' compatibility
+  view site link will now open in a new window
+  bug fixe more link in firefox osx now works (already fixed on radiantCMS)
+  bug fixe trailing <? removed
 
 0.1.7
   bug fixe filter and behavior listing now exclude all hidden files

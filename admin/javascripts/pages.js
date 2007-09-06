@@ -7,7 +7,7 @@ function part_added() {
   var page = 'page-' + index;
   tabControl.addTab(tab, caption, page);
   Element.hide('add-part-popup');
-  Element.hide('busy');
+  //Element.hide('busy');
   partNameField.value = '';
   partIndexField.value = (index + 1).toString();
   $('add-part-button').disabled = false;
@@ -16,7 +16,7 @@ function part_added() {
 }
 function part_loading() {
   $('add-part-button').disabled = true;
-  new Effect.Appear('busy');
+  //new Effect.Appear('busy');
 }
 function valid_part_name() {
   var partNameField = $('part-name-field');

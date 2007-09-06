@@ -1,10 +1,10 @@
 
-<h1><?php echo camelize($action) ?> Layout</h1>
+<h1><?php echo __(camelize($action).' Layout') ?></h1>
 
 <form action="<?php echo $action=='edit' ? get_url('layouts', 'edit', $layout->id): get_url('layouts', 'add');  ?>" method="post">
   <div class="form-area">
     <p class="title">
-      <label for="layout_name">Name</label>
+      <label for="layout_name"><?php echo __('Name') ?></label>
       <input class="textbox" id="layout_name" maxlength="100" name="layout[name]" size="100" type="text" value="<?php echo $layout->name ?>" />
     </p>
     <div id="extended-metadata" class="row">
@@ -21,13 +21,13 @@
     </p>
     <p class="clear">&nbsp;</p>
 <?php if (isset($layout->updated_on)) { ?>
-    <p style="clear: left"><small>Last updated by <?php echo $layout->updated_by_name ?> on <?php echo $layout->updated_on ?></small></p>
+    <p style="clear: left"><small><?php echo __('Last updated by') ?> <?php echo $layout->updated_by_name ?> <?php echo __('on') ?> <?php echo $layout->updated_on ?></small></p>
 <?php } ?>
   </div>
   <p class="buttons">
-    <input class="button" name="commit" type="submit" accesskey="s" value="Save (Alt+S)" />
-    <input class="button" name="continue" type="submit" accesskey="e" value="Save and Continue Editing (Alt+E)" />
-    or <a href="<?php echo get_url('layouts') ?>">Cancel</a>
+    <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save') ?> (Alt+S)" />
+    <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing') ?> (Alt+E)" />
+    <?php echo __('or') ?> <a href="<?php echo get_url('layouts') ?>"><?php echo __('Cancel') ?></a>
   </p>
 </form>
 

@@ -13,12 +13,12 @@ class FilesController extends Controller
 {
     var $path;
     var $fullpath;
-
+    
     function index()
     {
         $this->browse();
     }
-
+    
     function browse()
     {
         include_javascript('pages');
@@ -26,30 +26,30 @@ class FilesController extends Controller
         $this->path = join('/',get_params());
         // make sure there's a / at the end
         if (substr($this->path, -1, 1) != '/') $this->path .= '/';
-
+        
         //security
-
+        
         // we dont allow back link
         $this->path = preg_replace('/\./', '', $this->path);
-
+        
         // clean up nicely
         $this->path = preg_replace('/\/\//', '', $this->path);
-
+        
         // we dont allow leading slashes
         $this->path = preg_replace('/^\//', '', $this->path); 
-
+        
         $this->fullpath = FILES_DIR.'/'.$this->path;
-
+        
         // clean up nicely
         $this->fullpath = preg_replace('/\/\//', '/', $this->fullpath);
-
+        
         $this->setLayout('backend');
         $this->setView('files/index');
         $this->assignToView('dir', $this->path);
         $this->assignToView('files', $this->_getListFiles());
         $this->render();
     } // browse
-
+    
     function view()
     {
         $content = '';
@@ -58,7 +58,7 @@ class FilesController extends Controller
         if ( ! $this->_isImage($file) && file_exists($file)) {
             $content = file_get_contents($file);
         }
-
+        
         $this->setLayout('backend');
         $this->setView('files/view');
         $this->assignToView('is_image', $this->_isImage($file));
@@ -66,7 +66,7 @@ class FilesController extends Controller
         $this->assignToView('content', $content);
         $this->render();
     }
-
+    
     function save()
     {
         $data = array_var($_POST, 'file');
@@ -79,13 +79,13 @@ class FilesController extends Controller
             flash_success('File has been saved with success!');
         } else {
             if (file_put_contents($file, $data['content']) !== false) {
-                flash_success('File '.$data['name'].' has been created with success!');
+                flash_success(__('File :name has been created with success!', array(':name'=>$data['name'])));
             } else {
-                flash_error('Directory is not writable! File has not been saved!');
+                flash_error(__('Directory is not writable! File has not been saved!'));
             }
         }
         
-        redirect_to(get_url('files', 'browse', substr($data['name'], 0, strrpos($data['name'], '/'))));
+        redirect_to(get_url('files/browse/'.substr($data['name'], 0, strrpos($data['name'], '/'))));
     }
     
     function create_file()
@@ -98,11 +98,11 @@ class FilesController extends Controller
         
         if (file_put_contents($file, '') !== false) {
             chmod($file, 0644);
-            flash_success("File {$filename} has been created!");
+            flash_success(__('File :name has been created!', array(':name'=>$filename)));
         } else {
-            flash_error("File {$filename} has not been created!");
+            flash_error(__('File :name has not been created!', array(':name'=>$filename)));
         }
-        redirect_to(get_url('files', 'browse', $path));
+        redirect_to(get_url('files/browse/'.$path));
     }
     
     function create_directory()
@@ -115,11 +115,11 @@ class FilesController extends Controller
         
         if (mkdir($dir)) {
             chmod($dir, 0755);
-            flash_success("Directory {$dirname} has been created!");
+            flash_success(__('Directory :name has been created!', array(':name'=>$dirname)));
         } else {
-            flash_error("Directory {$dirname} has not been created!");
+            flash_error(__('Directory :name has not been created!', array(':name'=>$dirname)));
         }
-        redirect_to(get_url('files', 'browse', $path));
+        redirect_to(get_url('files/browse/'.$path));
     }
     
     function delete()
@@ -131,19 +131,19 @@ class FilesController extends Controller
         $paths = join('/', $paths);
         if (is_file($file)) {
             if (unlink($file)) {
-                flash_success('File '.$filename.' has been deleted with success!');
+                flash_success(__('File :name has been deleted with success!', array(':name'=>$filename)));
             } else {
-                flash_error('File '.$filename.' has not been deleted!');
+                flash_error(__('File :name has not been deleted!', array(':name'=>$filename)));
             }
         } else {
             if (rrmdir($file)) {
-                flash_success('Directory '.$filename.' has been deleted with success!');
+                flash_success(__('Directory :name has been deleted with success!', array(':name'=>$filename)));
             } else {
-                flash_error('Directory '.$filename.' has not been deleted!');
+                flash_error(__('Directory :name has not been deleted!', array(':name'=>$filename)));
             }
         }
         
-        redirect_to(get_url('files', 'browse', $paths));
+        redirect_to(get_url('files/browse/'.$paths));
     }
     
     function upload()
@@ -155,14 +155,14 @@ class FilesController extends Controller
         if (isset($_FILES)) {
             $file = upload_file($_FILES['upload_file']['name'], FILES_DIR.'/'.$path.'/', $_FILES['upload_file']['tmp_name'], $overwrite);
             if ($file !== false) {
-                flash_success('File '.$file.' has been uploaded with success!');
+                flash_success(__('File :name has been uploaded with success!', array(':name'=>$file)));
             } else {
-                flash_error('File has not been uploaded!');
+                flash_error(__('File has not been uploaded!'));
             }
         }
-        redirect_to(get_url('files', 'browse', $path));
+        redirect_to(get_url('files/browse/'.$path));
     }
-
+    
     function chmod()
     {
         $data = array_var($_POST, 'file');
@@ -171,24 +171,24 @@ class FilesController extends Controller
         if (file_exists($file)) {
             if (chmod($file, octdec($data['mode']))) {
                 if (is_file($file)) {
-                    flash_success('Permissions of file has been changed!');
+                    flash_success(__('Permissions of file has been changed!'));
                 } else {
-                    flash_success('Permissions of directory has been changed!');
+                    flash_success(__('Permissions of directory has been changed!'));
                 }
             } else {
-                flash_error('Change mode has not been done sorry!');
+                flash_error(__('Change mode has not been done!'));
             }
         } else {
-            flash_error('File or directory not found!');
+            flash_error(__('File or directory not found!'));
         }
         $path = substr($data['name'], 0, strrpos($data['name'], '/'));
-        redirect_to(get_url('files', 'browse', $path));
+        redirect_to(get_url('files/browse/'.$path));
     }
     
     //
     // Privates
     //
-
+    
     function _getPath()
     {
         $path = join('/', get_params());
@@ -196,29 +196,30 @@ class FilesController extends Controller
     }
     
     function _getListFiles()
-    { 
-        if ($handle = opendir($this->fullpath)) {
-            $files = array();
-
+    {
+        $files = array();
+        
+        if (is_dir($this->fullpath) && $handle = opendir($this->fullpath)) {
+            
             // check each files ...
             while (false !== ($file = readdir($handle))) {
                 // do not display . and the root ..
                 if ($file == '.' || $file == '..') continue;
-
+                
                 $object = new stdClass;
                 $file_stat = stat($this->fullpath.$file);
-
+                
                 // make the link depending on if it's a file or a dir
                 if (is_dir($this->fullpath.$file)) {
                     $object->is_dir = true;
                     $object->is_file = false;
-                    $object->link = '<a href="'.get_url('files', 'browse', $this->path.$file).'">'.$file.'</a>';
+                    $object->link = '<a href="'.get_url('files/browse/'.$this->path.$file).'">'.$file.'</a>';
                 } else {
                     $object->is_dir = false;
                     $object->is_file = true;
-                    $object->link = '<a href="'.get_url('files', 'view', $this->path.$file).'">'.$file.'</a>';
-                } // if
-
+                    $object->link = '<a href="'.get_url('files/view/'.$this->path.$file).'">'.$file.'</a>';
+                }
+                
                 $object->name = $file;
                 // humain size
                 $object->size = convert_size($file_stat['size']);
@@ -229,8 +230,8 @@ class FilesController extends Controller
                 $files[] = $object;
             } // while
             closedir($handle);
-        } // if
-
+        }
+        
         return $files;
     } // _getListFiles
 

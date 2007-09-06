@@ -54,7 +54,7 @@ if (DEBUG) {
 } else {
     ini_set('display_errors', false);
     ini_set('log_errors', true);
-} // if
+}
 
 // Start the session
 if (!ini_get('session.auto_start') || (strtolower(ini_get('session.auto_start')) == 'off')) {

@@ -56,7 +56,7 @@ class Controller
             $this->execute($action_name);
         } else {
             Frog::executeAction($controller_name, $action_name);
-        } // if
+        }
     } // forward
 
     /**
@@ -104,8 +104,8 @@ class Controller
             if (file_exists($file)) {
                 require $file;
                 $this->$var_name = new $camelize_model();
-            } // if
-        } // if
+            }
+        }
     } // loadModel
 
     // ---------------------------------------------------

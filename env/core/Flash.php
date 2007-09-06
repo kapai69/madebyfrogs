@@ -125,7 +125,7 @@ class Flash
                 $this->_previous = $flash_data;
             }
             unset($_SESSION['frog_flash_data']);
-        } // if
+        }
     } // _read
 
     /**

@@ -65,29 +65,29 @@ class LayoutsController extends Controller
 
         if ($this->layouts->save($data)) {
             $id = $this->layouts->insertId();
-            flash_success('Layout has been added!');
+            flash_success(__('Layout has been added!'));
         } else {
-            flash_error('Layout has not been added. Name must be unique!');
-            redirect_to(get_url('layouts', 'add'));
-        } //if
+            flash_error(__('Layout has not been added. Name must be unique!'));
+            redirect_to(get_url('layouts/add'));
+        }
 
         // save and quit or save and continue editing?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('layouts'));
         } else {
-            redirect_to(get_url('layouts', 'edit', $id));
-        } // if
+            redirect_to(get_url('layouts/edit'.$id));
+        }
     } // doadd
 
 
     function edit($id=null)
     {
-        if (is_null($id)) redirect_to(get_url('layouts', 'add'));
+        if (is_null($id)) redirect_to(get_url('layouts/add'));
     
         $layout = $this->layouts->findById($id);
 
         if (!$layout) {
-            flash_error('Layout not found!');
+            flash_error(__('Layout not found!'));
             redirect_to(get_url('layouts'));
         }
         
@@ -114,18 +114,18 @@ class LayoutsController extends Controller
         $data['updated_by_id'] = user_id();
 
         if ($this->layouts->save($data)) {
-            flash_success('Layout has been saved!');
+            flash_success(__('Layout has been saved!'));
         } else {
-            flash_error('Layout has not been saved. Name must be unique!');
-            redirect_to(get_url('layouts', 'edit', $id));
-        } // if
+            flash_error(__('Layout has not been saved. Name must be unique!'));
+            redirect_to(get_url('layouts/edit/'.$id));
+        }
 
         // save and quit or save and continue editing?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('layouts'));
         } else {
-            redirect_to(get_url('layouts', 'edit', $id));
-        } // if
+            redirect_to(get_url('layouts/edit/'.$id));
+        }
     } // doedit
 
 
@@ -137,13 +137,13 @@ class LayoutsController extends Controller
         // find the user to delete
         if ($layout = $this->layouts->findById($id)) {
             if ($this->layouts->deleteId($id)) {
-                flash_success('Layout '.$layout->name.' has been deleted!');
+                flash_success(__('Layout :name has been deleted!', array(':title'=>$layout->name)));
             } else {
-                flash_error('Layout '.$layout->name.' has not been deleted!');
-            } // if
+                flash_error(__('Layout :name has not been deleted!', array(':title'=>$layout->name)));
+            }
         } else {
-            flash_error('Layout not found!');
-        } // if
+            flash_error(__('Layout not found!'));
+        }
 
         redirect_to(get_url('layouts'));
     } // delete

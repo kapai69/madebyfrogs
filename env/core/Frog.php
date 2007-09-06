@@ -52,7 +52,7 @@ class Frog
         if (file_exists($controller_file)) {
             require $controller_file;
             return true;
-        } // if
+        }
         return false;
     } // useController
 

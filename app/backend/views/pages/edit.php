@@ -1,22 +1,20 @@
-<h1 id="new_page"><?php echo $action=='add' ? 'New Page': 'Edit page'; ?></h1>
+<h1 id="new_page"><?php echo $action=='add' ? __('New Page'): __('Edit page'); ?></h1>
 
-<form action="<?php if($action == 'add') echo get_url('pages/add'); else echo  get_url('pages/edit', $page->id); ?>" method="post">
+<form action="<?php if($action == 'add') echo get_url('pages/add'); else echo  get_url('pages/edit/'.$page->id); ?>" method="post">
 <input id="page_parent_id" name="page[parent_id]" type="hidden" value="<?php echo $page->parent_id ?>" />
   <div class="form-area">
     <p class="title">
-      <label for="page_title">Page Title</label>
-
+      <label for="page_title"><?php echo __('Page Title') ?></label>
       <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text" value="<?php echo $page->title ?>" />
     </p>
     <div id="extended-metadata" class="row" style="display: none">
       <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td><label for="page_slug">Slug</label></td>
+          <td><label for="page_slug"><?php echo __('Slug') ?></label></td>
           <td class="field"><input class="textbox" id="page_slug" maxlength="100" name="page[slug]" size="100" type="text" value="<?php echo $page->slug ?>" /></td>
         </tr>
-
         <tr>
-          <td><label for="page_breadcrumb">Breadcrumb</label></td>
+          <td><label for="page_breadcrumb"><?php echo __('Breadcrumb') ?></label></td>
           <td class="field"><input class="textbox" id="page_breadcrumb" maxlength="160" name="page[breadcrumb]" size="160" type="text" value="<?php echo $page->breadcrumb ?>" /></td>
         </tr>
       </table>
@@ -36,18 +34,16 @@
       </script>
     </div>
     <p class="more-or-less">
-
       <small>
-        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" id="more-extended-metadata">More</a>
-        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" style="display: none" id="less-extended-metadata">Less</a>
+        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" id="more-extended-metadata"><?php echo __('More') ?></a>
+        <a href="#" onclick="Element.toggle('extended-metadata'); Element.toggle('more-extended-metadata'); Element.toggle('less-extended-metadata'); return false;" style="display: none" id="less-extended-metadata"><?php echo __('Less') ?></a>
       </small>
     </p>
     <div id="tab-control">
       <div id="tabs" class="tabs">
         <div id="tab-toolbar">
-
-          <a href="#" onclick="toggle_add_part_popup(); return false;" title="Add Tab"><img alt="Plus" src="images/plus.png" /></a>
-          <a href="#" onclick="if(confirm('Delete the current tab?')) { tabControl.removeTab(tabControl.selected) }; return false;" title="Remove Tab"><img alt="Minus" src="images/minus.png" /></a>
+          <a href="#" onclick="toggle_add_part_popup(); return false;" title="<?php echo __('Add Tab') ?>"><img alt="<?php echo __('Plus') ?>" src="images/plus.png" /></a>
+          <a href="#" onclick="if(tabControl._tabify(tabControl.selected).tab_id == 'tab-1') {alert('You can\'t remove the Body Tab');} else if(confirm('<?php echo __('Delete the current tab?') ?>')) { tabControl.removeTab(tabControl.selected) }; return false;" title="<?php echo __('Remove Tab') ?>"><img alt="<?php echo __('Minus') ?>" src="images/minus.png" /></a>
         </div>
       </div>
       <div id="page_parts">
@@ -56,12 +52,12 @@
   <div class="part" id="part-<?php echo $index_part ?>">
 <?php if (isset($page_part->id)) { ?>
     <input id="part[<?php echo ($index_part-1) ?>][id]" name="part[<?php echo ($index_part-1) ?>][id]" type="hidden" value="<?php echo $page_part->id ?>" />
-<?php } // if ?>
+<?php } ?>
     <input id="part[<?php echo ($index_part-1) ?>][name]" name="part[<?php echo ($index_part-1) ?>][name]" type="hidden" value="<?php echo $page_part->name ?>" />
     <p>
-      <label for="part[<?php echo ($index_part-1) ?>][filter_id]">Filter</label>
+      <label for="part[<?php echo ($index_part-1) ?>][filter_id]"><?php echo __('Filter') ?></label>
       <select id="part[<?php echo ($index_part-1) ?>][filter_id]" name="part[<?php echo ($index_part-1) ?>][filter_id]">
-        <option value=""<?php if($page_part->filter_id == '') echo ' selected="selected"'; ?>>&#8212; none &#8212;</option>
+        <option value=""<?php if($page_part->filter_id == '') echo ' selected="selected"'; ?>>&#8212; <?php echo __('none') ?> &#8212;</option>
 <?php foreach ($filters as $filter) { ?>
         <option value="<?php echo$filter?>"<?php if($page_part->filter_id == $filter) echo ' selected="selected"'; ?>><?php echo$filter?></option>
 <?php } // foreach ?>
@@ -83,31 +79,30 @@
     // ]]>
     </script>
     <div class="row">
-
-      <p><label for="page_layout_id">Layout</label>
+      <p><label for="page_layout_id"><?php echo __('Layout') ?></label>
         <select id="page_layout_id" name="page[layout_id]">
-          <option value="">&#8212; inherit &#8212;</option>
+          <option value="">&#8212; <?php echo __('inherit') ?> &#8212;</option>
 <?php foreach ($layouts as $layout) { ?>
           <option value="<?php echo $layout->id ?>" <?php echo $layout->id==$page->layout_id ? 'selected="selected"': '' ?>><?php echo $layout->name ?></option>
 <?php } // foreach ?>
         </select>
       </p>
 
-      <p><label for="page_behavior_id">Behavior</label>
+      <p><label for="page_behavior_id"><?php echo __('Behavior') ?></label>
         <select id="page_behavior_id" name="page[behavior_id]">
-          <option value=""<?php if ($page->behavior_id == '') echo ' selected'; ?>>&#8212; none &#8212;</option>
+          <option value=""<?php if ($page->behavior_id == '') echo ' selected'; ?>>&#8212; <?php echo __('none') ?> &#8212;</option>
   <?php foreach ($behaviors as $behavior) { ?>
           <option value="<?php echo $behavior; ?>"<?php if ($page->behavior_id == $behavior) echo ' selected="selected"'; ?>><?php echo humanize($behavior); ?></option>
   <?php } // foreach ?>
   </select>
       </p>
 
-      <p><label for="page_status_id">Status</label>
+      <p><label for="page_status_id"><?php echo __('Status') ?></label>
         <select id="page_status_id" name="page[status_id]">
-          <option value="<?php echo PAGE_STATUS_DRAFT ?>" <?php echo $page->status_id==PAGE_STATUS_DRAFT ? 'selected="selected"': '' ?>>Draft</option>
-          <option value="<?php echo PAGE_STATUS_REVIEWED ?>"<?php echo $page->status_id==PAGE_STATUS_REVIEWED ? 'selected="selected"': '' ?>>Reviewed</option>
-          <option value="<?php echo PAGE_STATUS_PUBLISHED ?>"<?php echo $page->status_id==PAGE_STATUS_PUBLISHED ? 'selected="selected"': '' ?>>Published</option>
-          <option value="<?php echo PAGE_STATUS_HIDDEN ?>"<?php echo $page->status_id==PAGE_STATUS_HIDDEN ? 'selected="selected"': '' ?>>Hidden</option>
+          <option value="<?php echo PAGE_STATUS_DRAFT ?>" <?php echo $page->status_id==PAGE_STATUS_DRAFT ? 'selected="selected"': '' ?>><?php echo __('Draft') ?></option>
+          <option value="<?php echo PAGE_STATUS_REVIEWED ?>"<?php echo $page->status_id==PAGE_STATUS_REVIEWED ? 'selected="selected"': '' ?>><?php echo __('Reviewed') ?></option>
+          <option value="<?php echo PAGE_STATUS_PUBLISHED ?>"<?php echo $page->status_id==PAGE_STATUS_PUBLISHED ? 'selected="selected"': '' ?>><?php echo __('Published') ?></option>
+          <option value="<?php echo PAGE_STATUS_HIDDEN ?>"<?php echo $page->status_id==PAGE_STATUS_HIDDEN ? 'selected="selected"': '' ?>><?php echo __('Hidden') ?></option>
         </select>
       </p>
 
@@ -116,33 +111,33 @@
     <p class="clear">&nbsp;</p>
     <div id="attachments"></div>
 <?php if (isset($page->updated_on)) { ?>
-    <p style="clear: left"><small>Last updated by <?php echo $page->updated_by_name ?> on <?php echo $page->updated_on ?></small></p>
+    <p style="clear: left"><small><?php echo __('Last updated by') ?> <?php echo $page->updated_by_name ?> <?php echo __('on') ?> <?php echo $page->updated_on ?></small></p>
 <?php } ?>
     
   </div>
   <p class="buttons">
-    <input class="button" name="commit" type="submit" accesskey="s" value="Save (Alt+S)" />
-    <input class="button" name="continue" type="submit" accesskey="e" value="Save and Continue Editing (Alt+E)" />
-    or <a href="<?php echo get_url('pages') ?>">Cancel</a>
+    <input class="button" name="commit" type="submit" accesskey="s" value="<?php echo __('Save') ?> (Alt+S)" />
+    <input class="button" name="continue" type="submit" accesskey="e" value="<?php echo __('Save and Continue Editing') ?> (Alt+E)" />
+    <?php echo __('or') ?> <a href="<?php echo get_url('pages') ?>"><?php echo __('Cancel') ?></a>
   </p>
 </form>
 
 <div id="popups">
   <div class="popup" id="add-part-popup" style="display:none;">
     <div id="busy" class="busy" style="display: none"><img alt="Spinner" src="images/spinner.gif" /></div>
-    <h3>Add Part</h3>
+    <h3><?php echo __('Add Part') ?></h3>
     <form action="<?php echo get_url('pages/addPart') ?>" method="post" onsubmit="if (valid_part_name()) { new Ajax.Updater('page_parts', '<?php echo get_url('pages/addPart') ?>', {asynchronous:true, evalScripts:true, insertion:Insertion.Bottom, onComplete:function(request){part_added()}, onLoading:function(request){part_loading()}, parameters:Form.serialize(this)}); }; return false;"> 
       <div>
         <input id="part-index-field" name="part[index]" type="hidden" value="<?php echo $index_part ?>" />
         <input id="part-name-field" maxlength="100" name="part[name]" type="text" value="" /> 
-        <input id="add-part-button" name="commit" type="submit" value="Add Part" />
+        <input id="add-part-button" name="commit" type="submit" value="<?php echo __('Add') ?>" />
       </div>
-      <p><a class="close-link" href="#" onclick="Element.hide('add-part-popup'); return false;">Close</a></p>
+      <p><a class="close-link" href="#" onclick="Element.hide('add-part-popup'); return false;"><?php echo __('Close') ?></a></p>
     </form>
   </div>
 </div>
-    <script type="text/javascript">
-    // <![CDATA[
-  	  Field.activate('page_title');
-    // ]]>
-    </script>
+<script type="text/javascript">
+// <![CDATA[
+Field.activate('page_title');
+// ]]>
+</script>

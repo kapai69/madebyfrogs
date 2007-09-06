@@ -64,8 +64,8 @@
               break;
             } else {
               $i++;
-            } // if
-          } // if
+            }
+          }
         } // for
       } else if ($char == ';') {
           $ret[] = substr($sql, 0, $i);
@@ -87,13 +87,13 @@
         if (!$end_of_comment) {
           if ($start_of_comment > 0) {
             $ret[] = trim(substr($sql, 0, $start_of_comment));
-          } // if
+          }
           return $ret;
         } else {
           $sql = substr($sql, 0, $start_of_comment) . ltrim(substr($sql, $end_of_comment));
           $sql_len = strlen($sql);
           $i--;
-        } // if
+        }
       } else if ($char == '!' && $i > 1  && $sql[$i-2] . $sql[$i-1] == '/*') {
         $sql[$i] = ' ';
       } 

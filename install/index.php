@@ -43,7 +43,7 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && ((file_exists($config_file
         $msg .= "<p>unable to connect the database! tables not loaded, you need to load structure.sql manualy!</p>\n";
     }
 
-} // if
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -74,7 +74,7 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && ((file_exists($config_file
 <?php } ?>
 <?php if (!is_writable('../public/')) { ?>
   <strong>error</strong>: public/ must be writable<br />
-<?php } // if ?>
+<?php } ?>
 </p>
 
 <?php if (!defined('DEBUG')) { ?>
@@ -82,6 +82,16 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && ((file_exists($config_file
   <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
     <tr>
       <td colspan="3"><h3>Site information</h3></td>
+    </tr>
+    <tr>
+      <td class="label"><label for="config_language">Language</label></td>
+      <td class="field">
+        <select class="select" id="config_language" name="config[language]">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+        </select>
+      </td>
+      <td class="help">Required. This will set your language for Frog admin only. Installation script is only in english.</td>
     </tr>
     <tr>
       <td class="label"><label class="optional" for="config_admin_site_title">Admin Site title</label></td>

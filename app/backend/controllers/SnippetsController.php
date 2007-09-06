@@ -64,29 +64,29 @@ class SnippetsController extends Controller
 
         if ($this->snippets->save($data)) {
             $id = $this->snippets->insertId();
-            flash_success('Snippet has been added!');
+            flash_success(__('Snippet has been added!'));
         } else {
-            flash_error('Snippet has not been added. Name must be unique!');
+            flash_error(__('Snippet has not been added. Name must be unique!'));
             redirect_to(get_url('snippets', 'add'));
-        } // if
+        }
 
         // save and quit or save and continue editing?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('snippets'));
         } else {
             redirect_to(get_url('snippets', 'edit', $id));
-        } // if
+        }
     } // doadd
 
 
     function edit($id=null)
     {
-        if (is_null($id)) redirect_to(get_url('snippets', 'add'));
+        if (is_null($id)) redirect_to(get_url('snippets/add'));
         
         $snippet = $this->snippets->findById($id);
         
         if (!$snippet) {
-            flash_error('Snippet not found!');
+            flash_error(__('Snippet not found!'));
             redirect_to(get_url('snippets'));
         }
         
@@ -114,18 +114,18 @@ class SnippetsController extends Controller
         $data['updated_by_id'] = user_id();
 
         if ($this->snippets->save($data)) {
-            flash_success('Snippet '.$snippet->name.' has been saved!');
+            flash_success(__('Snippet :name has been saved!', array(':name' => $data['name'])));
         } else {
-            flash_error('Snippet '.$snippet->name.' has not been saved. Name must be unique!');
-            redirect_to(get_url('snippets', 'edit', $id));
-        } // if
+            flash_error(__('Snippet :name has not been saved. Name must be unique!', array(':name' => $data['name'])));
+            redirect_to(get_url('snippets/edit/'.$id));
+        }
 
         // save and quit or save and continue editing?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('snippets'));
         } else {
-            redirect_to(get_url('snippets', 'edit', $id));
-        } // if
+            redirect_to(get_url('snippets/edit/'.$id));
+        }
     } // doedit
 
 
@@ -137,13 +137,13 @@ class SnippetsController extends Controller
         // find the user to delete
         if ($snippet = $this->snippets->findById($id)) {
             if ($this->snippets->deleteId($id)) {
-                flash_success('Snippet '.$snippet->name.' has been deleted!');
+                flash_success(__('Snippet :name has been deleted!', array(':name' => $snippet->name)));
             } else {
-                flash_error('Snippet '.$snippet->name.' has not been deleted!');
-            } // if
+                flash_error(__('Snippet :name has not been deleted!', array(':name' => $snippet->name)));
+            }
         } else {
-            flash_error('Snippet not found!');
-        } // if
+            flash_error(__('Snippet not found!'));
+        }
 
         redirect_to(get_url('snippets'));
     } // delete

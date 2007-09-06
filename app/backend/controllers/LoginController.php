@@ -52,18 +52,18 @@ class LoginController extends Controller
                 // need to be remembered for 14 days ?
                 if (isset($data['remember'])) {
                     setcookie(session_name(), session_id(), time()+REMEMBER_LOGIN_LIFETIME, COOKIE_PATH, COOKIE_DOMAIN, COOKIE_SECURE);
-                } // if
+                }
                 
                 // redirect to defaut controller and action
                 redirect_to(get_url());
             } else {
                 // password error (but user don't have to know every think !!)
-                flash_error(_('Failed to log you in. Please check your login data and try again'));
-            } // if
+                flash_error(__('Failed to log you in. Please check your login data and try again.'));
+            }
         } else {
             // login error
-            flash_error(_('Failed to log you in. Please check your login data and try again'));
-        } // if
+            flash_error(__('Failed to log you in. Please check your login data and try again.'));
+        }
         
         // not find or password is wrong
         redirect_to(get_url('login'));

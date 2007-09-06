@@ -3,7 +3,7 @@
 // ---------------------------------------------------
 //  Directories
 // ---------------------------------------------------
-define('FROG_VERSION', '0.2.1');
+define('FROG_VERSION', '0.2.2');
 define('ROOT', dirname(__FILE__) . '/..');
 define('APP_PATH', ROOT . '/app/backend');
 define('ENV_PATH', ROOT . '/env');

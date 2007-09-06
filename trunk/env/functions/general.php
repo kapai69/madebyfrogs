@@ -262,7 +262,7 @@ function is_valid_email($user_email)
         return (boolean) preg_match($chars, $user_email);
     } else {
         return false;
-    } // if
+    }
 } // is_valid_email
 
 /**
@@ -350,7 +350,7 @@ function array_stripslashes(&$array)
         }
         else {
             $array[$k] = stripslashes($array[$k]);
-        } // if
+        }
     } // foreach
 } // array_stripslashes
 

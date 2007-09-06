@@ -8,7 +8,7 @@
       $out .= $path;
     } else {
       $progres_path .= $path.'/';
-      $out .= '<a href="'.get_url('files', 'browse', $progres_path).'">'.$path.'</a>/';
+      $out .= '<a href="'.get_url('files/browse/'.$progres_path).'">'.$path.'</a>/';
     }
   }
 ?>
@@ -16,11 +16,11 @@
 <?php if ($is_image) { ?>
   <img src="<?php echo BASE_FILES_DIR.'/'.$filename; ?>" />
 <?php } else { ?>
-<form method="post" action="<?php echo get_url('files', 'save'); ?>">
+<form method="post" action="<?php echo get_url('files/save'); ?>">
   <input type="hidden" name="file[name]" value="<?php echo $filename; ?>" />
   <textarea class="textarea" id="file_content" name="file[content]" style="width: 100%; height: 400px;"><?php echo htmlentities($content, ENT_COMPAT, 'UTF-8') ?></textarea><br />
-  <p><input type="submit" name="save" accesskey="s" value="Save (Alt+S)" />
-   or <a href="<?php echo get_url('files', 'browse', $progres_path); ?>">Cancel</a>
+  <p><input type="submit" name="save" accesskey="s" value="<?php echo __('Save') ?> (Alt+S)" />
+   <?php echo __('or') ?> <a href="<?php echo get_url('files/browse/'.$progres_path); ?>"><?php echo __('Cancel') ?></a>
   </p>
 </form>
 <?php } ?>

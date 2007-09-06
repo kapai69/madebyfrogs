@@ -30,24 +30,24 @@
       <div id="site-subtitle"><?php echo ADMIN_SUBTITLE ?></div>
       <div id="navigation">
 <?php $ctrl = get_controller(); if ($ctrl == 'pages') { ?>
-        <strong><a href="<?php echo get_url('pages') ?>">Pages</a></strong> <span class="separator"> | </span>
+        <strong><a href="<?php echo get_url('pages') ?>"><?php echo __('Pages') ?></a></strong> <span class="separator"> | </span>
 <?php } else { ?>
-        <a href="<?php echo get_url('pages') ?>">Pages</a> <span class="separator"> | </span>
+        <a href="<?php echo get_url('pages') ?>"><?php echo __('Pages') ?></a> <span class="separator"> | </span>
 <?php } ?>
 <?php if ($ctrl == 'snippets') { ?>
-        <strong><a href="<?php echo get_url('snippets') ?>">Snippets</a></strong><span class="separator"> | </span>
+        <strong><a href="<?php echo get_url('snippets') ?>"><?php echo __('Snippets') ?></a></strong><span class="separator"> | </span>
 <?php } else { ?>
-        <a href="<?php echo get_url('snippets') ?>">Snippets</a></strong><span class="separator"> | </span>
+        <a href="<?php echo get_url('snippets') ?>"><?php echo __('Snippets') ?></a></strong><span class="separator"> | </span>
 <?php } ?>
 <?php if ($ctrl == 'layouts') { ?>
-        <strong><a href="<?php echo get_url('layouts') ?>">Layouts</a></strong><span class="separator"> | </span>
+        <strong><a href="<?php echo get_url('layouts') ?>"><?php echo __('Layouts') ?></a></strong><span class="separator"> | </span>
 <?php } else { ?>
-        <a href="<?php echo get_url('layouts') ?>">Layouts</a></strong><span class="separator"> | </span>
+        <a href="<?php echo get_url('layouts') ?>"><?php echo __('Layouts') ?></a></strong><span class="separator"> | </span>
 <?php } ?>
 <?php if ($ctrl == 'files') { ?>
-        <strong><a href="<?php echo get_url('files') ?>">Files</a></strong><span class="separator"> | </span>
+        <strong><a href="<?php echo get_url('files') ?>"><?php echo __('Files') ?></a></strong><span class="separator"> | </span>
 <?php } else { ?>
-        <a href="<?php echo get_url('files') ?>">Files</a></strong><span class="separator"> | </span>
+        <a href="<?php echo get_url('files') ?>"><?php echo __('Files') ?></a></strong><span class="separator"> | </span>
 <?php } ?>
       </div>
     </div>
@@ -70,19 +70,19 @@
     <hr class="hidden" />
     <div id="footer">
       <p>
-      This site was made with PHP and is powered by <a href="http://www.philworks.com/frog/">Frog</a> version <?php echo FROG_VERSION ?><br />
+      <?php echo __('This site was made with PHP and is powered by') ?> <a href="http://www.philworks.com/frog/">Frog</a> <?php echo __('version') ?> <?php echo FROG_VERSION ?><br />
 <?php if (DEBUG) { ?>
-      Page rendered in <?php echo execution_time() ?> seconds<br />
-      Memory usage: <?php echo memory_usage() ?>
-<?php } // if ?>
+      <?php echo __('Page rendered in') ?> <?php echo execution_time() ?> <?php echo __('seconds') ?><br />
+      <?php echo __('Memory usage:') ?> <?php echo memory_usage() ?>
+<?php } ?>
       </p>
 
       <p id="site-links">
-          <a href="<?php echo get_url('users') ?>">Users</a>
+          <a href="<?php echo get_url('users') ?>"><?php echo __('Users') ?></a>
           <span class="separator"> | </span>
-          <a href="<?php echo get_url('logout') ?>">Log Out</a>
+          <a href="<?php echo get_url('logout') ?>"><?php echo __('Log Out') ?></a>
           <span class="separator"> | </span>
-          <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, 'a')); ?>" target="_blank">View Site</a>
+          <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, 'a')); ?>" target="_blank"><?php echo __('View Site') ?></a>
       </p>
     </div>
   </body>

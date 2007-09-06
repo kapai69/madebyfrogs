@@ -39,5 +39,8 @@ if (is_null(user_id()) && get_controller() != 'login') {
     redirect_to(get_url('login'));
 }
 
+use_helper('I18n');
+I18n::setLocale(LANGUAGE);
+
 // Get controller and action and execute...
 Frog::executeAction(get_controller(), get_action());

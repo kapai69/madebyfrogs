@@ -87,21 +87,18 @@ class PagesController extends Controller
         $data = array_var($_POST, 'page');
         flash_set('post_data', (object)$data);
         
-        // trying to access directly, redirect to index
-        // if (is_null($data)) redirect_to(get_url('pages'));
-
         // set creator field
         $data['created_on'] = $data['updated_on'] = date(DATE_MYSQL);
         $data['created_by_id'] = $data['updated_by_id'] = user_id();
-
+        
         // save page data
         if ($this->pages->save($data)) {
             // get the inserted id for this new page
             $page_id = $this->pages->insertId();
-
+            
             // make a new instance of the model page_parts
             $this->loadModel('page_parts');
-
+            
             // get data from user
             $data_parts = array_var($_POST, 'part');
             flash_set('post_parts_data', (object)$data_parts);
@@ -109,21 +106,21 @@ class PagesController extends Controller
             foreach ($data_parts as $data) {
                 $data['page_id'] = $page_id;
                 $this->page_parts->save($data);
-            } // foreach
-
+            }
+            
             // need to rebuild the tree to assumed a balanced tree
             $this->pages->rebuild();
 
-            flash_success('Page has been saved!');
+            flash_success(__('Page has been saved!'));
         } else {
-            flash_error('Page has not been saved!');
+            flash_error(__('Page has not been saved!'));
             redirect_to(get_url('pages', 'add'));
         }
         // save and quit or save and continue editing ?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('pages'));
         } else {
-            redirect_to(get_url('pages', 'edit', $page_id));
+            redirect_to(get_url('pages/edit/'.$page_id));
         }
     } // doadd
 
@@ -135,14 +132,14 @@ class PagesController extends Controller
 
     function edit($id=null)
     {
-        if (is_null($id)) redirect_to(get_url('snippets', 'add'));
+        if (is_null($id)) redirect_to(get_url('page'));
         
         include_javascript('pages');
 
         $page = $this->pages->findById($id);
 
         if (!$page) {
-            flash_error('Page not found!');
+            flash_error(__('Page not found!'));
             redirect_to(get_url('pages'));
         }
         
@@ -189,7 +186,7 @@ class PagesController extends Controller
 
         if ($this->pages->save($data)) {
             // get data for parts of this page
-            $data_parts = array_var($_POST, 'part', array('name'=> 'body', 'content' => 'nothing here'));
+            $data_parts = array_var($_POST, 'part', array('name'=> 'body', 'content' => '...'));
 
             // load page_parts model!
             $this->loadModel('page_parts');
@@ -204,11 +201,12 @@ class PagesController extends Controller
                     if ($old_part->name == $data['name']) {
                         $not_in = false;
                         break;
-                    } // if
-                } // foreach
+                    }
+                }
+                
                 if ($not_in) {
                     $this->page_parts->deleteId($old_part->id);
-                } // if
+                }
             }
 
             // save each parts
@@ -216,17 +214,17 @@ class PagesController extends Controller
                 $data['page_id'] = $id;
                 $this->page_parts->save($data);
             }
-            flash_success('Page has been saved!');
+            flash_success(__('Page has been saved!'));
         } else {
-            flash_error('Page has not been saved!');
-            redirect_to(get_url('pages', 'edit', $id));
+            flash_error(__('Page has not been saved!'));
+            redirect_to(get_url('pages/edit/'.$id));
         }
         // save and quit or save and continue editing ?
         if (isset($_POST['commit'])) {
             redirect_to(get_url('pages'));
         } else {
-            redirect_to(get_url('pages', 'edit', $id));
-        } // if
+            redirect_to(get_url('pages/edit/'.$id));
+        }
     } // doedit
 
     function delete()
@@ -247,16 +245,16 @@ class PagesController extends Controller
                 $this->page_parts->deleteByPageId($id);
 
                 if ($this->pages->deleteId($id)) {
-                    flash_success('Page '.$page->title.' as been deleted!');
+                    flash_success(__('Page :title as been deleted!', array(':title'=>$page->title)));
                 } else {
-                    flash_error('Page '.$page->title.' as not been deleted!');
-                } // if
+                    flash_error(__('Page :title as not been deleted!', array(':title'=>$page->title)));
+                }
             } else {
-                flash_error('Page not found!');
-            } // if
+                flash_error(__('Page not found!'));
+            }
         } else {
-            flash_error('Action disabled!');
-        } // if
+            flash_error(__('Action disabled!'));
+        }
         redirect_to(get_url('pages'));
     } // delete
     

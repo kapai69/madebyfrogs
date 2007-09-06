@@ -125,8 +125,8 @@
           } else {
             $page_offset = ($page-1)*$this->per_page;
             $output .= $this->num_tag_open.'<a href="'.$this->base_url.$page_offset.'">'.$page.'</a>'.$this->num_tag_close;
-          } // if
-        } // if
+          }
+        }
       } // for
 
       // Render the "next" link

@@ -43,7 +43,7 @@ class Router
             $this->params = array_slice($this->params, 2);
         } else {
             $this->params = array();
-        } // if
+        }
     } //__construct
 
     /**
@@ -127,7 +127,7 @@ class Router
                 log_info('Route used: '.$uri);
                 
                 return;
-            } // if
+            }
         } // foreach
         // nothing is found ... default routing is used
     } // parse

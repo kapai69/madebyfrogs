@@ -1,13 +1,23 @@
 var SiteMap = Class.create();
-SiteMap.prototype = Object.extend({}, RuledList.prototype); // Inherit from RuledList
+SiteMap.prototype = Object.extend({}, RuledList.prototype);
 
 Object.extend(SiteMap.prototype, {
   
   ruledListInitialize: RuledList.prototype.initialize,
   
   initialize: function(id, expanded) {
+    this.id = id;
     this.ruledListInitialize(id);
     this.expandedRows = expanded;
+    this.sortablize();
+  },
+  
+  sortablize: function() {
+    Sortable.destroy(this.id);
+    Sortable.create(this.id, { constraint:'vertical', scroll:window, handle:'handle', tree:true,
+      onChange: SiteMap.prototype.adjustLevelOf,
+      onUpdate: SiteMap.prototype.update
+    });
   },
   
   onRowSetup: function(row) {
@@ -137,7 +147,8 @@ Object.extend(SiteMap.prototype, {
           this.updating = true;
         }.bind(this),
         onComplete: function(request) {
-          this.setupRow(row);
+          this.setupRows(row);
+          this.sortablize();
           this.updating = false;
           Effect.Fade('busy-' + id);
         }.bind(this)
@@ -153,8 +164,55 @@ Object.extend(SiteMap.prototype, {
         this.showBranch(row, img);
       }
     }
-  }
+  },
+  
+  adjustLevelOf: function(element) {
+    // this will make the page displayed at the level + 1 of the parent
+    var currentLevel = 1;
+    var parentLevel = 0;
+    currentElementSelected = element;
+    
+    if (/level-(\d+)/i.test(element.className))
+      currentLevel = RegExp.$1.toInteger();
+      
+    if (/level-(\d+)/i.test(element.parentNode.parentNode.className))
+      parentLevel = RegExp.$1.toInteger();
 
+    if (currentLevel != parentLevel+1) {
+       Element.removeClassName(element, 'level-'+currentLevel);
+       Element.addClassName(element, 'level-'+(parentLevel+1));
+    }
+    // this will update all childs level
+    var container = Element.findChildren(element, false, false, 'ul');
+    if (container.length == 1) {
+        var childs = Element.findChildren(container[0], false, false, 'li');
+        for (var i=0; i<childs.length;i++) {
+            childs[i].className = childs[i].className.replace(/level-(\d+)/, 'level-'+(parentLevel+2));
+        }
+    }
+  },
+  
+  update: function() {
+    var parent = null;
+    var parent_id = 1;
+    var pages = [];
+    var data = '';
+    
+    if (/page_(\d+)/i.test(currentElementSelected.parentNode.parentNode.id)) {
+      parent_id = RegExp.$1.toInteger();
+      parent = currentElementSelected.parentNode;
+    } else {
+      parent = $('site-map');
+    }
+    
+    pages = Element.findChildren(parent, false, false, 'li');
+    
+    for(var i=0; i<pages.length; i++) {
+      data += 'pages[]='+SiteMap.prototype.extractPageId(pages[i])+'&';
+    }
+    
+    new Ajax.Request('?/pages/reorder/'+parent_id, {method: 'post', parameters: { 'data': data }});
+  }
 });
 
 Insertion.EndOfRow = Class.create();

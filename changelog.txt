@@ -1,6 +1,9 @@
 0.2.2
   localization of all the adminstration part of frog (english, french)
   bug fixe tab (page part) can't remove body part
+  view site link will NO LONGER open in a new window (really don't like it)
+  bug fixe page toggle now al levels works
+  bug fixe sortable drag and drop page on second level now display righ level
 
 0.2.1
   drag and drop sortable page position (order)

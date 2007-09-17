@@ -30,6 +30,10 @@ define('COOKIE_SECURE', false);
 // ---------------------------------------------------
 //  Init...
 // ---------------------------------------------------
+
+session_name('_FROG_SESSION_KEY_');
+session_cache_expire(REMEMBER_LOGIN_LIFETIME);
+
 include_once ROOT . '/config/config.php';
 include_once APP_PATH . '/functions.php';
 include_once ENV_PATH . '/frog.php';

@@ -55,7 +55,7 @@ class Log
 
     public function add($level, $msg)
     {
-        if ($level > $this->_display_level) {
+        if (DEBUG && $level > $this->_display_level) {
             return false;
         }
         $now = date($this->_date_fmt);
@@ -78,16 +78,7 @@ class Log
     }
 
     // --------------------------------------------------------------
-    
-    /**
-     * Write Log File
-     *
-     * Generally this function will be called using the global log_message() function
-     *
-     * @param string the error level
-     * @param string the error message
-     * @return bool
-     */
+
     private function _write()
     {
         $filepath = $this->log_path.'/log-'.date('Y-m-d');

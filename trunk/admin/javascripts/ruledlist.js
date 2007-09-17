@@ -2,21 +2,24 @@ var RuledList = Class.create();
 RuledList.prototype = {
   
   initialize: function(element_id) {
+    this.setupRows(element_id);
+  },
+  
+  onMouseOverRow: function(event) {
+    this.className = this.className.replace(/\s*\bhighlight\b|$/, ' highlight');
+  },
+  
+  onMouseOutRow: function(event) {
+    this.className = this.className.replace(/\s*\bhighlight\b\s*/, ' ');
+  },
+  
+  setupRows: function(element_id) {
     var list = $(element_id);
+    this.setupRow(list);
     var rows = list.getElementsByTagName('li');
     for (var i = 0; i < rows.length; i++) {
       this.setupRow(rows[i]);
     }
-  },
-  
-  onMouseOverRow: function(event) {
-    // Element.addClassName(this, 'highlight');
-    this.className = this.className.replace(/\s*\bhighlight\b|$/, ' highlight'); // faster than the above
-  },
-  
-  onMouseOutRow: function(event) {
-    // Element.removeClassName(this, 'highlight');
-    this.className = this.className.replace(/\s*\bhighlight\b\s*/, ' '); // faster than the above
   },
   
   setupRow: function(row) {

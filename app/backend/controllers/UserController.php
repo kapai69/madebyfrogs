@@ -1,7 +1,7 @@
 <?php 
 
 /**
- * class UsersController
+ * class UserController
  *
  * Enter description here...
  *
@@ -169,4 +169,4 @@ class UserController extends Controller
         redirect(get_url('user'));
     } // delete
 
-} // end UsersController class
+} // end UserController class

@@ -394,13 +394,14 @@ class Record
     public function save()
     {
         if ( ! $this->beforeSave()) return false;
-
-        $columns = $this->getColumns();
+        
         $value_of = array();
         
         if (empty($this->id)) {
             
             if ( ! $this->beforeInsert()) return false;
+            
+            $columns = $this->getColumns();
             
             // escape and format for SQL insert query
             foreach ($columns as $column) {
@@ -420,6 +421,8 @@ class Record
         } else {
             
             if ( ! $this->beforeUpdate()) return false;
+            
+            $columns = $this->getColumns();
             
             // escape and format for SQL update query
             foreach ($columns as $column) {

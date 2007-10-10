@@ -15,7 +15,7 @@
         </tr>
         <tr>
           <td><label for="page_breadcrumb"><?php echo __('Breadcrumb') ?></label></td>
-          <td class="field"><input class="textbox" id="page_breadcrumb" maxlength="160" name="page[breadcrumb]" size="160" type="text" value="<?php echo $page->breadcrumb ?>" /></td>
+          <td class="field"><input class="textbox" id="page_breadcrumb" maxlength="160" name="page[breadcrumb]" size="160" type="text" value="<?php echo htmlentities($page->breadcrumb, ENT_COMPAT, 'UTF-8') ?>" /></td>
         </tr>
       </table>
       <script type="text/javascript">

@@ -156,6 +156,10 @@ class Page
             }
         }
 
+        if ($limit == 1) {
+            return $pages[0];
+        }
+        
         return $pages;
     } // children
 

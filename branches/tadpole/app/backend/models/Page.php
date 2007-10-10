@@ -51,6 +51,9 @@ class Page extends Record
         $this->updated_by_id = AuthUser::getId();
         $this->updated_on = date('Y-m-d H:i:s');
         
+        // get old page information (slug to replace)
+        $old_page = self::findById($this->id);
+        
         // rebuild slug path
         $parent = Record::findByIdFrom('Page', $this->parent_id);
         $my_slug = self::getSlug($this->slug);
@@ -60,7 +63,7 @@ class Page extends Record
         }
         
         if (Page::hasChildren($this->id)) {
-            Page::replacePath($this->slug, $my_slug);
+            Page::replacePath($old_page->slug, $my_slug);
         }
         
         $this->slug = $my_slug;

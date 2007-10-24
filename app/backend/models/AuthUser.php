@@ -101,7 +101,7 @@ class AuthUser
             
             if ($set_cookie) {
                 $time = $_SERVER['REQUEST_TIME'] + self::COOKIE_LIFE;
-                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user->id, $user->usernamer), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
+                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user->id, $user->username), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
             }
             
             self::setInfos($user);

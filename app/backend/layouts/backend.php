@@ -21,11 +21,7 @@
     <script src="javascripts/pages.js" type="text/javascript"></script>
     <script src="javascripts/control.textarea.2.0.0.RC1.js" type="text/javascript"></script>
     <script src="javascripts/control.textarea.markdown.js" type="text/javascript"></script>
-
-    <!--[if lt IE 7]>
-    <script defer type="text/javascript" src="javascripts/pngfix.js"></script>
-    <![endif]-->
-
+    
   </head>
   <body>
     <div id="header">
@@ -72,7 +68,7 @@
     <hr class="hidden" />
     <div id="footer">
       <p>
-      <?php echo __('This site was made with PHP and is powered by') ?> <a href="http://www.philworks.com/frog/">Frog</a> <?php echo __('version') ?> <?php echo FROG_VERSION ?><br />
+      <?php echo __('This site was made with PHP and is powered by') ?> <a href="http://www.madebyfrog.com/">Frog</a> <?php echo __('version') ?> <?php echo FROG_VERSION ?><br />
 <?php if (DEBUG) { ?>
       <?php echo __('Page rendered in') ?> <?php echo execution_time() ?> <?php echo __('seconds') ?><br />
       <?php echo __('Memory usage:') ?> <?php echo memory_usage() ?>

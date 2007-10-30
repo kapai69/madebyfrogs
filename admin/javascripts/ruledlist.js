@@ -16,7 +16,7 @@ RuledList.prototype = {
   setupRows: function(element_id) {
     var list = $(element_id);
     this.setupRow(list);
-    var rows = list.getElementsByTagName('li');
+    var rows = list.getElementsByTagName('LI');
     for (var i = 0; i < rows.length; i++) {
       this.setupRow(rows[i]);
     }

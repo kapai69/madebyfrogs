@@ -21,14 +21,14 @@ Object.extend(SiteMap.prototype, {
   },
   
   onRowSetup: function(row) {
-    var toggler = row.getElementsByTagName('img')[0];
+    var toggler = row.getElementsByTagName('IMG')[0];
     Event.observe(toggler, 'click', this.onMouseClickRow.bindAsEventListener(this), false);
   },
   
   onMouseClickRow: function(event) {
     var element = Event.element(event);
     if (this.isExpander(element)) {
-      var row = Event.findElement(event, 'li');
+      var row = Event.findElement(event, 'LI');
       if (this.hasChildren(row)) {
         this.toggleBranch(row, element);
       }
@@ -48,7 +48,7 @@ Object.extend(SiteMap.prototype, {
   },
   
   isRow: function(element) {
-    return element.tagName && (element.tagName.strip().downcase() == 'li');
+    return element.tagName && (element.tagName.strip() == 'LI');
   },
   
   extractLevel: function(row) {
@@ -62,7 +62,7 @@ Object.extend(SiteMap.prototype, {
   },
   
   getExpanderImageForRow: function(row) {
-    var images = $A(row.getElementsByTagName('img', row));
+    var images = $A(row.getElementsByTagName('IMG', row));
     var expanders = [];
     images.each(function(image){
       expanders.push(image);
@@ -183,9 +183,9 @@ Object.extend(SiteMap.prototype, {
        Element.addClassName(element, 'level-'+(parentLevel+1));
     }
     // this will update all childs level
-    var container = Element.findChildren(element, false, false, 'ul');
+    var container = Element.findChildren(element, false, false, 'UL');
     if (container.length == 1) {
-        var childs = Element.findChildren(container[0], false, false, 'li');
+        var childs = Element.findChildren(container[0], false, false, 'LI');
         for (var i=0; i < childs.length; i++) {
             childs[i].className = childs[i].className.replace(/level-(\d+)/, 'level-'+(parentLevel+2));
         }
@@ -202,7 +202,7 @@ Object.extend(SiteMap.prototype, {
       parent_id = RegExp.$1.toInteger();
     }
     
-    pages = Element.findChildren(parent, false, false, 'li');
+    pages = Element.findChildren(parent, false, false, 'LI');
     
     for(var i=0; i<pages.length; i++) {
       data += 'pages[]='+SiteMap.prototype.extractPageId(pages[i])+'&';

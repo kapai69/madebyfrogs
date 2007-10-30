@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Puno : Extra Light PHP Framework
- * http://www.philworks.com/projects/puno
+ * Framework : Extra Light PHP Framework
+ * http://www.madebyfrog.com/framework/
  * 
  * Copyright (c) 2007, Philippe Archambault
  *
@@ -26,12 +26,12 @@
  *
  * @author Philippe Archambault <philippe.archambault@gmail.com>
  * @copyright 2007 Philippe Archambault
- * @package Puno
- * @version 0.1
+ * @package Framework
+ * @version 1.6
  * @license http://www.opensource.org/licenses/mit-license.html MIT License
  */
 
-define('FRAMEWORK_STARTING_MICROTIME', getMicrotime());
+define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
 
 // all constants that you can define before to costumize your framework
 if (!defined('DEBUG'))              define('DEBUG', false);
@@ -45,12 +45,13 @@ if (!defined('URL_SUFFIX'))         define('URL_SUFFIX', null);
 
 if (!defined('DEFAULT_CONTROLLER')) define('DEFAULT_CONTROLLER', 'index');
 if (!defined('DEFAULT_ACTION'))     define('DEFAULT_ACTION', 'index');
-//if (!defined('DEFAULT_LOCALE'))     define('DEFAULT_LOCALE', 'en');
 
 // setting error display depending on debug mode or not
 error_reporting((DEBUG ? E_ALL : 0));
 
-// Start the session
+// no more quotes escaped with a backslash
+set_magic_quotes_runtime(0);
+
 if ( ! ini_get('session.auto_start') || strtolower(ini_get('session.auto_start')) == 'off') {
     session_start();
 }
@@ -84,11 +85,8 @@ final class Dispatcher
     private static $routes = array();
     private static $params = array();
     private static $status = array();
+    private static $requested_url = '';
     
-    /**
-     * @param mixed $route String route or array of route => controller and method pairs.
-     * @param mixed $destination ...
-     */
     public static function addRoute($route, $destination=null)
     {
         if ($destination != null && !is_array($route)) {
@@ -97,23 +95,11 @@ final class Dispatcher
         self::$routes = array_merge(self::$routes, $route);
     }
     
-    /**
-     * split a url by / in a array without empty param
-     *
-     * @param string $uri url string to split
-     * @return array
-     */
     public static function splitUrl($url)
     {
         return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
     }
     
-    /**
-     * before calling this method make sure you have define APP_PATH to your application path
-     *
-     * @param string $requested_url The url that is being requested relative to the base url.
-     * @return void
-     */
     public static function dispatch($requested_url=null)
     {
         Flash::init();
@@ -143,6 +129,8 @@ final class Dispatcher
                 $requested_url = substr($requested_url, 0, $pos_to_cut);
             }
         }
+        
+        self::$requested_url = $requested_url;
         
         // this is only trace for debuging
         self::$status['requested_url'] = $requested_url;
@@ -178,8 +166,14 @@ final class Dispatcher
                 break;
             }
         }
+        
         return self::executeAction(self::getController(), self::getAction(), self::getParams());
     } // dispatch
+    
+    public static function getCurrentUrl()
+    {
+        return self::$requested_url;
+    }
     
     public static function getController()
     {
@@ -200,14 +194,7 @@ final class Dispatcher
     {
         return ($key === null) ? self::$status: (isset(self::$status[$key]) ? self::$status[$key]: null);
     }
-
-    /**
-     * Load controller and execute the action
-     *
-     * @param string $controller_name
-     * @param string $action_name
-     * @return void
-     */
+    
     public static function executeAction($controller, $action, $params)
     {
         self::$status['controller'] = $controller;
@@ -218,8 +205,11 @@ final class Dispatcher
         $controller_class_name = $controller_class . 'Controller';
         
         // get a instance of that controller
-        $controller = new $controller_class_name();
-        
+        if (class_exists($controller_class_name)) {
+            $controller = new $controller_class_name();
+        } else {
+            //page_not_found();
+        }
         if ( ! $controller instanceof Controller) {
             throw new Exception("Class '{$controller_class_name}' does not extends Controller class!");
         }
@@ -538,7 +528,7 @@ class Record
     
     //
     // note: lazy finder or getter methode. Pratical when you need something really 
-    //       simple no join or anything will only generate siple select * from table ...
+    //       simple no join or anything will only generate simple select * from table ...
     //
     
     public static function findByIdFrom($class_name, $id)
@@ -590,9 +580,9 @@ class Record
  * display() to get the output of the template, or just call print on the template
  * directly thanks to PHP 5's __toString magic method.
  * 
- * echo new View('views/my_template.php',array(
+ * echo new View(APP_PATH.'/views/my_template.php',array(
  *  'title' => 'My Title',
- *  'body' => 'My body'
+ *  'body' => 'My body content'
  * ));
  * 
  * my_template.php might look like this: 
@@ -609,7 +599,7 @@ class Record
  * 
  * Using view helpers:
  * 
- * use_helper('HelperFileName');
+ * use_helper('HelperName', 'OtherHelperName');
  */
 class View
 {
@@ -732,7 +722,7 @@ class Controller
         }
     }
     
-    public function display($view, $vars, $exit=true)
+    public function display($view, $vars=array(), $exit=true)
     {
         echo $this->render($view, $vars);
         
@@ -800,6 +790,7 @@ class AutoLoader
         if (isset(self::$files[$class_name])) {
             if (file_exists(self::$files[$class_name])) {
                 require self::$files[$class_name];
+                return;
             }
         } else {
             foreach (self::$folders as $folder) {
@@ -807,9 +798,11 @@ class AutoLoader
                 $file = $folder.DIRECTORY_SEPARATOR.$class_name.'.php';
                 if (file_exists($file)) {
                     require $file;
+                    return;
                 }
             }
         }
+        page_not_found();
     }
     
 } // end AutoLoader class
@@ -840,7 +833,7 @@ if ( ! function_exists('__autoload')) {
  */
 final class Flash
 {
-    const SESSION_KEY = '__flash__';
+    const SESSION_KEY = '_flash';
     
     private static $_previous = array(); // Data that prevous page left in the Flash
 
@@ -1031,7 +1024,7 @@ function get_url()
 /**
  * Get the request method used to send this page
  *
- * @return string GET, POST or AJAX
+ * @return string possible value: GET, POST or AJAX
  */
 function get_request_method()
 {
@@ -1042,9 +1035,6 @@ function get_request_method()
 
 /**
  * Redirect this page to the url passed in param
- *
- * @param  string $url like http://www.example.com/
- * @return void
  */
 function redirect($url)
 {
@@ -1052,9 +1042,23 @@ function redirect($url)
 }
 
 /**
+ * Alias for redirect
+ */
+function redirect_to($url)
+{
+    header('Location: '.$url); exit;
+}
+
+/**
+ * Encodes HTML safely for UTF-8. Use instead of htmlentities.
+ */
+function html_encode($string)
+{
+	return htmlentities($string, ENT_QUOTES, 'UTF-8') ;
+}
+
+/**
  * Display a 404 page not found and exit
- *
- * @return void
  */
 function page_not_found()
 {
@@ -1081,10 +1085,10 @@ function memory_usage()
 
 function execution_time()
 {
-    return sprintf("%01.4f", getMicrotime() - FRAMEWORK_STARTING_MICROTIME);
+    return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME);
 }
 
-function getMicrotime()
+function get_microtime()
 {
     $time = explode(' ', microtime());
     return doubleval($time[0]) + $time[1];
@@ -1093,8 +1097,12 @@ function getMicrotime()
 function odd_even()
 {
     static $odd = true;
-    $odd = !$odd;
-    return $odd ? 'even': 'odd';
+    return ($odd = !$odd) ? 'even': 'odd';
+}
+
+function even_odd()
+{
+    return odd_even();
 }
 
 /**
@@ -1102,7 +1110,7 @@ function odd_even()
  *
  * @param Exception $e Exception object.
  */
-function frog_exception_handler($e)
+function framework_exception_handler($e)
 {
     if ( ! DEBUG) page_not_found();
     
@@ -1178,28 +1186,26 @@ function debug_table($array, $label, $key_label='Variable', $value_label='Value'
     echo '</table>';
 }
 
-set_exception_handler('frog_exception_handler');
+set_exception_handler('framework_exception_handler');
 
 /**
  * This function will strip slashes if magic quotes is enabled so 
  * all input data ($_GET, $_POST, $_COOKIE) is free of slashes
- *
- * @param none
- * @return void
  */
 function fix_input_quotes()
 {
-    if (get_magic_quotes_gpc()) {
-        $in = array(&$_GET, &$_POST, &$_COOKIE);
-        while (list($k,$v) = each($in)) {
-            foreach ($v as $key => $val) {
-                if (!is_array($val)) {
-                     $in[$k][$key] = stripslashes($val); continue;
-                }
-                $in[] =& $in[$k][$key];
+    $in = array(&$_GET, &$_POST, &$_COOKIE);
+    while (list($k,$v) = each($in)) {
+        foreach ($v as $key => $val) {
+            if (!is_array($val)) {
+                 $in[$k][$key] = stripslashes($val); continue;
             }
+            $in[] =& $in[$k][$key];
         }
-        unset($in);
     }
+    unset($in);
 } // fix_input_quotes
-fix_input_quotes();
+
+if (get_magic_quotes_gpc()) {
+    fix_input_quotes();
+}

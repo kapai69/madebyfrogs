@@ -47,7 +47,7 @@ class PagePart extends Record
     
     public static function deleteByPageId($id)
     {
-        return self::exec('DELETE FROM '.self::tableNameFromClassName('PagePart').' WHERE page_id='.(int)$id) === false ? false: true;
+        return self::$__CONN__->exec('DELETE FROM '.self::tableNameFromClassName('PagePart').' WHERE page_id='.(int)$id) === false ? false: true;
     } // deleteByPageId
 
 } // end PagePart class

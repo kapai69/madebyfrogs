@@ -14,12 +14,20 @@ class FileController extends Controller
     var $path;
     var $fullpath;
     
-    function index()
+    public function __construct()
+    {
+        AuthUser::load();
+        if ( ! AuthUser::isLoggedIn()) {
+            redirect(get_url('login'));
+        }
+    }
+    
+    public function index()
     {
         $this->browse();
     }
     
-    function browse()
+    public function browse()
     {
         $this->path = join('/', Dispatcher::getParams());
         // make sure there's a / at the end
@@ -48,7 +56,7 @@ class FileController extends Controller
         ));
     } // browse
     
-    function view()
+    public function view()
     {
         $content = '';
         $filename = join('/', Dispatcher::getParams());
@@ -65,7 +73,7 @@ class FileController extends Controller
         ));
     }
     
-    function save()
+    public function save()
     {
         $data = $_POST['file'];
         
@@ -86,7 +94,7 @@ class FileController extends Controller
         redirect(get_url('file/browse/'.substr($data['name'], 0, strrpos($data['name'], '/'))));
     }
     
-    function create_file()
+    public function create_file()
     {
         $data = $_POST['file'];
         
@@ -103,7 +111,7 @@ class FileController extends Controller
         redirect(get_url('file/browse/'.$path));
     }
     
-    function create_directory()
+    public function create_directory()
     {
         $data = $_POST['directory'];
         
@@ -120,7 +128,7 @@ class FileController extends Controller
         redirect(get_url('file/browse/'.$path));
     }
     
-    function delete()
+    public function delete()
     {
         $paths = Dispatcher::getParams();
         $file = join('/', $paths);
@@ -144,7 +152,7 @@ class FileController extends Controller
         redirect(get_url('file/browse/'.$paths));
     }
     
-    function upload()
+    public function upload()
     {
         $data = $_POST['upload'];
         $path = str_replace('..', '', $data['path']);
@@ -161,7 +169,7 @@ class FileController extends Controller
         redirect(get_url('file/browse/'.$path));
     }
     
-    function chmod()
+    public function chmod()
     {
         $data = $_POST['file'];
         $data['name'] = str_replace('..', '', $data['name']);
@@ -187,13 +195,13 @@ class FileController extends Controller
     // Privates
     //
     
-    function _getPath()
+    public function _getPath()
     {
         $path = join('/', get_params());
         return str_replace('..', '', $path);
     }
     
-    function _getListFiles()
+    public function _getListFiles()
     {
         $files = array();
         
@@ -233,7 +241,7 @@ class FileController extends Controller
         return $files;
     } // _getListFiles
 
-    function _getPermissions($file)
+    public function _getPermissions($file)
     {
         $perms = fileperms($file);
 
@@ -288,7 +296,7 @@ class FileController extends Controller
         return $info;
     } // _getPermissions
 
-    function _isImage($file)
+    public function _isImage($file)
     {
         if (!@is_file($file)) return false;
         else if (!@exif_imagetype($file)) return false;

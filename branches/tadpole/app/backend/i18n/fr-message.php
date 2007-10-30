@@ -69,6 +69,7 @@ return array(
 'Page Title' => 'Titre de la page',
 'Filter' => 'Filtre',
 'none' => 'aucun',
+'Page Type' => 'Type de page',
 
 // snippets
 'Snippets are generally small pieces of content which are included in other pages or layouts.' =>

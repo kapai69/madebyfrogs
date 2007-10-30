@@ -25,7 +25,9 @@ class LoginController extends Controller
         }
 
         // show it!
-        echo $this->render('login/login');
+        $this->display('login/login', array(
+            'username' => Flash::get('username')
+        ));
     } // add
     
     function login()
@@ -35,7 +37,8 @@ class LoginController extends Controller
             redirect(get_url());
         }
 
-        $data = isset($_POST['login']) ? $_POST['login']: array();
+        $data = isset($_POST['login']) ? $_POST['login']: array('username' => '', 'password' => '');
+        Flash::set('username', $data['username']);
         
         if (AuthUser::login($data['username'], $data['password'], isset($data['remember']))) {
             $this->_checkVersion();
@@ -60,9 +63,37 @@ class LoginController extends Controller
     
     function forgot()
     {
-        // show it!
-        echo $this->render('login/forgot');
+        if (get_request_method() == 'POST') {
+            return $this->_sendPasswordTo($_POST['forgot']['email']);
+        }
+        $this->display('login/forgot', array('email' => Flash::get('email')));
     } // forgot
+    
+    function _sendPasswordTo($email)
+    {
+        $user = User::findBy('email', $email);
+        if ($user) {
+            use_helper('Email');
+            
+            $new_pass = '12'.dechex(rand(100000000, 4294967295)).'K';
+            $user->password = sha1($new_pass);
+            $user->save();
+            
+            $email = new Email();
+            $email->from('no-reply@madebyfrog.com', 'Frog CMS');
+            $email->to($user->email);
+            $email->subject('Your new password from Frog CMS');
+            $email->message('username: '.$user->username."\npassword: ".$new_pass);
+            $email->send();
+            
+            Flash::set('success', 'An email has been send with your new password!');
+            redirect(get_url('login'));
+        } else {
+            Flash::set('email', $email);
+            Flash::set('error', 'No user found!');
+            redirect(get_url('login/forgot'));
+        }
+    }
     
     function _checkVersion()
     {

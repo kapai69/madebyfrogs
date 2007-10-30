@@ -2,10 +2,10 @@
 
 class AuthUser
 {
-    const SESSION_KEY               = 'frog.auth.user';
-    const COOKIE_KEY                = 'frog.auth.user';
+    const SESSION_KEY               = 'frog_auth_user';
+    const COOKIE_KEY                = 'frog_auth_user';
     const ALLOW_LOGIN_WITH_EMAIL    = false;
-    const COOKIE_LIFE               = 604800; // 1 week (7 days)
+    const COOKIE_LIFE               = 1209600; // 2 weeks
     const DELAY_ON_INVALID_LOGIN    = true;
     
     static protected $is_logged_in  = false;
@@ -13,7 +13,7 @@ class AuthUser
     static protected $is_admin      = false;
     static protected $record        = false;
     static protected $permissions   = array();
-      
+    
     static public function load()
     {
         if (isset($_SESSION[self::SESSION_KEY]) && isset($_SESSION[self::SESSION_KEY]['username'])) {
@@ -34,8 +34,7 @@ class AuthUser
     
     static public function setInfos(Record $user)
     {
-        $_SESSION[self::SESSION_KEY] = (array) $user;
-        unset($_SESSION[self::SESSION_KEY]['password']);
+        $_SESSION[self::SESSION_KEY] = array('username' => $user->username);
         
         self::$record = $user;
         self::$is_logged_in = true;
@@ -101,7 +100,7 @@ class AuthUser
             
             if ($set_cookie) {
                 $time = $_SERVER['REQUEST_TIME'] + self::COOKIE_LIFE;
-                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user->id, $user->username), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
+                setcookie(self::COOKIE_KEY, self::bakeUserCookie($time, $user), $time, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && ((strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS')))));
             }
             
             self::setInfos($user);
@@ -109,12 +108,12 @@ class AuthUser
         
         } else {
             if (self::DELAY_ON_INVALID_LOGIN) {
-                if ( ! isset($_SESSION[self::SESSION_KEY.'.invalid_logins'])) {
-                    $_SESSION[self::SESSION_KEY.'.invalid_logins'] = 1;
+                if ( ! isset($_SESSION[self::SESSION_KEY.'_invalid_logins'])) {
+                    $_SESSION[self::SESSION_KEY.'_invalid_logins'] = 1;
                 } else {
-                    ++$_SESSION[self::SESSION_KEY.'.invalid_logins'];
+                    ++$_SESSION[self::SESSION_KEY.'_invalid_logins'];
                 }
-                sleep(max(0, min($_SESSION[self::SESSION_KEY.'.invalid_logins'], (ini_get('max_execution_time') - 1))));
+                sleep(max(0, min($_SESSION[self::SESSION_KEY.'_invalid_logins'], (ini_get('max_execution_time') - 1))));
             }
             return false;   
         }
@@ -122,7 +121,7 @@ class AuthUser
     
     static public function logout()
     {
-        session_unregister(self::SESSION_KEY);
+        unset($_SESSION[self::SESSION_KEY]);
         self::eatCookie();
         self::$record = false;
         self::$user_id = false;
@@ -135,12 +134,10 @@ class AuthUser
         $params = self::explodeCookie($cookie);
         if (isset($params['exp'], $params['id'], $params['digest'])) {
             $user = Record::findByIdFrom('User', $params['id']);
-            
-            if (!$user) {
+            if ( ! $user) {
                 return false;
             }
-            
-            if (self::bakeUserCookie($params['exp'], $user->id, $user->username) == $cookie && $params['exp'] > $_SERVER['REQUEST_TIME']) {
+            if (self::bakeUserCookie($params['exp'], $user) == $cookie && $params['exp'] > $_SERVER['REQUEST_TIME']) {
                 return $user;
             }  
         }  
@@ -167,9 +164,9 @@ class AuthUser
         setcookie(self::COOKIE_KEY, false, $_SERVER['REQUEST_TIME']-self::COOKIE_LIFE, '/', null, (isset($_ENV['SERVER_PROTOCOL']) && (strpos($_ENV['SERVER_PROTOCOL'],'https') || strpos($_ENV['SERVER_PROTOCOL'],'HTTPS'))));
     }
     
-    static protected function bakeUserCookie($time, $id, $username)
+    static protected function bakeUserCookie($time, $user)
     {
-        return 'exp='.$time.'&id='.$id.='&digest='.md5(SECRET_KEY. $time. $id. $username);
+        return 'exp='.$time.'&id='.$user->id.'&digest='.md5($user->username.$user->password);
     }
     
 } // end AuthUser class

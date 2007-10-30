@@ -66,7 +66,7 @@ CREATE TABLE `{TABLEPREFIX}page` (
   `parent_id` int(11) unsigned default NULL,
   `layout_id` int(11) unsigned default NULL,
   `behavior_id` varchar(25) NOT NULL,
-  `status_id` int(11) unsigned NOT NULL default '1',
+  `status_id` int(11) unsigned NOT NULL default '100',
   `created_on` datetime default NULL,
   `updated_on` datetime default NULL,
   `created_by_id` int(11) default NULL,

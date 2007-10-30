@@ -95,7 +95,7 @@
         </select>
       </p>
 
-      <p><label for="page_behavior_id"><?php echo __('Behavior') ?></label>
+      <p><label for="page_behavior_id"><?php echo __('Page Type') ?></label>
         <select id="page_behavior_id" name="page[behavior_id]">
           <option value=""<?php if ($page->behavior_id == '') echo ' selected'; ?>>&#8212; <?php echo __('none') ?> &#8212;</option>
   <?php foreach ($behaviors as $behavior) { ?>
@@ -108,7 +108,7 @@
         <select id="page_status_id" name="page[status_id]">
           <option value="<?php echo Page::STATUS_DRAFT ?>" <?php echo $page->status_id == Page::STATUS_DRAFT ? 'selected="selected"': '' ?>><?php echo __('Draft') ?></option>
           <option value="<?php echo Page::STATUS_REVIEWED ?>"<?php echo $page->status_id == Page::STATUS_REVIEWED ? 'selected="selected"': '' ?>><?php echo __('Reviewed') ?></option>
-          <option value="<?php echo Page::STATUS_PUBLISHED ?>"<?php echo $page->status_id == Page::STATUS_PUBLISHED ? 'selected="selected"': '' ?>><?php echo __('Published') ?></option>
+          <option value="<?php echo Page::STATUS_PUBLISHED ?>"<?php echo $page->status_id == Page::STATUS_PUBLISHED || ! $page->status_id ? 'selected="selected"': '' ?>><?php echo __('Published') ?></option>
           <option value="<?php echo Page::STATUS_HIDDEN ?>"<?php echo $page->status_id == Page::STATUS_HIDDEN ? 'selected="selected"': '' ?>><?php echo __('Hidden') ?></option>
         </select>
       </p>

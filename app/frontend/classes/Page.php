@@ -142,7 +142,7 @@ class Page
              . 'from '.TABLE_PREFIX.'pages as pages '
              . 'left join '.TABLE_PREFIX.'users as author on author.id = pages.created_by_id '
              . 'left join '.TABLE_PREFIX.'users as updator on updator.id = pages.updated_by_id '
-             . 'where parent_id = '.$this->id.' and (status_id=50 or status_id=100 or status_id=101) '
+             . 'where parent_id = '.$this->id.' and (status_id=50 or status_id=100) '
              . "$whereString order by $order $limitString";
 
         $pages = array();

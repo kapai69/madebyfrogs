@@ -1,0 +1,51 @@
+= What are a behavior in Frog CMS =
+
+  * A behavior is what you can apply to a page to make it different! 
+  * A behavior take control of all is children page
+  * A behavior can redefine all page method by "overwriting* the Page class
+
+== HOWTO create a new behavior ==
+
+this a a work in progress documentation for the implementation of the behavior in the next and first version *1*
+
+first is to create a folder in the frog/behaviors folder. (the name of the folder have to be underscored ie: *my_archive_version*
+
+then you have to create a file with the name of the class and this one have to be camelized ie: *MyArchiveVersion.php*
+
+the content of this file have to start with this model:
+
+{{{
+<?php
+
+class MyArchiveVersion
+{
+    function __construct(&$page, $params)
+    {
+        $this->page =& $page;
+        $this->params = $params;
+    }
+}
+
+?>
+}}}
+
+
+then you can, but it is optional, extends the page class by creating a file with the same name as the behavior but with Page before it ie: PageMyArchiveVersion.php
+
+and this one have to look like:
+
+{{{
+<?php
+
+class PageMyArchiveVersion extends Page
+{
+    // ...
+}
+}}} 
+
+then overwrite method (function) that you need to be different.
+
+or this is the basic ... of what you need to know ... and don't forget when you apply a behavior (page type) to a page, all is children are now depending of it, Frog give the control to the behavior, so watch out!!  ;)
+
+a other thing to know that is important is that the page is passed by reference, so if you redefine it, be sure that it is a instance of a Page and have a _executeLayout() function and _saveComment() function this are the two function that will be called automatically by Frog CMS
+

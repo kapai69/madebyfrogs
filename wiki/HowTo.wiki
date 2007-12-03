@@ -1,12 +1,12 @@
-After reading all this little document (5 minutes) you will be able to create
+After reading all of this little document (5 minutes) you will be able to create
 Frog CMS site in a minute, ok maybe in 10 minutes if you are really slow ;)
 
 If you have any question, suggestion, feedback or whatever, there is a forum
 at this address: http://forum.madebyfrog.com
 
-the official website address is: http://www.madebyfrog.com
+The official website address is: http://www.madebyfrog.com
 
-if you need a Frog CMS expert you can contact me at: info@madebyfrog.com
+If you need a Frog CMS expert you can contact me at: info@madebyfrog.com
 
 = HOW-TO =
 

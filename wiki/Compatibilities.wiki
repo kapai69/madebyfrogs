@@ -1,0 +1,19 @@
+= Compatibilities =
+
+PHP
+
+  * PHP5
+  * PHP6
+
+Server
+
+  * Apache
+  * IIS
+  * Nginx
+
+MySQL
+
+  * MySQL 5
+
+
+_all informations here are what I know that have been tested and work just fine_

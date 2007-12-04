@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 12px verdana, arial, helvetica, sans-serif;
+  color: white;
+  background: #2e2e2e;
+  text-align: center;
+  line-height: 150%;
+}
+
+a {
+  color: #8DA349;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: -10px -10px 5px;
+  padding: 10px 10px 5px;
+  background: #B7D773;
+  color: white;
+  font-size: 20px;
+  border-bottom: 3px solid #D6E8AA;
+}
+
+p {
+  margin: 8px 0;
+}
+
+
+/** Form **/
+
+label {
+  margin: 3px 0;
+  font-size: 90%;
+  font-weight: bolder;
+  display: block;
+}
+
+label.checkbox {
+  font-weight: normal;
+  display: inline;
+}
+
+input {
+  border: 1px solid #ccc;
+  padding: 3px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 11px;
+  background: white;
+}
+
+input:hover {
+  border: 1px solid green;
+}
+
+input:focus {
+  border: 1px solid black;
+}
+
+input.medium { width: 150px; }
+
+input.checkbox {
+  border: 0;
+  width: auto;
+}
+
+input.submit {
+  margin-top: 10px;
+}
+
+/** Construction **/
+
+#dialog {
+  margin: 100px auto 0 auto;
+  background: white;
+  color: #2e2e2e;
+  border: 3px solid #B7D773;
+  padding: 10px;
+  width: 332px;
+  text-align: left;
+}
+
+#error, #success {
+  margin: 10px 0;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  clear: both;
+  cursor: pointer;
+  text-align: left;
+}
+
+#error {
+  background: #FFB0B0;
+  border-color: red;
+}
+
+#success {
+  background: #90DC90;
+  border-color: green;
+}
+
+/** Login dialog **/
+
+#login_username_div, #login_password_div {
+  padding-top: 1px;
+}
+
+#login_username_div {
+  float: left;
+  width: 170px;
+}
+
+* html #login_username_div {
+  margin-top: 1px;
+}
+
+#login_password_div {
+  margin-left: 170px;
+}
+
+#login_submit span, #forgot_password_submit span {
+  padding-left: 8px;
+  font-size: 11px;
+}
+
+* html #login_submit span, * html #forgot_password_submit span {
+  position: relative;
+  top: -4px;
+}

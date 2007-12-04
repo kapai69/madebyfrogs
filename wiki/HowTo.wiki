@@ -12,34 +12,34 @@ If you need a Frog CMS expert you can contact me at: info@madebyfrog.com
 
 == HOW-TO: Create a Page ==
 
-You have two opion to do this:
+You have two options for doing this:
 
-  # Create a page by using the add page button on the left and then fill all the informations (Title, body, tags, ...), save it and then click on the small link *reorder* and then just drag and drop your new page where you want it.
-  # It is to click on the small green plus button (add child) at the right of the "parent" page that you want your page "in", then fill all informations and save it.
+  # Create a page by using the “New Page” button on the right, and then fill all the information (Title, body, tags, ...), and save it by clicking the “Save” button below the editing area. Then click on the small link *reorder* (at the left of the header line above the list of pages), and then just drag and drop your new page where you want it.
+  # The second method is to click on the small green plus button (it has the tooltip “Add child” when you hover the mouse pointer over it) at the right of the "parent" page that you want your new page to be created “under”. Fill all necessary information, and save it (as above).
 
 == HOW-TO: Create a Layout ==
 
-  # In the Layouts tab, click the "New Layout" button
-  # Write a name for this layout (must be unique)
-  # Write the Content-Type of it (default: text/html)
-  # Write the content "Body" of this layout
-  # Click on the "Save" button
+  # In the *Layouts* tab, click the "New Layout" button.
+  # Write a name for this layout (must be unique).
+  # Write the Content-Type for it (default: text/html).
+  # Write the content "Body" of this layout.
+  # Click on the "Save" button.
 
 == HOW-TO: Create a Snippet ==
 
-  # In the Snippets tab, click the "New Snippet" button
-  # Write a name for this snippet (must be unique)
-  # Write the content "Body" of this snippet
-  # You can decide to use or not a filter for this snippet by selecting it from the dropdown filter menu
-  # Click on the "Save" button
+  # In the *Snippets* tab, click the "New Snippet" button.
+  # Write a name for this snippet (must be unique).
+  # Write the content "Body" of this snippet.
+  # You can decide to use or not a filter for this snippet by selecting it from the dropdown filter menu.
+  # Click on the "Save" button.
 
 == HOW-TO: Create a User ==
 
-Note that you need to be a administration to have access at the Users module
+_Note that you need to have “administrator” rights to have access at the Users module._
  
-  # Click the Users link at the top right of your window
-  # Click the "New User" button choose is role. Email is optional (but is usefull if you need to change your password because you didn't remember it)
-  # Click on the "Save" button
+  # Click the Users link at the top right of your window.
+  # Click the "New User" button. Fill in the details, and choose a role. Email is optional (but is useful if you need to change your password because you didn't remember it).
+  # Click on the "Save" button.
 
 == HOW-TO: Manage my files ==
 

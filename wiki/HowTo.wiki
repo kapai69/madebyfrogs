@@ -37,22 +37,21 @@ You have two options for doing this:
 
 _Note that you need to have “administrator” rights to have access at the Users module._
  
-  # Click the Users link at the top right of your window.
-  # Click the "New User" button. Fill in the details, and choose a role. Email is optional (but is useful if you need to change your password because you didn't remember it).
+  # Click the *Users* link at the top right of your window.
+  # Click the “New User” button. Fill in the details, and choose a role. Email is optional (but is useful if you need to change your password because you didn't remember it).
   # Click on the "Save" button.
 
 == HOW-TO: Manage my files ==
 
-Note that the web server need to have access to write in "public" directory
-if you want to use the "Files" module.
+Note that the web server needs to have access to write in a “public” directory
+if you want to use the “Files” module.
  
- * here you can add, edit and remove files or directories
- * you can upload local file to a directory directly from the files module
+ * here you can add, edit and remove files or directories.
+ * you can upload local file to a directory directly from the files module.
 
 == HOW-TO: Insert/Add a snippet in a page, a layout or a snippet ==
 
-This is quite simple, you need to know the exact name of the snippet and then
-write where you want this snippet to be add:
+A “snippet” is bit of layout that might be used across many pages. For example, Frog CMS comes with “header” and “footer” snippets. Including snippets in your page or layout is quite simple. You need to know the exact name of the snippet (the same as it appears under the *Snippets* tab), and then include this code where you want this snippet to appear:
 
 {{{
     <?php $this->includeSnippet('the_name_of_the_snippet') ?>

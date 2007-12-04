@@ -16,4 +16,4 @@ MySQL
   * MySQL 5
 
 
-_all informations here are what I know that have been tested and work just fine_
+_All compatibilities noted here are known to have been tested and work just fine_

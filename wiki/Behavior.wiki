@@ -42,8 +42,8 @@ class PageMyArchiveVersion extends Page
 }
 }}} 
 
-then overwrite method (function) that you need to be different.
+Then overwrite method (function) that you need to be different.
 
-or this is the basic ... of what you need to know ... and don't forget when you apply a behavior (page type) to a page, all children pages are now dependent on it. Frog gives the control to the behavior, so watch out!!  ;)
+or this is the basic ... of what you need to know ... and don't forget when you apply a behavior (page type) to a page, all child pages are now dependent on it. Frog gives the control to the behavior, so watch out!!  ;)
 
 One other important thing to be aware of is that the page is passed by reference, so if you redefine it, be sure that it is an instance of a Page and has an `_executeLayout()` function and `_saveComment()` function. These are the two functions that will be called automatically by Frog CMS.

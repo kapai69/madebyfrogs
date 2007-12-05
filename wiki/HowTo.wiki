@@ -1,7 +1,7 @@
 After reading all of this little document (5 minutes) you will be able to create
 Frog CMS site in a minute, ok maybe in 10 minutes if you are really slow ;)
 
-If you have any question, suggestion, feedback or whatever, there is a forum
+If you have any questions, suggestions, feedback or whatever, there is a forum
 at this address: http://forum.madebyfrog.com
 
 The official website address is: http://www.madebyfrog.com
@@ -27,6 +27,8 @@ You have two options for doing this:
 
 == HOW-TO: Create a Snippet ==
 
+A “snippet” is bit of layout that might be used across many pages. For example, Frog CMS comes with “header” and “footer” snippets.
+
   # In the *Snippets* tab, click the "New Snippet" button.
   # Write a name for this snippet (must be unique).
   # Write the content "Body" of this snippet.
@@ -51,13 +53,13 @@ if you want to use the “Files” module.
 
 == HOW-TO: Insert/Add a snippet in a page, a layout or a snippet ==
 
-A “snippet” is bit of layout that might be used across many pages. For example, Frog CMS comes with “header” and “footer” snippets. Including snippets in your page or layout is quite simple. You need to know the exact name of the snippet (the same as it appears under the *Snippets* tab), and then include this code where you want this snippet to appear:
+Including snippets in your page or layout is quite simple. You need to know the exact name of the snippet (the same as it appears under the *Snippets* tab), and then include this code where you want this snippet to appear:
 
 {{{
     <?php $this->includeSnippet('the_name_of_the_snippet') ?>
 }}}
 
-== HOW-TO: Display a list of is sub pages (children) in (page, layout or snippet) ==
+== HOW-TO: Display a list of subpages (children) in (page, layout or snippet) ==
 
 Here is the example of the header snippet:
 
@@ -73,21 +75,20 @@ Here is the example of the header snippet:
     </ul>
 }}}
 
-The first LI is added to link the Home Page. BASE_URL is a constant the Frog 
-use to display the link() or all url in the application. You can use it 
+The first `LI` is added to link the Home Page. `BASE_URL` is a constant that Frog 
+uses to display the `link()` or whole URL in the application. You can use it 
 without any problem.
 
 Then you have the `$this->find('/')` method that will return the page at the
-url that you send it to, in this case, the Home Page.
+URL that you send it to, in this case, the Home Page.
 
-The you have the `children()` method that will return all subpage of the 
-finded page. (you can do $this->children() and you will get all sub page of 
-the current page)
+The you have the `children()` method that will return all the subpages of the page already found. (You can do `$this->children()` and you will get all subpages of 
+the current page.)
 
-Then you have a loop "foreach" that will pass each subpage one by one and 
-execute all line beetween this line and the `<?php endforeach; ?>`, in this 
+Then you have a "foreach" loop that will pass each subpage one by one and 
+execute every line between this line and the `<?php endforeach; ?>`, in this 
 case the line that will be repeated is: 
-`<li><?php echo $menu->link(); ?></li>`.
+`<li><?php echo $menu->link(); ?></li>`. (You can see more about making links below.)
 
 If you take a look at the code source of the page header you will see 
 something like this:
@@ -102,26 +103,26 @@ something like this:
 
 == HOW-TO: Know what can I do with the children method in (page, layout or snippet) ==
 
-this a weird question, but here is the answer ...
+This a weird question, but here is the answer ...
 
-  # You can decide to add condition to the search (be carfull with this one)
-  # You can limit the number of result returned (limit)
+  # You can decide to add a condition to the search (be careful with this one!)
+  # You can limit the number of results returned (limit)
   # You can change the offset to be returned (offset)
-  # You can decide the order (by created_on, by position, ASC asendent, DESC descendent ...)
+  # You can determine the order (by created_on, by position, ASC ascending, DESC descending ...)
  
-that's anoght power I think
+That's enough power I think!
 
-Example: you want to display the last 5 result only, here is how to do it:
+*Example 1*: if you want to display the last 5 result only, here is how to do it:
 
     <?php $last_result = $this->children(array('limit' => 5, 'order' => 'created_on DESC')); ?>
 
 Then you need to loop those result like the exemple in the previous HOW-TO.
 
-Example 2: you only want result 3 and 4 order by the position (by default)
+*Example 2*: if you only want results 3 and 4, ordered by the position (by default):
 
     <?php $last_result = $this->children(array('offset' => 2, 'limit' => 2)); ?>
 
-This is weird for you but ... the offset start at 0 not at 1 ...
+This might appear weird to you but ... the offset starts at 0 not at 1.
 
 == HOW-TO: Display a breadcrumb in (page, layout or snippet) ==
 
@@ -146,7 +147,7 @@ Note: if you want to set a '\' as a separator you will need to write '\\'
     <?php echo $this->date() ?>
 }}}
 
-If you want to change the format of the date, you can pass it as he first 
+If you want to change the format of the date, you can pass it as the first 
 parameter of the method like this:
 
 {{{ 
@@ -167,14 +168,14 @@ For more infos about the format, check this site: http://php.net/strftime
     <?php echo $this->link() ?>
 }}}
 
-you can chose to set a different text (default it is the title of the page), 
-give it the text you want in parameter:
+If you wish to set a different text for the link (the default is the title of the page), 
+give the text you want in the parameter this way:
 
 {{{
     <?php echo $this->link('here is my text') ?>
 }}}
 
-If you need to set a class or adding a onlick or anything you need to add to 
+If you need to set a class or add an `onlick` or anything else you need to add to 
 the link, you can pass it as the second parameter:
 
 {{{
@@ -189,24 +190,23 @@ or
 
 == HOW-TO: Display content of a part in (page, layout or snippet) ==
 
-The default part content is the body part, so if you need to display the body
-par juste write this:
+The default part content is the `body` part, so if you need to display the `body`, just write this:
 
 {{{
   <?php echo $this->content() ?>
 }}}
 
-if you need to display a particular part, just add it to the parameter:
+if you need to display any other particular part, just add it to the parameter:
 
 {{{
   <?php echo $this->content('extended') ?>
 }}}
 
-Note: if you write `<?php echo $this->content() ?>` in a page content, you
-will get a infiny loop, and let me told you that you don't want a infiny loop
-so don't do it ;)
+*Note*: if you write `<?php echo $this->content() ?>` in a page content, you
+will get an infinite loop, and let me tell you that you don't want an infinite loop,
+so don't do it! ;) (In other words, only use that code in a _layout_, not a _page_.)
 
-== HOW-TO: Know if a page content exist or not in (page, layout or snippet) ==
+== HOW-TO: Determine whether page content exists or not in (page, layout or snippet) ==
 
 By testing it before calling the method content(), just like this:
 
@@ -214,7 +214,7 @@ By testing it before calling the method content(), just like this:
     <?php echo $this->hasContent('sidebar') ? $this->content('sidebar'): '' ?>
 }}}
 
-the other way is whit a if condition like this:
+the other way is with an `if` condition like this:
 
 {{{
     <?php if ($this->hasContent('sidebar')): ?>
@@ -224,11 +224,11 @@ the other way is whit a if condition like this:
     <?php endif; ?>
 }}}
 
-Don't forget to close the if condition with the endif;
+Don't forget to close the if condition with the `endif;`
 
 == HOW-TO: Display all tags of the page in (page, layout or snippet) ==
 
-by using a php fonction + a Frog page method like this:
+By using a PHP function + a Frog page method like this:
 
 {{{
     <?php echo join(', ', $this->tags()) ?>
@@ -243,9 +243,9 @@ result:
 if you only write `<?php echo $this->tags() ?>` you will always see "Array"
 displayed, be this is what is returned by the tags() method.
 
-== HOT-TO: Know all method disponible to display author, id, url, ... ==
+== HOW-TO: Determine all methods available to display author, id, url, ... ==
 
-here is the list:
+Here is the list:
 
   * id()
   * title()
@@ -260,16 +260,16 @@ here is the list:
 
 == HOW-TO: Display each comments of the page in (page, layout or snippet) ==
 
-if you didn't remove or delete it you only have to:
+If you haven't removed or deleted it, you only have to include:
 
 {{{
     <?php $this->includeSnippet('comment-form') ?>
 }}}
 
-then costomise the snippet to fit you css template. If you did have this 
-snippet you will need to continu reading this.
+then customise the snippet to fit you CSS template. If you do have this 
+snippet you will need to continue reading...
 
-It is almost like the children() method, but instead of getting pages, you
+It is almost like the `children()` method, but instead of getting pages, you
 will get comments:
 
 {{{
@@ -288,22 +288,22 @@ will get comments:
 
 here is the list of what you can display from a comment:
 
-  * name() the name of the author of the comment
-  * email() the email of the author of the comment
-  * link() the website link of the author of the comment
-  * body() the comment (this comment is html safe)
-  * date(['%a, %e %b %Y']) the date, you can change the format to it
+  * `name()` the name of the author of the comment
+  * `email()` the email of the author of the comment
+  * `link()` the website link of the author of the comment
+  * `body()` the comment (this comment is HTML safe)
+  * `date(['%a, %e %b %Y'])` the date, you can change the format to it
 
-== HOW-TO: Display the number of comments of the page in (page, layout or snippet) ==
+== HOW-TO: Display the number of comments on the page in (page, layout or snippet) ==
 
-the easy way is :
+The easy way is :
 
 {{{
     <?php echo $this->commentsCount(); ?> comment(s)
 }}}
 
-this exemple is more complex, because it will add or not the "s" to comment if 
-there is more then one comment hoooooo !!
+This example is more complex, because it will add “s” to the word “comment” if 
+there is more than one comment hoooooo!!
 
 {{{
     <?php echo $num_comments = $this->commentsCount(); ?>
@@ -312,13 +312,13 @@ there is more then one comment hoooooo !!
 
 == HOW-TO: Display the form for adding a comment on a page in (page, layout or snippet) ==
 
-if you didn't remove or delete it you only have to:
+If you haven't removed or deleted it, you only have to include:
 
 {{{
     <?php $this->includeSnippet('comment-form') ?>
 }}}
 
-if you have done this terrible thing of deleting it, here is the form gain:
+If you have done this terrible thing of deleting it, here is the form again:
 
 {{{
     <form action="<?php echo $this->url() ?>" method="post" id="comment_form"> 

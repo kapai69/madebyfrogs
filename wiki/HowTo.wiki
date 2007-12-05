@@ -35,7 +35,7 @@ You have two options for doing this:
 
 == HOW-TO: Create a User ==
 
-_Note that you need to have “administrator” rights to have access at the Users module._
+_Note that you need to have “administrator” rights to have access to the Users module._
  
   # Click the *Users* link at the top right of your window.
   # Click the “New User” button. Fill in the details, and choose a role. Email is optional (but is useful if you need to change your password because you didn't remember it).

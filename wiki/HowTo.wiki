@@ -266,7 +266,7 @@ If you haven't removed or deleted it, you only have to include:
     <?php $this->includeSnippet('comment-form') ?>
 }}}
 
-then customise the snippet to fit you CSS template. If you do have this 
+then customise the snippet to fit your CSS template. If you do have this 
 snippet you will need to continue reading...
 
 It is almost like the `children()` method, but instead of getting pages, you

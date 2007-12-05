@@ -112,7 +112,7 @@ This a weird question, but here is the answer ...
  
 That's enough power I think!
 
-*Example 1*: if you want to display the last 5 result only, here is how to do it:
+*Example 1*: if you want to display the last 5 results only, here is how to do it:
 
     <?php $last_result = $this->children(array('limit' => 5, 'order' => 'created_on DESC')); ?>
 

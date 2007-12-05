@@ -2,8 +2,7 @@
 
   * A behavior is what you can apply to a page to make it different! 
   * A behavior is passed on to all children (descendent) pages
-  * A behavior *can* redefine all page functions by _overwriting_ them
-by extending the Page class
+  * A behavior *can* redefine all page functions by _overwriting_ them by extending the Page class
 
 == HOWTO create a new behavior ==
 

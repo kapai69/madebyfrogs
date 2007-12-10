@@ -31,4 +31,4 @@ function snippet_sitemap($parent)
 
 *Note*: set your `Sitemap` page to `hidden` if you don't want it to appear in the sitemap itself.
 
-3. You can reference the Sitemap link with this code: `<a href="<?php echo BASE_URL ?>sitemap">Sitemap</a>` which can be included in a footer, sidebar, or wherever!
+3. You can reference the Sitemap link with this code: `<a href="<?php echo BASE_URL; ?>sitemap">Sitemap</a>` which can be included in a footer, sidebar, or wherever!

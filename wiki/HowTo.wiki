@@ -1,3 +1,5 @@
+#summary Basic instructions on how to use Frog CMS - START HERE!
+
 After reading all of this little document (5 minutes) you will be able to create
 Frog CMS site in a minute, ok maybe in 10 minutes if you are really slow ;)
 

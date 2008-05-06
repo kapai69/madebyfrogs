@@ -19,4 +19,4 @@ The reason that "snippets" are optional, is that they can of course be included 
 
 Frog does not use "automatic" theme switching. Once a Layout/CSS/snippets combination has been installed, it can be activated from the "Layout" dropdown found just below the "Body" textarea for editing a page. Pick the desired Layout from that list.
 
-The "children" of that page can inherit the layout or be assigned a new one. If the "Layout" is chosen on the Homepage page, then all pages in the site set to "inherit" will get that Layout with a single mouse click.
+The "children" of that page will inherit the layout unless they are assigned a new one. If the "Layout" is chosen on the Homepage page, then all pages in the site set to "inherit" will get that Layout with a single mouse click. "Layouts" can, then, be assigned on a per-page basis.

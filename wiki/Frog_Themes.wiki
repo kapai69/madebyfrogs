@@ -1,0 +1,22 @@
+#summary How does Frog CMS handle "themes" and "templates"?
+
+= Introduction =
+
+Frog does not use a "templating" engine. Rather, it relies on simple combintations of CSS plus an (X)HTML "layout".
+
+
+= Overview =
+
+It works together this way:
+
+  # a *Layout* which gives the HTML skeleton of the page;
+  # an accompanying *CSS* (style sheet) which is called by the Layout; and
+  # (optional) any *snippets* (headers/footers, etc.) that the layout requires.
+
+The reason that "snippets" are optional, is that they can of course be included in the "Layout" itself.
+
+= Activating a Theme =
+
+Frog does not use "automatic" theme switching. Once a Layout/CSS/snippets combination has been installed, it can be activated from the "Layout" dropdown found just below the "Body" textarea for editing a page. Pick the desired Layout from that list.
+
+The "children" of that page can inherit the layout or be assigned a new one. If the "Layout" is chosen on the Homepage page, then all pages in the site set to "inherit" will get that Layout with a single mouse click.

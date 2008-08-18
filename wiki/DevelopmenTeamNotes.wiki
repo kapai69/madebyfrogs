@@ -1,0 +1,14 @@
+#summary This page contains notes applicable to development team members only.
+#labels Featured
+
+= Introduction =
+
+This page contains notes, working guidelines and references for the Frog core dev team.
+
+= Notes =
+
+= Working guidelines =
+
+= References =
+
+The FrogDev discussion group: http://groups.google.com/group/frogdev?hl=en

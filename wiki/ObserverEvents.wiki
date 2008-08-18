@@ -1,0 +1,20 @@
+#summary Observer events described
+
+= Introduction =
+
+<Discuss what the Observers are in Frog and what they do with events.>
+
+
+= Event list (incomplete) =
+
+|| *Event name* || *Description* || *Argument(s)* ||
+|| page_add_after_save || fired when page is added || page ||
+|| page_edit_after_save || fired when page is edited || page ||
+|| page_delete || fired when page is deleted || page ||
+|| view_page_edit_tabs || ... || page ||
+|| view_page_edit_plugins || ... || page ||
+|| view_page_edit_popup || ... || n/a ||
+|| page_requested || fired when a page is requested || query string ||
+|| page_found || fired when a page is found || page ||
+|| page_not_found || fired when a requested page wasn't found || n/a ||
+|| part_edit_after_save || fired when part is edited || part ||

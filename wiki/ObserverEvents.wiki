@@ -4,6 +4,9 @@
 
 <Discuss what the Observers are in Frog and what they do with events.>
 
+= Possible API calls =
+
+<List and describe which Observer related API call are available to plugins.>
 
 = Event list (incomplete) =
 

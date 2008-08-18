@@ -46,6 +46,8 @@ This describes what dev team members should do if/when a security related issue 
 
 === After fix is implemented ===
 
+At least one other Frog dev team member should test the patch and stability of Frog.
+
 Depending on the severity of the issue, either:
   * an immediate security patch is released against the current version of Frog
   * the current version of Frog available for download is upgraded to include at least the security related fix.

@@ -1,0 +1,76 @@
+#summary This page contains notes applicable to development team members only.
+#labels Featured
+
+
+= Introduction =
+
+This page contains notes, working guidelines and references for the Frog core dev team.
+
+
+= Notes =
+
+<none yet>
+
+
+= Working guidelines =
+
+== Security related issues ==
+
+This describes what dev team members should do if/when a security related issue is found.
+
+=== When fixing it yourself ===
+  * If the problem hasn't been reported in the issue list, create an issue for it.
+    * mark the issue as "Critical"
+    * also mark the issue as "Security" related
+    * give a clear summary
+    * describe the steps to reproduce the issue and clearly state the *expected* and *actual* outcomes.
+  * Implement a fix
+  * Create a post in the Security discussion within the FrogDev discussion group. (see templates section below)
+    * give the title
+    * give a link to the issue
+    * give a description
+    * mention the fix and link to the fix's revision in SVN
+
+=== When you can't fix it ===
+  * If the problem hasn't been reported in the issue list, create an issue for it.
+    * mark the issue as "Critical"
+    * also mark the issue as "Security" related
+    * give a clear summary
+    * describe the steps to reproduce the issue and clearly state the *expected* and *actual* outcomes.
+  * Create a post in the Security discussion within the FrogDev discussion group. (see templates section below)
+    * give the title
+    * give a link to the issue
+    * give a description
+    * mention the fix and link to the fix's revision in SVN
+  * *Clearly* mark the issue as *NOT FIXED* so another dev team member may pick it up.
+
+=== After fix is implemented ===
+
+Depending on the severity of the issue, either:
+  * an immediate security patch is released against the current version of Frog
+  * the current version of Frog available for download is upgraded to include at least the security related fix.
+
+OR
+
+  * the current version of Frog available for download is upgraded to include at least the security related fix
+  * no seperate security patch is released.
+
+
+= Templates =
+
+== Security post ==
+
+{{{
+ISSUE: <issue title>
+LINK: http://code.google.com/p/madebyfrogs/issues/detail?id=999
+DESC:
+
+<issue description>
+
+RESOLVED: <fixed | NOT FIXED>, see http://code.google.com/p/madebyfrogs/source/detail?r=999
+}}}
+
+
+= References =
+
+The FrogDev discussion group: http://groups.google.com/group/frogdev?hl=en

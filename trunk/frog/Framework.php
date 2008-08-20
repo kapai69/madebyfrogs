@@ -96,27 +96,20 @@ final class Dispatcher
         return preg_split('/\//', $url, -1, PREG_SPLIT_NO_EMPTY);
     }
     
-    public static function dispatch($requested_url = null, $default = null)
+    public static function dispatch($requested_url=null)
     {
         Flash::init();
-
+        
         // if no url passed, we will get the first key from the _GET array
         // that way, index.php?/controller/action/var1&email=example@example.com
         // requested_url will be equal to: /controller/action/var1
         if ($requested_url === null) {
             //$requested_url = count($_GET) >= 1 ? key($_GET) : '/';
-            $pos = strpos($_SERVER['QUERY_STRING'], '&');
-            if ($pos !== false) {
+            if ($pos = strpos($_SERVER['QUERY_STRING'], '&') !== false) {
                 $requested_url = substr($_SERVER['QUERY_STRING'], 0, $pos);
             } else {
                 $requested_url = $_SERVER['QUERY_STRING'];
             }
-        }
-
-        // If no URL is requested (due to someone accessing admin section for the first time)
-        // AND $default is setAllow for a default tab
-        if ($requested_url == null && $default != null) {
-            $requested_url = $default;
         }
         
         // requested url MUST start with a slash (for route convention)
@@ -171,20 +164,9 @@ final class Dispatcher
     
     public static function getController()
     {
-        // Check for settable default controller
-        // if it's a plugin and not activated, revert to Frog hardcoded default
-        if (isset(self::$params[0]) && self::$params[0] == 'plugin' )
-        {
-            $loaded_plugins = Plugin::$plugins;
-            if (isset(self::$params[1]) && !isset($loaded_plugins[self::$params[1]])) {
-                unset(self::$params[0]);
-                unset(self::$params[1]);
-            }
-        }        
-
         return isset(self::$params[0]) ? self::$params[0]: DEFAULT_CONTROLLER;
     }
-        
+    
     public static function getAction()
     {
         return isset(self::$params[1]) ? self::$params[1]: DEFAULT_ACTION;
@@ -218,7 +200,7 @@ final class Dispatcher
         if ( ! $controller instanceof Controller) {
             throw new Exception("Class '{$controller_class_name}' does not extends Controller class!");
         }
-
+        
         // execute the action
         $controller->execute($action, $params);
     }
@@ -856,7 +838,7 @@ class AutoLoader
                 }
             }
         }
-        throw new Exception("AutoLoader did not find file for '{$class_name}'!");
+        throw new Exception("AutoLoader did not found file for '{$class_name}'!");
     }
     
 } // end AutoLoader class

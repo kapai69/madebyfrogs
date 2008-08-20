@@ -7,7 +7,6 @@
 return array(
 
 // general
-'Administration' => 'Administratie',
 'Pages' => 'Paginas',
 'Snippets' => 'Snippers',
 'Layouts' => 'Layouts',
@@ -86,13 +85,6 @@ return array(
 'none' => 'geen',
 'Page Type' => 'Pagina Type',
 'Comments' => 'Opmerkingen',
-
-// plugins
-'Plugin' => 'Plugin',
-'Website' => 'Website',
-'Version' => 'Versie',
-'Latest' => 'Recentste',
-'Enabled' => 'Geactiveerd',
 
 // settings
 'Settings' => 'Instellingen',

@@ -7,20 +7,6 @@ Sigla:
 . other development
 ======
 
-?.?.? - release ???
-
-. Changed default footer snippet to read copyright Madebyfrog.com instead of Philworks.com
-- Fixed incorrect return and if statement in DoPgsql.php
-- Fixed accidental assignment bug in Framework.php (issue 43)
-. Corrected the default RSS Feed, should now validate. Also added RSS subscription link tag to default Normal template.
-- Fixed bug where "Files" tab was accessible to users without roles. Now restricted to "administrator,developer,editor" (issue 42)
-- Fixed bug where using permissions string as parameter to addController had no effect (issue 41)
-+ Added admin section option to choose default tab after login (issue 29)
-+ Added display of latest plugin version in Frog admin section
-. Updated dutch translation
-+ Added en-messages.php.template to i18n directory of core to assist translators
-- Fixed bug allowing HTML code in page title, now filtered with Kses
-
 0.9.3 - released 2008.08.14
 
 + license change to AGPLv3
@@ -54,7 +40,7 @@ Sigla:
 + adding Dutch translation
 + comments to moved from core to plugin
 . Hungarian translation revision
-
+  
 0.9.2
   bug fixed: issue 10 Remove Markdown/Textile from default plugin if not enabled
   cleaning old files
@@ -127,7 +113,7 @@ Sigla:
   new framework
   new user permission
   new database schemas
-  no more dependencies for PDO
+  no more dependencies for PDO 
   adding DoLite (database object lite)
 
 ... a lot of experimentations have been done here ...
@@ -164,7 +150,7 @@ Sigla:
   zip library is now done
   email library (from code igniter - thanks to them)
   utilisation of php5 PDO
-
+  
 0.1.4
   database abstraction for mysql, postgresql and sqlite
   adding behavior for pages (page plugin like Radiant CMS)
@@ -186,6 +172,6 @@ Sigla:
   adding version.php
   adding markdown filter
   bug fix: filter in snippet is now like in parts
-
+  
 0.1.1
   first public version with 1 week of dev... mega alpha beta version.

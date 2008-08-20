@@ -34,4 +34,4 @@ Plugin::setInfos(array(
     'website'     => 'http://www.madebyfrog.com/')
 );
 
-Plugin::addController('file_manager', 'Files', 'developer,editor');
+Plugin::addController('file_manager', 'Files');

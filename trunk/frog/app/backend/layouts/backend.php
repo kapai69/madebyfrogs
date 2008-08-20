@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-    <title><?php echo Setting::get('admin_title') . ' - ' . ucfirst($ctrl = Dispatcher::getController(Setting::get('default_tab'))); ?></title>
+    <title><?php echo Setting::get('admin_title') . ' - ' . ucfirst($ctrl = Dispatcher::getController()); ?></title>
     
     <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
     
@@ -35,15 +35,13 @@
       <div id="mainTabs">
         <ul>
           <li><a href="<?php echo get_url('page'); ?>"<?php if ($ctrl=='page') echo ' class="current"'; ?>><?php echo __('Pages'); ?></a></li>
-<?php if (AuthUser::hasPermission('administrator,developer') ): ?>
+<?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer') ): ?> 
           <li><a href="<?php echo get_url('snippet'); ?>"<?php if ($ctrl=='snippet') echo ' class="current"'; ?>><?php echo __('Snippets'); ?></a></li>
           <li><a href="<?php echo get_url('layout'); ?>"<?php if ($ctrl=='layout') echo ' class="current"'; ?>><?php echo __('Layouts'); ?></a></li>
 <?php endif; ?>
 
 <?php foreach (Plugin::$controllers as $plugin_name => $plugin): ?>
-<?php if (AuthUser::hasPermission($plugin->permissions) || AuthUser::hasPermission('administrator')): ?>
           <li class="plugin"><a href="<?php echo get_url('plugin/'.$plugin_name); ?>"<?php if ($ctrl=='plugin' && $action==$plugin_name) echo ' class="current"'; ?>><?php echo __($plugin->label); ?></a></li>
-    <?php endif; ?>
 <?php endforeach; ?>
 
 <?php if (AuthUser::hasPermission('administrator')): ?> 

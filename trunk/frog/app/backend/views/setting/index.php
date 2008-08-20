@@ -15,7 +15,6 @@
       <th class="plugin"><?php echo __('Plugin'); ?></th>
       <th class="website"><?php echo __('Website'); ?></th>
       <th class="version"><?php echo __('Version'); ?></th>
-      <th class="latest"><?php echo __('Latest'); ?></th>
       <th class="enabled"><?php echo __('Enabled'); ?></th>
     </tr>
   </thead>
@@ -31,7 +30,6 @@
       </td>
       <td class="website"><a href="<?php echo $plugin->website; ?>" target="_blank"><?php echo __('Website') ?></a></td>
       <td class="version"><?php echo $plugin->version; ?></td>
-      <td class="latest"><?php echo Plugin::checkLatest($plugin); ?></td>
       <td class="enabled"><input type="checkbox" name="enabled_<?php echo $plugin->id; ?>" value="<?php echo $plugin->id; ?>"<?php if (isset($loaded_plugins[$plugin->id])) echo ' checked="checked"'; if ($disabled) echo ' disabled="disabled"'; ?> onclick="new Ajax.Request('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value, {method: 'get'});" /></td>
     </tr>
 <?php endforeach; ?>
@@ -74,23 +72,6 @@
           </select>
         </td>
         <td class="help"><?php echo __('This will change your Administration theme.'); ?></td>
-      </tr>
-        <tr>
-        <td class="label"><label for="setting_default_tab"><?php echo __('Default tab'); ?></label></td>
-        <td class="field">
-          <select class="select" id="setting_default_tab" name="setting[default_tab]">
-<?php $current_default_tab = Setting::get('default_tab');?>
-            <option value="page"<?php if ($current_default_tab == 'page') echo ' selected="selected"'; ?>><?php echo __('Pages'); ?></option>
-            <option value="snippet"<?php if ($current_default_tab == 'snippet') echo ' selected="selected"'; ?>><?php echo __('Snippets'); ?></option>
-            <option value="layout"<?php if ($current_default_tab == 'layout') echo ' selected="selected"'; ?>><?php echo __('Layouts'); ?></option>
-            <option value="user"<?php if ($current_default_tab == 'user') echo ' selected="selected"'; ?>><?php echo __('Users'); ?></option>
-            <option value="setting"<?php if ($current_default_tab == 'setting') echo ' selected="selected"'; ?>><?php echo __('Administration'); ?></option>
-<?php foreach(Plugin::$controllers as $key=>$controller): ?>
-            <option value="plugin/<?php echo $key; ?>"<?php if ('plugin/'.$key == $current_default_tab) echo ' selected="selected"'; ?>><?php echo $controller->label; ?></option>
-<?php endforeach; ?>
-          </select>
-        </td>
-        <td class="help"><?php echo __('This allows you to specify which tab (controller) you will see by default after login.'); ?></td>
       </tr>
       <tr>
         <td colspan="3"><h3><?php echo __('Page options'); ?></h3></td>

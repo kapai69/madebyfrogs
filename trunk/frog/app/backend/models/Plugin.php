@@ -79,9 +79,6 @@ class Plugin
 		$file = CORE_ROOT.'/plugins/'.$plugin_id.'/enable.php';
 		if (file_exists($file))
 			include $file;
-        
-        $class_name = Inflector::camelize($plugin_id).'Controller';        
-        AutoLoader::addFile($class_name, self::$controllers[$plugin_id]->file);
 	}
 	
 	/**
@@ -136,31 +133,6 @@ class Plugin
 		ksort(self::$plugins_infos);
 		return self::$plugins_infos;
 	}
-
-    /**
-     * Check the file mentioned as update_url for the latest plugin version available.
-     *
-     * @param plugin     object A plugin object.
-     *
-     * @return           string The latest version number or 'n/a' when latest version couldn't be determined.
-     */
-    static function checkLatest($plugin)
-    {
-        if ( ! isset($plugin->update_url) || ! $xml = simplexml_load_file($plugin->update_url)) {
-            return 'unknown';
-        }
-
-        foreach($xml as $node) {
-            if ($plugin->id == $node->id)
-                if ($plugin->version == $node->version)
-                    return 'latest';
-                else
-                    return (string) $node->version;
-        }
-
-        return 'error';
-    }
-
 
 	/**
 	 * Add a controller (tab) to the administration

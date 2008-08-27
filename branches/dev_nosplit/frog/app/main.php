@@ -20,8 +20,8 @@
 
 define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
 
-require APP_PATH . '/frontend/classes/Plugin.php'; // Setting, Plugin, Behavior and Filter classes
-require APP_PATH . '/frontend/classes/Page.php';
+require APP_PATH . '/classes/Plugin.php'; // Setting, Plugin, Behavior and Filter classes
+require APP_PATH . '/classes/Page.php';
 
 if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
 if ( ! defined('URL_SUFFIX')) define('URL_SUFFIX', '');

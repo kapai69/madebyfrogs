@@ -57,4 +57,4 @@ else
 $__FROG_CONN__->exec("set names 'utf8'");
 
 // run everything!
-require APP_PATH.'/frontend/main.php';
+require APP_PATH.'/main.php';

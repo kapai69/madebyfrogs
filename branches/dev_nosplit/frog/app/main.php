@@ -18,10 +18,30 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
+require APP_PATH . '/../Framework.php';
 
-require APP_PATH . '/classes/Plugin.php'; // Setting, Plugin, Behavior and Filter classes
+//define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
+
+require APP_PATH . '/models/Plugin.php'; // Setting, Plugin, Behavior and Filter classes
+require APP_PATH . '/models/Setting.php';
+require APP_PATH . '/models/Behavior.php';
+require APP_PATH . '/models/Filter.php';
+
 require APP_PATH . '/classes/Page.php';
+
+Record::connection($__FROG_CONN__);
+Record::getConnection()->exec("set names 'utf8'");
+
+
+//  Initialize  --------------------------------------------------------------
+
+Setting::init();
+
+use_helper('I18n');
+I18n::setLocale(Setting::get('language'));
+
+//Plugin::init();
+
 
 if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
 if ( ! defined('URL_SUFFIX')) define('URL_SUFFIX', '');
@@ -45,7 +65,7 @@ Plugin::init();
  *
  * @param  string helpers in CamelCase
  * @return void
- */
+ *
 function use_helper()
 {
     static $_helpers = array();
@@ -66,7 +86,7 @@ function use_helper()
         include $helper_file;
         $_helpers[] = $helper;
     }
-}
+}*/
 
 /**
  * Explode an URI and make a array of params
@@ -201,38 +221,38 @@ function url_start_with($url)
     return false;
 }
 
-function execution_time()
+/*function execution_time()
 {
     return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME);
-}
+}*/
 
-function get_microtime()
+/*function get_microtime()
 {
     $time = explode(' ', microtime());
     return doubleval($time[0]) + $time[1];
-}
+}*/
 
-function convert_size($num)
+/*function convert_size($num)
 {
     if ($num >= 1073741824) $num = round($num / 1073741824 * 100) / 100 .' gb';
     else if ($num >= 1048576) $num = round($num / 1048576 * 100) / 100 .' mb';
     else if ($num >= 1024) $num = round($num / 1024 * 100) / 100 .' kb';
     else $num .= ' b';
     return $num;
-}
+}*/
 
-function memory_usage()
+/*function memory_usage()
 {
     return convert_size(memory_get_usage());
-}
+}*/
 
-function page_not_found()
+/*function page_not_found()
 {
     Observer::notify('page_not_found');
     
     include FROG_ROOT . '/404.php';
     exit;
-}
+}*/
 
 function main()
 {

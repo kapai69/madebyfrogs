@@ -27,7 +27,7 @@ require APP_PATH . '/models/Setting.php';
 require APP_PATH . '/models/Behavior.php';
 require APP_PATH . '/models/Filter.php';
 
-require APP_PATH . '/classes/Page.php';
+require APP_PATH . '/models/Page.php';
 
 Record::connection($__FROG_CONN__);
 Record::getConnection()->exec("set names 'utf8'");
@@ -285,7 +285,7 @@ function main()
     
     // this is where 80% of the things is done 
     $page = find_page_by_uri($uri);
-    
+    echo 'TEST - '.print_r($page, false);
     // if we fund it, display it!
     if (is_object($page))
     {

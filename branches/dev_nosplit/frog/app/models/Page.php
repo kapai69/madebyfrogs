@@ -34,6 +34,7 @@ class Page extends Record
     const STATUS_PUBLISHED = 100;
     const STATUS_HIDDEN = 101;
     
+    public $id;
     public $title;
     public $slug;
     public $breadcrumb;

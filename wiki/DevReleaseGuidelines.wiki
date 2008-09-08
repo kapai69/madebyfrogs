@@ -66,3 +66,4 @@ Security Patches should never be applied to SVN HEAD, only to previously tagged 
   # Test to see if the link to the files are correct (i.e. downloadable)
   # Write a blog post about the release
   # Write an entry in the Frog site forum's "General Discussion" or "Announcements" section pointing to the blog post for more details.
+  # If releasing a stable version, don't forget to update the version number in the "version" page of the Frog site.

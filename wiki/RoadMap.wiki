@@ -34,6 +34,7 @@ Updated Comments plugin and the stuff below (from changelog):
 
 0.9.5 - Split Frog
 
+  * Add option to admin screen: allow html in page title. (default: false)
   * Evaluate performance for Frog without frontend/backend split.
   * If we decide to go ahead with the splitless version; work on the performance
   * Add "addScript" funtion for plugin developers

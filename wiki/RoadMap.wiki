@@ -1,7 +1,7 @@
 #summary A roadmap for future Frog releases. NOT FINISHED
 #labels Phase-Requirements
 
-= Introduction =
+= How to read this roadmap =
 
 This document contains the roadmap for the Frog project. It is important to know that the roadmap is not set in stone. This means that we will probably follow the roadmap very accurately, it may also mean that we decide to do something else due to changing priorities for example.
 
@@ -11,20 +11,26 @@ This document contains the roadmap for the Frog project. It is important to know
 
 Updated Comments plugin and the stuff below (from changelog):
 
+  * + Updated the comments plugin
+  * + Added Indonesian translation
+  * + Added "View this page" link in the Edit page screen
+  * + Added "Tag to use this snippet" in the Snippets tab
+  * + Added en-messages.php.template to i18n directory of core to assist translators
   * + Added admin section option to choose default tab after login (issue 29)
   * + Added display of latest plugin version in Frog admin section
-  * + Added en-messages.php.template to i18n directory of core to assist translators
-  * + Added "Tag to use this snippet" in the Snippets tab
-  * - Fixed bug allowing HTML code in page title, now filtered with Kses- Fixed security issue with DB username password in index.php
+  * - Fixed bug allowing HTML code in page title, now filtered with Kses
+  * - $values => $value in Page.childrenCount()
+  * - Fixed security issue with DB username password in index.php
   * - Fixed incorrect return and if statement in DoPgsql.php
   * - Fixed accidental assignment bug in Framework.php (issue 43)
   * - Fixed bug where "Files" tab was accessible to users without roles. Now restricted to "administrator,developer,editor" (issue 42)
   * - Fixed bug where using permissions string as parameter to addController had no effect (issue 41)
+  * . Updated dutch translation
   * . Corrected the default RSS Feed, should now validate. Also added RSS subscription link tag to default Normal template.
+  * . Modified the place of the "filter" input in Snippets
   * . Removed comments css code from admin.css
   * . Updated default Layout to find metadata from Edit.Page.Metadata tab
   * . Changed default footer snippet to read copyright Madebyfrog.com instead of Philworks.com
-  * . Updated dutch translation
 
 0.9.5 - Broken Frog
 

@@ -32,7 +32,7 @@ Updated Comments plugin and the stuff below (from changelog):
   * . Updated default Layout to find metadata from Edit.Page.Metadata tab
   * . Changed default footer snippet to read copyright Madebyfrog.com instead of Philworks.com
 
-0.9.5 - Broken Frog
+0.9.5 - Split Frog
 
   * Evaluate performance for Frog without frontend/backend split.
   * If we decide to go ahead with the splitless version; work on the performance

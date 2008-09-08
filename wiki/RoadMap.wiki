@@ -41,12 +41,14 @@ Updated Comments plugin and the stuff below (from changelog):
   * Add frontend login through plugin
   * Add plugin specific settings pages
   * Fix reorder javascript
+  * Provide detailed textual upgrade instructions
 
 1.0.0 - Frogtastic
 
   * Complete UTF-8 support
   * A mechanism for content in multiple languages
   * Make sure plugin tabs and parts tabs work without javascript
+  * Perform (semi) automated upgrades ???
 
 1.0.1 - Bugtastic Frog
 

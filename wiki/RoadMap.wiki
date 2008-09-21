@@ -1,5 +1,5 @@
 #summary A roadmap for future Frog releases.
-#labels Phase-Requirements
+#labels Phase-Requirements,Featured
 
 = How to read this roadmap =
 

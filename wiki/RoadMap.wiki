@@ -18,6 +18,7 @@ Updated Comments plugin and the stuff below (from changelog):
   * + Added en-messages.php.template to i18n directory of core to assist translators
   * + Added admin section option to choose default tab after login (issue 29)
   * + Added display of latest plugin version in Frog admin section
+  * + Add option to admin screen: allow html in page title. (default: false)
   * - Fixed bug allowing HTML code in page title, now filtered with Kses
   * - $values => $value in Page.childrenCount()
   * - Fixed security issue with DB username password in index.php
@@ -34,7 +35,6 @@ Updated Comments plugin and the stuff below (from changelog):
 
 0.9.5 - Split Frog
 
-  * Add option to admin screen: allow html in page title. (default: false)
   * Evaluate performance for Frog without frontend/backend split.
   * If we decide to go ahead with the splitless version; work on the performance
   * Add "addScript" funtion for plugin developers

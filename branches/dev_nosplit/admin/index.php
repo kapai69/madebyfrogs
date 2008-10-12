@@ -37,7 +37,7 @@ define('COOKIE_PATH', '/');
 define('COOKIE_DOMAIN', '');
 define('COOKIE_SECURE', false);
 
-include FROG_ROOT.'/config.php';
+require FROG_ROOT.'/config.php';
 
 define('BASE_URL', URL_PUBLIC . ADMIN_DIR . (USE_MOD_REWRITE ? '/': '/?/'));
 

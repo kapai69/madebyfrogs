@@ -18,9 +18,9 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
+//define('FRAMEWORK_STARTING_MICROTIME', get_microtime());
 
-require APP_PATH . '/classes/Plugin.php'; // Setting, Plugin, Behavior and Filter classes
+require APP_PATH . '/models/Plugin.php';
 require APP_PATH . '/classes/Page.php';
 
 if ( ! defined('HELPER_PATH')) define('HELPER_PATH', CORE_ROOT.'/helpers');
@@ -45,7 +45,7 @@ Plugin::init();
  *
  * @param  string helpers in CamelCase
  * @return void
- */
+ *
 function use_helper()
 {
     static $_helpers = array();
@@ -67,6 +67,7 @@ function use_helper()
         $_helpers[] = $helper;
     }
 }
+ */
 
 /**
  * Explode an URI and make a array of params
@@ -201,6 +202,7 @@ function url_start_with($url)
     return false;
 }
 
+/*
 function execution_time()
 {
     return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME);
@@ -233,6 +235,7 @@ function page_not_found()
     include FROG_ROOT . '/404.php';
     exit;
 }
+*/
 
 function main()
 {

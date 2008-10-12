@@ -122,7 +122,10 @@
     <p class="clear">&nbsp;</p>
     
 <?php if (AuthUser::hasPermission('administrator') || AuthUser::hasPermission('developer')): ?>
-    <p style="float: right"><input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?>/><label for="page_is_protected"> <?php echo __('protected'); ?> </label></p>
+    <p style="float: right">
+        <input id="page_is_protected" name="page[is_protected]" class="checkbox" type="checkbox" value="1"<?php if ($page->is_protected) echo ' checked="checked"'; ?>/><label for="page_is_protected"> <?php echo __('protected'); ?> </label>
+        <input id="page_needs_login" name="page[needs_login]" class="checkbox" type="checkbox" value="1"<?php if ($page->needs_login) echo ' checked="checked"'; ?>/><label for="page_needs_login"> <?php echo __('login required'); ?> </label>    
+    </p>
 <?php endif; ?>
     <p><small>
 <?php if (isset($page->updated_on)): ?>

@@ -272,6 +272,16 @@ function main()
     // if we fund it, display it!
     if (is_object($page))
     {
+        // If page needs login, redirect to login
+        if ($page->needs_login)
+        {
+            AuthUser::load();
+            if (!AuthUser::isLoggedIn()) {
+                Flash::set('redirect', $page->url());
+                redirect(URL_PUBLIC.ADMIN_DIR.(USE_MOD_REWRITE ? '/': '/?/').'login');
+            }
+        }       
+        
         Observer::notify('page_found', $page);
         $page->_executeLayout();
     }

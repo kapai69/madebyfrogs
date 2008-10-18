@@ -9,8 +9,8 @@ The following guidance and suggested procedures should help those who wish to (a
 
 == Before you begin ==
 
+  * Consult the [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/app/backend/i18n i18n source directory] to see whether the translation exists!
   * Always ensure you are working with the most recent stable Frog version.
-  * Consult the [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/app/backend/i18n i18n source directory] to see whether the traslation exists!
   * Consider translating the i18n files for those [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/plugins plugins] that have them. (At this time of writing, only the [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/plugins/file_manager/i18n filemanager plugin] has an i18n module.)
   * Of course, make sure you use the correct two-chacacter code for your particular language: from [http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes Wikipedia] or the [http://www.iana.org/assignments/language-subtag-registry official list].
 

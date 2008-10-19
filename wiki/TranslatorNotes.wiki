@@ -12,7 +12,23 @@ The following guidance and suggested procedures should help those who wish to (a
   * Consult the [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/app/backend/i18n i18n source directory] to see whether the translation exists!
   * Always ensure you are working with the most recent stable Frog version.
   * Consider translating the i18n files for those [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/plugins plugins] that have them. (At this time of writing, only the [http://code.google.com/p/madebyfrogs/source/browse/#svn/trunk/frog/plugins/file_manager/i18n filemanager plugin] has an i18n module.)
-  * Of course, make sure you use the correct two-chacacter code for your particular language: from [http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes Wikipedia] or the [http://www.iana.org/assignments/language-subtag-registry official list].
+  * Of course, make sure you use the correct ISO 639-1 two-chacacter code for your particular language: from [http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes Wikipedia] or the [http://www.iana.org/assignments/language-subtag-registry official list].
+
+== Translating ==
+
+=== In 0.9.4 (current as of 2008-09-29) ===
+
+For the moment, translators may use the (now deprecated) [http://madebyfrogs.googlecode.com/svn-history/r259/trunk/frog/app/backend/i18n/en-messages.php.template template] for the Frog core.
+
+As of r260, however, this system has been superseded (see next).
+
+=== In 0.9.5 (currently in development) and beyond ===
+
+With the developments in 0.9.5, Frog's admin includes atranslation template generator to help out translators with translating.the Frog core and plugins.
+
+http://farm4.static.flickr.com/3058/2954786106_4867ef3e39_o.png
+
+Clicking on the "translate Frog" link (circled in red in the image above) will take you to a page with complete instructions for doing your translation, as well as links which will generate the template files both for the Frog core as well as for those plugins which have i18n implemented.
 
 == Sharing your work ==
 

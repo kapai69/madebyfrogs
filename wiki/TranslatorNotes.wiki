@@ -20,7 +20,7 @@ The following guidance and suggested procedures should help those who wish to (a
 
 For the moment, translators may use the (now deprecated) [http://madebyfrogs.googlecode.com/svn-history/r259/trunk/frog/app/backend/i18n/en-messages.php.template template] for the Frog core.
 
-As of r260, however, this system has been superseded (see next).
+As of r260, however, this system has been superseded (see next), and we *strongly recommend* anyone thinking of contributing a new translation to use the new system described below:
 
 === In 0.9.5 (currently in development) and beyond ===
 

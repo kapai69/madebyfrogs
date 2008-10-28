@@ -12,6 +12,8 @@ If you need a Frog CMS expert you can contact me at: info@madebyfrog.com
 
 = HOW-TO =
 
+<wiki:toc/>
+
 == HOW-TO: Create a Page ==
 
 You have two options for doing this:

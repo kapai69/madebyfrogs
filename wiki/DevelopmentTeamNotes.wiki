@@ -14,6 +14,7 @@ This page contains notes, working guidelines and references for the Frog core de
 
 = Working guidelines =
 
+  * Issue tracker guidelines - DevIssueTrackerGuidelines
   * Release related guidelines - DevReleaseGuidelines
   * Security related guidelines - DevSecurityGuidelines
 

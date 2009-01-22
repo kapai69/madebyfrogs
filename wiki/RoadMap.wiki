@@ -7,33 +7,7 @@ This document contains the roadmap for the Frog project. It is important to know
 
 = Details =
 
-0.9.4 - Fixing Frog
-
-Updated Comments plugin and the stuff below (from changelog):
-
-  * + Updated the comments plugin
-  * + Added Indonesian translation
-  * + Added "View this page" link in the Edit page screen
-  * + Added "Tag to use this snippet" in the Snippets tab
-  * + Added en-messages.php.template to i18n directory of core to assist translators
-  * + Added admin section option to choose default tab after login (issue 29)
-  * + Added display of latest plugin version in Frog admin section
-  * + Add option to admin screen: allow html in page title. (default: false)
-  * - Fixed bug allowing HTML code in page title, now filtered with Kses
-  * - $values => $value in Page.childrenCount()
-  * - Fixed security issue with DB username password in index.php
-  * - Fixed incorrect return and if statement in DoPgsql.php
-  * - Fixed accidental assignment bug in Framework.php (issue 43)
-  * - Fixed bug where "Files" tab was accessible to users without roles. Now restricted to "administrator,developer,editor" (issue 42)
-  * - Fixed bug where using permissions string as parameter to addController had no effect (issue 41)
-  * . Updated dutch translation
-  * . Corrected the default RSS Feed, should now validate. Also added RSS subscription link tag to default Normal template.
-  * . Modified the place of the "filter" input in Snippets
-  * . Removed comments css code from admin.css
-  * . Updated default Layout to find metadata from Edit.Page.Metadata tab
-  * . Changed default footer snippet to read copyright Madebyfrog.com instead of Philworks.com
-
-0.9.5 - Split Frog
+0.9.5 - Split Frog (updated with changelog items)
 
   * Evaluate performance for Frog without frontend/backend split.
   * If we decide to go ahead with the splitless version; work on the performance
@@ -43,6 +17,30 @@ Updated Comments plugin and the stuff below (from changelog):
   * Add plugin specific settings pages
   * Fix reorder javascript
   * Provide detailed textual upgrade instructions
+
+From the current changelog:
+  * Added MySQL port to install screen. Thanks gilles.doge - issue 107
+  * Added new events - issue 94
+  * Added site identifiers to login screens (both login.php and forgot.php) based on Admin screen title setting.
+  * Added front-end login feature similar to layout selector. (login required, not required, inherit)
+  * Added drag-to-copy feature for better multi-language support. Thanks tuupola.
+  * Added a new core plugin called skeleton to help out new plugin developers.
+  * Added translation template generator to help out translators with translating Frog core and plugins.
+  * Added Norwegian and Swedish core translations.
+  * Added updated Chinese translation.
+  * Removed split between frontend and backend.
+  * Added an ID to the "view this page" link so it can be styled.
+  * Fixed issue with filename lowercasing during upload of files. Thanks david - issue 113
+  * Fixed previous()/next() functions to work for all levels. Thanks rid - issue 109
+  * Fixed "Add child" tooltip for browsers not picking up the alt value of the icon.
+  * Fixed broken View Site link for TLDs starting with 'a' - issue 116
+  * Fixed XHTML compatibility problem with Comment plugin.
+  * Fixed issue where only the last addJavascript was accepted.
+  * Updated readme.txt with requirements detail for MySQL server.
+  * Updated file_manager plugin translations to conform to new template.
+  * Updated comments in preparation for PHPDoc documentation.
+  * Renamed root dir text files to avoid name conflicts and accomodate Windows users.
+  * Renamed style.css into screen.css for more consistency with print.css in Normal layout.
 
 1.0.0 - Frogtastic
 

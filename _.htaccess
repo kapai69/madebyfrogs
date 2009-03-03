@@ -3,13 +3,13 @@ AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /frog/
+  RewriteBase /
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   # Administration URL rewriting.
-  RewriteRule ^admin(.*)$ admin/index.php?$1 [L,QSA]
+  RewriteRule ^admin(.*)$ frog/index.php?$1 [L,QSA]
   
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

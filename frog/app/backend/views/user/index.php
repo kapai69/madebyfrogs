@@ -21,9 +21,9 @@
       <td><?php echo implode(', ', $user->getPermissions()); ?></td>
       <td>
 <?php if ($user->id > 1): ?>
-        <a href="<?php echo get_url('user/delete/'.$user->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete it?'); ?>');"><img src="images/icon-remove.gif" alt="remove icon" /></a>
+        <a href="<?php echo get_url('user/delete/'.$user->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete it?'); ?>');"><img src="app/backend/assets/images/icon-remove.gif" alt="remove icon" /></a>
 <?php else: ?>
-        <img src="images/icon-remove-disabled.gif" alt="remove icon disabled" />
+        <img src="app/backend/assets/images/icon-remove-disabled.gif" alt="remove icon disabled" />
 <?php endif; ?>
       </td>
     </tr>

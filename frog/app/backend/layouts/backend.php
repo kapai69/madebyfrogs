@@ -8,32 +8,32 @@
     <base href="<?php echo trim(BASE_URL, '?/').'/'; ?>" />
 
     <link rel="favourites icon" href="<?php echo URL_PUBLIC; ?>favicon.ico">
-    <link href="stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
-    <link href="themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="app/backend/assets/stylesheets/admin.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="app/backend/assets/stylesheets/toolbar.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="app/backend/assets/themes/<?php echo Setting::get('theme'); ?>/styles.css" id="css_theme" media="screen" rel="Stylesheet" type="text/css" />
 
     <!-- IE6 PNG support fix -->
     <!--[if lt IE 7]>
-        <script type="text/javascript" charset="utf-8" src="javascripts/unitpngfix.js"></script>
+        <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/unitpngfix.js"></script>
     <![endif]-->
-    <script type="text/javascript" charset="utf-8" src="javascripts/prototype.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/effects.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/dragdrop.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/cp-datepicker.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/frog.js"></script>
-    <script type="text/javascript" charset="utf-8" src="javascripts/control.textarea.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/effects.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/dragdrop.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/cp-datepicker.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/frog.js"></script>
+    <script type="text/javascript" charset="utf-8" src="app/backend/assets/javascripts/control.textarea.js"></script>
     
 <?php foreach(Plugin::$plugins as $plugin_id => $plugin): ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.js')): ?>
-    <script type="text/javascript" charset="utf-8" src="../frog/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
+    <script type="text/javascript" charset="utf-8" src="plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.js"></script>
 <?php endif; ?>
 <?php foreach(Plugin::$javascripts as $jscript_plugin_id => $javascript): ?>
 <?php if ($jscript_plugin_id == $plugin_id) { ?>
-    <script type="text/javascript" charset="utf-8" src="../frog/plugins/<?php echo $plugin_id.'/'.$javascript; ?>"></script>
+    <script type="text/javascript" charset="utf-8" src="plugins/<?php echo $plugin_id.'/'.$javascript; ?>"></script>
 <?php } ?>
 <?php endforeach; ?>
 <?php if (file_exists(CORE_ROOT . '/plugins/' . $plugin_id . '/' . $plugin_id . '.css')): ?>
-    <link href="../frog/plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
+    <link href="plugins/<?php echo $plugin_id.'/'.$plugin_id; ?>.css" media="screen" rel="Stylesheet" type="text/css" />
 <?php endif; ?>
 <?php endforeach; ?>
 

@@ -7,10 +7,10 @@
 <ul id="snippets" class="index">
 <?php foreach($snippets as $snippet): ?>
   <li id="snippet_<?php echo $snippet->id; ?>" class="snippet node <?php echo odd_even(); ?>">
-    <img align="middle" alt="snippet-icon" src="images/snippet.png" />
+    <img align="middle" alt="snippet-icon" src="app/backend/assets/images/snippet.png" />
     <a href="<?php echo get_url('snippet/edit/'.$snippet->id); ?>"><?php echo $snippet->name; ?></a>
-    <img class="handle" src="images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove"><a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $snippet->name; ?>?');"><img src="images/icon-remove.gif" alt="remove icon" /></a></div>
+    <img class="handle" src="app/backend/assets/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    <div class="remove"><a class="remove" href="<?php echo get_url('snippet/delete/'.$snippet->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $snippet->name; ?>?');"><img src="app/backend/assets/images/icon-remove.gif" alt="remove icon" /></a></div>
   </li>
 <?php endforeach; ?>
 </ul>

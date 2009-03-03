@@ -7,42 +7,6 @@ Sigla:
 . other development
 ======
 
-0.9.5 - released 2009-02-??
-
-+ Added Plugin::isEnabled($plugin_id) to Plugin class for plugin devs. (allows for basic plugin dependancies.)
-+ Added getSetting(), setSetting(), getAllSettings() and setAllSettings() to Plugin class for plugin devs - issue 128
-+ Added comments plugin option to display to-be-moderated comments on plugin tab (default true)
-+ Added MySQL port to install screen. Thanks gilles.doge - issue 107
-+ Added new events - issue 94
-+ Added site identifiers to login screens (both login.php and forgot.php) based on Admin screen title setting.
-+ Added front-end login feature similar to layout selector. (login required, not required, inherit)
-+ Added drag-to-copy feature for better multi-language support. Thanks tuupola.
-+ Added a new core plugin called skeleton to help out new plugin developers.
-+ Added translation template generator to help out translators with translating Frog core and plugins.
-+ Added Norwegian and Swedish core translations.
-+ Added updated Chinese translation.
-+ Removed split between frontend and backend.
-+ Added an ID to the "view this page" link so it can be styled.
-- Fixed issue with settings table. Changed table setting's field value to TEXT instead of VARCHAR.
-- Fixed GET variables not being available in Frog's frontend. - issue 75
-- Fixed issue where AutoLoader did not find file for 'PageArchiveMonthIndex' - issue 101
-- Fixed issue where saving a page without title results in loss of entered content - issue 68
-- Fixed issue with filename lowercasing during upload of files. Thanks david - issue 113
-- Fixed previous()/next() functions to work for all levels. Thanks rid - issue 109
-- Fixed "Add child" tooltip for browsers not picking up the alt value of the icon.
-- Fixed broken View Site link for TLDs starting with 'a' - issue 116
-- Fixed XHTML compatibility problem with Comment plugin.
-- Fixed issue where only the last addJavascript was accepted.
-. Updated comment plugin to make use of statistics_api plugin if available and enabled.
-. Restricted access to backend to roles administrator, developer and editor - issue 122
-. Updated backend layout to make error and success messages automatically dissappear after 1.5 sec.
-. Updated readme.txt with requirements detail for MySQL server.
-. Updated file_manager plugin translations to conform to new template.
-. Updated comments in preparation for PHPDoc documentation.
-. Renamed root dir text files to avoid name conflicts and accomodate Windows users.
-. Renamed style.css into screen.css for more consistency with print.css in Normal layout.
-. Simplified Comment plugin to make use of Plugin::getAllSettings() and friends.
-
 0.9.4 - released 2008-09-29
 
 + Added function to allow plugin devs to add one or more javascript file to the backend html for their plugin. (issue 35)

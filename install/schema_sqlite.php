@@ -54,8 +54,7 @@ $PDO->exec("CREATE TABLE page (
     created_by_id int(11) default NULL , 
     updated_by_id int(11) default NULL , 
     position mediumint(6) default NULL , 
-    is_protected tinyint(1) NOT NULL default '0' ,
-    needs_login tinyint(1) NOT NULL default '0'
+    is_protected tinyint(1) NOT NULL default '0'
 )");
 
 
@@ -93,19 +92,9 @@ $PDO->exec("CREATE UNIQUE INDEX permission_name ON permission (name)");
 
 $PDO->exec("CREATE TABLE setting (
     name varchar(40) NOT NULL ,
-    value text NOT NULL
-)");
-$PDO->exec("CREATE UNIQUE INDEX setting_id ON setting (name)");
-
-
-// Table structure for table: plugin_settings ----------------------------------------
-
-$PDO->exec("CREATE TABLE plugin_settings (
-    plugin_id varchar(40) NOT NULL ,
-    name varchar(40) NOT NULL ,
     value varchar(255) NOT NULL
 )");
-$PDO->exec("CREATE UNIQUE INDEX plugin_setting_id ON plugin_settings (plugin_id,name)");
+$PDO->exec("CREATE UNIQUE INDEX setting_id ON setting (name)");
 
 
 // Table structure for table: snippet ----------------------------------------

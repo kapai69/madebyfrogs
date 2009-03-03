@@ -55,7 +55,6 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   updated_by_id int(11) default NULL,
   position mediumint(6) unsigned default NULL,
   is_protected tinyint(1) NOT NULL default '0',
-  needs_login tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");
 
@@ -96,18 +95,8 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."permission (
 
 $PDO->exec("CREATE TABLE ".TABLE_PREFIX."setting (
   name varchar(40) NOT NULL,
-  value text NOT NULL,
-  UNIQUE KEY id (name)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8");
-
-
-// Table structure for table: plugin_settings ----------------------------------------
-
-$PDO->exec("CREATE TABLE ".TABLE_PREFIX."plugin_settings (
-  plugin_id varchar(40) NOT NULL,
-  name varchar(40) NOT NULL,
   value varchar(255) NOT NULL,
-  UNIQUE KEY plugin_setting_id (plugin_id,name)
+  UNIQUE KEY id (name)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8");
 
 

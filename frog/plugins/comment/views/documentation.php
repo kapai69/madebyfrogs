@@ -1,41 +1,4 @@
-<?php
-/*
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
-/**
- * The Comment plugin provides an interface to enable adding and moderating page comments.
- *
- * @package frog
- * @subpackage plugin.comment
- *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @author Bebliuc George <bebliuc.george@gmail.com>
- * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.2.0
- * @since Frog version 0.9.3
- * @license http://www.gnu.org/licenses/agpl.html AGPL License
- * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
- */
-?>
 <h3>How to use this plugin</h3>
-<p>
-    By default, the comments plugin tab displays for example: "Comments (2/5)". This means that two comments are
-    waiting for approval in the moderation list out of five total comments.
-</p>
 <p>
   On each page edit screen, you will have a drop-down box available called "Comments".
   From this, you can choose between three options:
@@ -71,8 +34,7 @@
 </p>
 <p>
   Copyright (C) 2008 Philippe Archambault &lt;philippe.archambault@gmail.com&gt;<br/>
-  Copyright (C) 2008 Bebliuc George &lt;bebliuc.george@gmail.com&gt;<br/>
-  Copyright (C) 2008 Martijn van der Kleijn &lt;martijn.niji@gmail.com&gt;
+  Copyright (C) 2008 Bebliuc George &lt;bebliuc.george@gmail.com&gt;
 </p>
 <p>
   Please see the full license statement in this plugin's readme.txt file.

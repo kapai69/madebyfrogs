@@ -1,14 +1,5 @@
-#
-# Setting Frog requirements
-#
-
-php_flag magic_quotes_gpc off
+Options +FollowSymLinks
 AddDefaultCharset UTF-8
-Options -Indexes +FollowSymLinks
-
-#
-# Setting rewrite rules
-#
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -24,6 +15,6 @@ Options -Indexes +FollowSymLinks
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l
   # Main URL rewriting.
-  RewriteRule ^(.*)$ index.php?PAGE=$1 [L,QSA]
+  RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 
 </IfModule>

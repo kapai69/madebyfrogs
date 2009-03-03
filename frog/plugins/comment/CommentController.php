@@ -1,45 +1,31 @@
 <?php
 
-/*
- * Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 /**
- * The Comment plugin provides an interface to enable adding and moderating page comments.
- *
- * @package frog
- * @subpackage plugin.comment
- *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @author Bebliuc George <bebliuc.george@gmail.com>
- * @author Martijn van der Kleijn <martijn.niji@gmail.com>
- * @version 1.2.0
- * @since Frog version 0.9.3
- * @license http://www.gnu.org/licenses/agpl.html AGPL License
- * @copyright Philippe Archambault, Bebliuc George & Martijn van der Kleijn, 2008
+   Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+   Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+   Copyright (C) 2008 Bebliuc George <bebliuc.george@gmail.com>
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Affero General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Affero General Public License for more details.
+
+   You should have received a copy of the GNU Affero General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 /**
  * class CommentController
  *
- * @package frog
- * @subpackage plugin.comment
  * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @since Frog version 0.6
+ * @since  0.6
  */
+
 class CommentController extends PluginController
 {
     function __construct()
@@ -49,10 +35,10 @@ class CommentController extends PluginController
             redirect(get_url('login'));
         
         $this->setLayout('backend');
-        $this->assignToLayout('sidebar', new View('../../plugins/comment/views/sidebar'));
+        $this->assignToLayout('sidebar', new View('../../../plugins/comment/views/sidebar'));
     }
     
-    function index($page = 0)
+    function index($page)
     {
         $this->display('comment/views/index', array(
             'comments' => Comment::findAll(),
@@ -92,11 +78,7 @@ class CommentController extends PluginController
             Flash::set('error', __('Comment has not been saved!'));
             redirect(get_url('plugin/comment/edit/'.$id));
         }
-        else
-        {
-            Flash::set('success', __('Comment has been saved!'));
-            Observer::notify('comment_after_edit', $comment);
-        }
+        else Flash::set('success', __('Comment has been saved!'));
         
         redirect(get_url('plugin/comment'));
     }
@@ -107,10 +89,7 @@ class CommentController extends PluginController
         if ($comment = Record::findByIdFrom('Comment', $id))
         {
             if ($comment->delete())
-            {
                 Flash::set('success', __('Comment has been deleted!'));
-                Observer::notify('comment_after_delete', $comment);
-            }
             else
                 Flash::set('error', __('Comment has not been deleted!'));
         }
@@ -126,10 +105,7 @@ class CommentController extends PluginController
         {
             $comment->is_approved = 1;
             if ($comment->save())
-            {
                 Flash::set('success', __('Comment has been approved!'));
-                Observer::notify('comment_after_approve', $comment);
-            }
         }
         else Flash::set('error', __('Comment not found!'));
         
@@ -143,10 +119,7 @@ class CommentController extends PluginController
         {
             $comment->is_approved = 0;
             if ($comment->save())
-            {
                 Flash::set('success', __('Comment has been unapproved!'));
-                Observer::notify('comment_after_unapprove', $comment);
-            }
         }
         else Flash::set('error', __('Comment not found!'));
         
@@ -154,41 +127,65 @@ class CommentController extends PluginController
     }
    
     function settings() {
-        $tmp = Plugin::getAllSettings('comment');
-        $settings = array('approve' => $tmp['auto_approve_comment'],
-                          'captcha' => $tmp['use_captcha'],
-                          'rowspage' => $tmp['rowspage'],
-                          'numlabel' => $tmp['numlabel']
-                         );
-        $this->display('comment/views/settings', $settings);
+    	
+    	error_reporting(E_ALL);
+    	
+		global $__FROG_CONN__;
+    	$sql = "SELECT * FROM ".TABLE_PREFIX."setting WHERE name = 'auto_approve_comment'";
+		$stmt = $__FROG_CONN__->prepare($sql);
+		$stmt->execute();
+		$auto_approve = $stmt->fetchObject();
+        
+        $sql = "SELECT * FROM ".TABLE_PREFIX."setting WHERE name = 'use_captcha'";
+		$stmt = $__FROG_CONN__->prepare($sql);
+		$stmt->execute();
+		$captcha = $stmt->fetchObject();
+		
+		$sql = "SELECT * FROM ".TABLE_PREFIX."setting WHERE name = 'rowspage'";
+		$stmt = $__FROG_CONN__->prepare($sql);
+		$stmt->execute();
+		$rowspage = $stmt->fetchObject();
+		
+            $this->display('comment/views/settings', array(
+				'approve' => $auto_approve->value,
+				'captcha' => $captcha->value,
+				'rowspage' => $rowspage->value
+				));
+		
     }
     
 	function save() {
+		error_reporting(E_ALL);
 		$approve = mysql_escape_string($_POST['autoapprove']);
         $captcha = mysql_escape_string($_POST['captcha']);
         $rowspage = mysql_escape_string($_POST['rowspage']);
-        $numlabel = mysql_escape_string($_POST['numlabel']);
-
-        $settings = array('auto_approve_comment' => $approve,
-                          'use_captcha' => $captcha,
-                          'rowspage' => $rowspage,
-                          'numlabel' => $numlabel
-                         );
-                         
-        $ret = Plugin::setAllSettings($settings, 'comment');
         
-        if ($ret)
-            Flash::set('success', __('The settings have been updated.'));
-        else
-            Flash::set('error', 'An error has occured.');
-
-        redirect(get_url('plugin/comment/settings'));
+        global $__FROG_CONN__;
+        $sql = "UPDATE " . TABLE_PREFIX . "setting SET value='$approve' WHERE name = 'auto_approve_comment'"; 
+        $PDO = $__FROG_CONN__->prepare($sql);
+        $approve_var = $PDO->execute() !== false;
+        
+        $sql = "UPDATE " . TABLE_PREFIX . "setting SET value='$captcha' WHERE name = 'use_captcha'"; 
+        $PDO = $__FROG_CONN__->prepare($sql);
+        $captcha_var = $PDO->execute() !== false;
+        
+        $sql = "UPDATE " . TABLE_PREFIX . "setting SET value='$rowspage' WHERE name = 'rowspage'"; 
+        $PDO = $__FROG_CONN__->prepare($sql);
+        $rowspage_var = $PDO->execute() !== false;
+        
+        if ($captcha_var){
+                Flash::set('success', __('The settings have been update :)'));
+            }
+        else{
+                Flash::set('error', 'An error has occured. Seems MySQL hates you :(');
+            }
+           redirect(get_url('plugin/comment/settings'));   
 	}
 	
 	function documentation() {
     	$this->display('comment/views/documentation'); 
     }
-    function moderation($page = 0) {
+    function moderation($page) {
     	 $this->display('comment/views/moderation', array(
             'comments' => Comment::findAll(),
             'page' => $page

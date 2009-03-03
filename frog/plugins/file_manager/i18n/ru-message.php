@@ -1,43 +1,38 @@
 <?php
 
 /**
- * Russian language file for plugin file_manager
- *
- * @package frog
- * @subpackage plugin.file_manager.translations
- *
- * @author Maslakov Alexander <jmas.ukraine@gmail.com>
- * @version Frog 0.9.4
+ * this file has been translated by: Maslakov Alexander (jmas.ukraine@gmail.com)
  */
 
-    return array(
-        'Action' => 'Действие',
-        'Are you sure you wish to delete' => 'Вы уверены, что хотите удалить',
-        'Cancel' => 'Отмена',
-        'Change mode' => 'Изментить права',
-        'Close' => 'Закрыть',
-        'Create' => 'Создать',
-        'Create new directory' => 'Создать дерикторию',
-        'Create new file' => 'Создать файл',
-        'Directory :name has not been created!' => 'Директория <strong>:name</strong> не создана!',
-        'Directory is not writable! File has not been saved!' => 'Нет прав для записи в директорию! Файл не был сохранен!',
-        'File' => 'Файл',
-        'File :name has been created with success!' => 'Файл <strong>:name</strong> был успешно создан!',
-        'File :name has not been created!' => 'Файл <strong>:name</strong> не создан!',
-        'File has been saved with success!' => 'Файл был успешно сохранен!',
-        'File has not been uploaded!' => 'Файл не был загружен!',
-        'File is not writable! File has not been saved!' => 'Файл защищен от записи и не может быть сохранен!',
-        'File or directory not found!' => 'Файл или директория не найдены!',
-        'Modify' => 'Изменить',
-        'Permission denied!' => 'Доступ запрещен!',
-        'Permissions' => 'Права',
-        'Rename' => 'переименовать',
-        'Save' => 'Сохранить',
-        'Save and Continue Editing' => 'Сохранить и продолжить',
-        'Size' => 'Размер',
-        'Upload' => 'Загрузить',
-        'Upload file' => 'Загрузить файл',
-        'You do not have permission to access the requested page!' => 'Вы не имеете прав доступа к запрашиваемой странице!',
-        'or' => 'или',
-        'overwrite it?' => 'Заменить?',
-    );
+return array(
+
+// files
+'File' => 'Файл',
+'Size' => 'Размер',
+'Permissions' => 'Права',
+'Change mode' => 'Изментить права',
+'Remove file' => 'Удалить файл',
+'Create new file' => 'Создать файл',
+'Create new directory' => 'Создать дерикторию',
+'Upload file' => 'Загрузить файл',
+'rename' => 'переименовать',
+
+
+'File :name has been created with success!' => 'Файл <strong>:name</strong> был успешно создан!',
+'Directory is not writable! File has not been saved!' => 'Нет прав для записи в директорию! Файл не был сохранен!',
+'File :name has been created!' => 'Файл <strong>:name</strong> успешно создан!',
+'File :name has not been created!' => 'Файл <strong>:name</strong> не создан!',
+'Directory :name has been created!' => 'Директория <strong>:name</strong> была создана!',
+'Directory :name has not been created!' => 'Директория <strong>:name</strong> не создана!',
+'File :name has been deleted with success!' => 'Файл <strong>:name</strong> успешно удален!',
+'File :name has not been deleted!' => 'Файл <strong>:name</strong> не был удален!',
+'Directory :name has been deleted with success!' => 'Директория <strong>:name</strong> была успешно удалена!',
+'Directory :name has not been deleted!' => 'Директория <strong>:name</strong> не была удалена!',
+'File :name has been uploaded with success!' => 'Файл <strong>:name</strong> успешно загружен!',
+'File has not been uploaded!' => 'Файл не был загружен!',
+'Permissions of file has been changed!' => 'Права доступа к файлу изменены!',
+'Permissions of directory has been changed!' => 'Права доступа к директории были изменены!',
+'Change mode has not been done!' => 'Не удалось изменить права!',
+'File or directory not found!' => 'Файл или директория не найдены!',
+
+);

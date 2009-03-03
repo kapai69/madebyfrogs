@@ -1,13 +1,4 @@
-== WHAT IT IS ==
-
-The Comments plugin provides you with the functionality to enable visitors to
-leave comments on your pages.
-
-Dependencies:
-    - Frog 0.9.5+
-    - Statistics API plugin (optional, see NOTES section)
-
-== HOW TO USE IT ==
+== HOW TO USE IT:
 
 On each page edition you will have a drop-down available to choose between 3 
 options (none, open and close).
@@ -18,42 +9,29 @@ options (none, open and close).
 
 You will need to add this little code in your layout:
 
-<?php
-    if (Plugins::isEnabled('comment'))
-    {
-        if ($this->comment_status != Comment::NONE)
-            $this->includeSnippet('comment-each');
-        if ($this->comment_status == Comment::OPEN)
-            $this->includeSnippet('comment-form');
-    }
-?>
+    <?php if ($this->comment_status != Comment::NONE) 
+          $this->includeSnippet('comment-each'); ?>
+    <?php if ($this->comment_status == Comment::OPEN) 
+          $this->includeSnippet('comment-form'); ?>
 
-== NOTES ==
 
-* When you disable the comment plugin, database table, snippet and
-  page.comment_status stay available.
+== NOTES:
 
-* Do not forget to remove the code you added to your layout if you delete the
-  comments plugin from your system. It will do no harm to leave it in, but will
-  clutter your layout.
+When you disable the comment plugin, database table, snippet and 
+page.comment_status stay available.
 
-* When the optional statistics_api plugin is enabled, the comments plugin registers
-  an event with the statistics_api plugin each time:
-    - a comment is added.
+Do not forget to remove you code in your layout otherwise you will get PHP 
+errors.
 
-* The statistics_api plugin is a plugin by Martijn van der Kleijn and can be
-  downloaded from http://www.vanderkleijn.net/frog-cms/plugins.html
 
-== LICENSE ==
+== LICENSE:
 
 Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
 
 Comments plugin:
 
 Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
-and parts are
-    Copyright (C) 2008 Bebliuc George <bebliuc.george@gmail.com>
-    Copyright (C) 2009 Martijn van der Kleijn <martijn.niji@gmail.com>
+and parts are Copyright (C) 2008 Bebliuc George <bebliuc.george@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as

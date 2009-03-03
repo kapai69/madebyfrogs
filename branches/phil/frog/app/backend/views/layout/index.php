@@ -7,10 +7,10 @@
 <ul id="layouts" class="index">
 <?php foreach($layouts as $layout) { ?>
   <li id="layout_<?php echo $layout->id; ?>" class="layout node <?php echo odd_even(); ?>">
-    <img align="middle" alt="layout-icon" src="images/layout.png" title="" />
+    <img align="middle" alt="layout-icon" src="app/backend/assets/images/layout.png" title="" />
     <a href="<?php echo get_url('layout/edit/'.$layout->id); ?>"><?php echo $layout->name; ?></a>
-    <img class="handle" src="images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
-    <div class="remove"><a href="<?php echo get_url('layout/delete/'.$layout->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');"><img alt="<?php echo __('Remove Layout'); ?>" src="images/icon-remove.gif" /></a></div>
+    <img class="handle" src="app/backend/assets/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+    <div class="remove"><a href="<?php echo get_url('layout/delete/'.$layout->id); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $layout->name; ?>?');"><img alt="<?php echo __('Remove Layout'); ?>" src="app/backend/assets/images/icon-remove.gif" /></a></div>
   </li>
 <?php } ?>
 </ul>

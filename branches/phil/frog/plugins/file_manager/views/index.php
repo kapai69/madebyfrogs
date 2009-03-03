@@ -31,8 +31,8 @@
       <td><code><?php echo $file->perms; ?> (<a href="#" onclick="toggle_chmod_popup('<?php echo $dir.$file->name; ?>'); return false;" title="<?php echo __('Change mode'); ?>"><?php echo $file->chmod; ?></a>)</code></td>
       <td><code><?php echo $file->mtime; ?></code></td>
       <td>
-        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="images/icon-rename.gif" alt="rename icon" /></a> 
-        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $file->name; ?>?');"><img src="images/icon-remove.gif" alt="remove icon" /></a>
+        <a href="#" onclick="toggle_rename_popup('<?php echo $dir.$file->name; ?>', '<?php echo $file->name; ?>'); return false;" title="<?php echo __('Rename'); ?>"><img src="app/backend/assets/images/icon-rename.gif" alt="rename icon" /></a> 
+        <a href="<?php echo get_url('plugin/file_manager/delete/'.$dir.$file->name); ?>" onclick="return confirm('<?php echo __('Are you sure you wish to delete'); ?> <?php echo $file->name; ?>?');"><img src="app/backend/assets/images/icon-remove.gif" alt="remove icon" /></a>
       </td>
     </tr>
 <?php endforeach; ?>

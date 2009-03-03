@@ -1,6 +1,6 @@
 <?php if (Dispatcher::getAction() == 'index'): ?>
 
-<p class="button"><a href="<?php echo get_url('layout/add'); ?>"><img src="images/layout.png" align="middle" alt="layout icon" /> <?php echo __('New Layout'); ?></a></p>
+<p class="button"><a href="<?php echo get_url('layout/add'); ?>"><img src="app/backend/assets/images/layout.png" align="middle" alt="layout icon" /> <?php echo __('New Layout'); ?></a></p>
 
 <div class="box">
 <h2><?php echo __('What is a Layout?'); ?></h2>

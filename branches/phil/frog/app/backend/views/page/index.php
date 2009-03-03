@@ -11,16 +11,16 @@
       <div class="page" style="padding-left: 4px">
         <span class="w1">
 <?php if ($root->is_protected && ! AuthUser::hasPermission('administrator') && ! AuthUser::hasPermission('developer')): ?>
-          <img align="middle" class="icon" src="images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
+          <img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
 <?php else: ?>
-          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
+          <a href="<?php echo get_url('page/edit/1'); ?>" title="/"><img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
 <?php endif; ?>
         </span>
       </div>
       <div class="status published-status"><?php echo __('Published'); ?></div>
       <div class="modify">
-          <a href="<?php echo get_url('page/add/1'); ?>"><img src="images/plus.png" align="middle" alt="<?php echo __('Add child'); ?>" /></a>&nbsp; 
-          <img class="remove" src="images/icon-remove-disabled.gif" align="middle" alt="remove icon disabled" />
+          <a href="<?php echo get_url('page/add/1'); ?>"><img src="app/backend/assets/images/plus.png" align="middle" alt="<?php echo __('Add child'); ?>" /></a>&nbsp; 
+          <img class="remove" src="app/backend/assets/images/icon-remove-disabled.gif" align="middle" alt="remove icon disabled" />
       </div>
     </li>
 </ul>

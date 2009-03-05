@@ -394,6 +394,15 @@ table.index td.note {
 }
 /* Site Map --------------------------------------------------------------- */
 
+#form-backend_language {
+	position: relative;
+	top: -32px;
+	text-align: right
+}
+#form-backend_language label {
+	color: #fff;
+}
+
 #site-map-root .node.level-0 .page,
 #site-map .node.level-1 .page,
 #site-map .node.level-2 .page {

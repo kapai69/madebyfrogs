@@ -68,8 +68,6 @@ class Setting extends Record
     
     public static function getLanguages()
     {
-        global $iso_639_1;
-        
         $languages = array('en' => 'English');
         
         if ($handle = opendir(APP_PATH.'/i18n'))
@@ -79,7 +77,7 @@ class Setting extends Record
                 if (strpos($file, '.') !== 0)
                 {
                     $code = substr($file, 0, 2);
-                    $languages[$code] = isset($iso_639_1[$code]) ? $iso_639_1[$code]: __('unknown');
+                    $languages[$code] = Language::nameOf($code);
                 }
             }
             closedir($handle);
@@ -92,7 +90,7 @@ class Setting extends Record
     public static function getThemes()
     {
         $themes = array();
-        $dir = FROG_ROOT.'/'.ADMIN_DIR.'/themes/';
+        $dir = CORE_ROOT.'/app/backend/assets/themes/';
         if ($handle = opendir($dir))
         {
             while (false !== ($file = readdir($handle)))

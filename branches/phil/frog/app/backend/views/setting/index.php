@@ -51,7 +51,7 @@
       <td class="latest"><?php echo Plugin::checkLatest($plugin); ?></td>
       <td class="enabled"><input type="checkbox" name="enabled_<?php echo $plugin->id; ?>" value="<?php echo $plugin->id; ?>"<?php if (isset($loaded_plugins[$plugin->id])) echo ' checked="checked"'; if ($disabled) echo ' disabled="disabled"'; ?> onclick="new Ajax.Request('<?php echo get_url('setting'); ?>'+(this.checked ? '/activate_plugin/':'/deactivate_plugin/')+this.value, {method: 'get'});" /></td>
     </tr>
-<?php endforeach; ?>
+<?php flush(); endforeach; ?>
   </tbody>
 </table>
 <script type="text/javascript">
@@ -69,21 +69,19 @@
         <td class="help"><?php echo __('By using <strong>&lt;img src="img_path" /&gt;</strong> you can set your company logo instead of a title.'); ?></td>
       </tr>
       <tr>
-        <td class="label"><label for="setting_language"><?php echo __('Language'); ?></label></td>
-        <td class="field">
-          <select class="select" id="setting_language" name="setting[language]">
-<?php $current_language = Setting::get('language'); ?>
-<?php foreach (Setting::getLanguages() as $code => $label): ?>
-            <option value="<?php echo $code; ?>"<?php if ($code == $current_language) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
-<?php endforeach; ?>
-          </select>
-        </td>
-        <td class="help"><?php echo __('This will set your language for the backend.'); ?></td>
+        <td class="label"><label for="setting_backend_language"><?php echo __('Backend Language'); ?></label></td>
+        <td class="field"><input class="textbox" id="setting_backend_language" maxlength="255" name="setting[backend_language]" size="255" type="text" value="<?php echo Setting::get('backend_language'); ?>" /></td>
+        <td class="help"><?php echo __('Languages for the backend. Separate them with coma.'); ?><br /><?php echo __('Use the <acronym title="ex: en=English, fr=French, es=Spanish ...">"iso_639_1"</acronym> language code for your language.'); ?></td>
+      </tr>
+      <tr>
+        <td class="label"><label for="setting_available_language"><?php echo __('Available Language'); ?></label></td>
+        <td class="field"><input class="textbox" id="setting_available_language" maxlength="255" name="setting[available_language]" size="255" type="text" value="<?php echo Setting::get('available_language'); ?>" /></td>
+        <td class="help"><?php echo __('Languages available for your web site. Separate them with coma.'); ?><br /><?php echo __('Use the <acronym title="ex: en=English, fr=French, es=Spanish ...">"iso_639_1"</acronym> language code for your language.'); ?></td>
       </tr>
       <tr>
         <td class="label"><label for="setting_theme"><?php echo __('Administration Theme'); ?></label></td>
         <td class="field">
-          <select class="select" id="setting_language" name="setting[theme]" onchange="$('css_theme').href = 'themes/' + this[this.selectedIndex].value + '/styles.css';">
+          <select class="select" id="setting_language" name="setting[theme]" onchange="$('css_theme').href = 'app/backend/assets/themes/'+this[this.selectedIndex].value+'/styles.css';">
 <?php $current_theme = Setting::get('theme'); ?>
 <?php foreach (Setting::getThemes() as $code => $label): ?>
             <option value="<?php echo $code; ?>"<?php if ($code == $current_theme) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>

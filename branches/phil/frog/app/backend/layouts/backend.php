@@ -99,7 +99,7 @@
         <span class="separator"> | </span>
         <a href="<?php echo get_url('login/logout'); ?>"><?php echo __('Log Out'); ?></a>
         <span class="separator"> | </span>
-        <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, 'a')); ?>" target="_blank"><?php echo __('View Site'); ?></a>
+        <a href="<?php echo substr(BASE_URL, 0, strrpos(BASE_URL, ADMIN_DIR)); ?>" target="_blank"><?php echo __('View Site'); ?></a>
       </p>
     </div>
   </body>

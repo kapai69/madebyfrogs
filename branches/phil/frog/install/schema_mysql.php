@@ -48,6 +48,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   layout_id int(11) unsigned default NULL,
   behavior_id varchar(25) NOT NULL,
   status_id int(11) unsigned NOT NULL default '100',
+  language char(2) default '{$_POST['config']['language']}',
   created_on datetime default NULL,
   published_on datetime default NULL,
   updated_on datetime default NULL,

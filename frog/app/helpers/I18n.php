@@ -1,35 +1,34 @@
 <?php
 
 /**
-   Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
-   Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
+	Frog CMS - Content Management Simplified. <http://www.madebyfrog.com>
+	Copyright (C) 2008 Philippe Archambault <philippe.archambault@gmail.com>
 
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU Affero General Public License as
-   published by the Free Software Foundation, either version 3 of the
-   License, or (at your option) any later version.
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU Affero General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-   You should have received a copy of the GNU Affero General Public License
-   along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 defined('I18N_PATH') or define('I18N_PATH', APP_PATH.DIRECTORY_SEPARATOR.'i18n');
 define('DEFAULT_LOCALE', 'en');
 
 /**
- * I18n : Internationalisation function and class
- *
- * @author Philippe Archambault <philippe.archambault@gmail.com>
- * @copyright 2007 Philippe Archambault
- * @package Frog
- * @version 0.1
- * @license http://www.opensource.org/licenses/mit-license.html MIT License
- */
+	I18n : Internationalisation function and class
+
+	Author Philippe Archambault <philippe.archambault@gmail.com>
+	Copyright 2007 Philippe Archambault
+	Package Frog
+	Version 0.1
+*/
 
 
 /**

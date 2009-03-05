@@ -41,7 +41,18 @@
       </td>
       <td class="help"><?php echo __('Roles restrict user privileges and turn parts of the administrative interface on or off.'); ?></td>
     </tr>
-<?php endif; ?> 
+<?php endif; ?>
+    <tr>
+      <td class="label"><label for="user_language"><?php echo __('Language'); ?></label></td>
+      <td class="field">
+        <select class="select" id="user_language" name="user[language]">
+<?php foreach (Setting::getLanguages() as $code => $label): ?>
+          <option value="<?php echo $code; ?>"<?php if ($code == $user->language) echo ' selected="selected"'; ?>><?php echo __($label); ?></option>
+<?php endforeach; ?>
+        </select>
+      </td>
+      <td class="help"><?php echo __('This will set your language for the backend.'); ?><br /><?php echo __('Help us <a href=":url">translate Frog</a>!', array(':url' => get_url('translate'))); ?></td>
+    </tr>
   </table>
 
   <p class="buttons">

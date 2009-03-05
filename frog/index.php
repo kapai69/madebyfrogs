@@ -20,7 +20,7 @@
 
 //  Constantes  --------------------------------------------------------------
 
-define('FROG_VERSION', '0.9.4');
+define('FROG_VERSION', '0.9.4 branche/phil');
 
 define('CORE_ROOT', dirname(__FILE__));
 define('FROG_ROOT', CORE_ROOT.'/..');
@@ -56,14 +56,13 @@ if (USE_PDO) {
 Record::connection($__FROG_CONN__);
 Record::getConnection()->exec("set names 'utf8'");
 
-
 //  Initialize  --------------------------------------------------------------
 
-Setting::init();
-
 use_helper('I18n');
-I18n::setLocale(Setting::get('language'));
 
+AuthUser::load();
+
+Setting::init();
 Plugin::init();
 
 //  Get controller and action and execute  -----------------------------------

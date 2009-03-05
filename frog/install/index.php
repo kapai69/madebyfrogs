@@ -23,6 +23,7 @@ define('CORE_ROOT', dirname(__FILE__).'/..');
 $config_file = CORE_ROOT.'/../config.php';
 
 include 'Template.php';
+include '../app/backend/models/Language.php';
 
 if (file_exists($config_file))
   include $config_file;
@@ -112,6 +113,17 @@ if ( ! defined('DEBUG') && isset($_POST['commit']) && (file_exists($config_file)
 <?php if ( ! defined('DEBUG')): ?>
 <form action="index.php" method="post">
   <table class="fieldset" cellpadding="0" cellspacing="0" border="0">
+	<tr>
+	  <td class="label"><label for="config_language">Default language</label></td>
+	  <td class="field">
+	    <select class="select" id="config_language" name="config[language]">
+<?php foreach (Language::all() as $code => $label): ?>
+	      <option value="<?php echo $code; ?>"<?php if ($code == 'en') echo ' selected="selected"'; ?>><?php echo $label; ?></option>
+<?php endforeach; ?>
+	    </select>
+	  </td>
+	  <td class="help">This will set the default language of your website</td>
+	</tr>
 	<tr>
 	  <td colspan="3"><h3>Database information</h3></td>
 	</tr>

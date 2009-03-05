@@ -26,7 +26,8 @@
 
 class PageController extends Controller
 {
-	public $language = 'en';
+	public $language = DEFAULT_LANGUAGE;
+	
 	public function __construct()
 	{
 		if ( ! AuthUser::isLoggedIn())
@@ -211,8 +212,8 @@ class PageController extends Controller
 		// need to do this because the use of a checkbox
 		$data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
 
-		// if it's a root page, remove the slug
-		if ($page->parent_id == 0)
+		// if it's THE root page of the default website language, remove the slug
+		if ($page->parent_id == 0 and $page->language == DEFAULT_LANGUAGE)
 			$data['slug'] = '';
 		
 		$page->setFromData($data);

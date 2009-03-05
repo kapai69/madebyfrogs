@@ -37,23 +37,24 @@ $PDO->exec("CREATE UNIQUE INDEX layout_name ON layout (name)");
 
 // Table structure for table: page -------------------------------------------
 
-$PDO->exec("CREATE TABLE page ( 
+$PDO->exec("CREATE TABLE page (
     id INTEGER NOT NULL PRIMARY KEY,
-    title varchar(255) default NULL ,
-    slug varchar(100) default NULL , 
-    breadcrumb varchar(160) default NULL ,
-    keywords varchar(255) default NULL ,
-    description text , 
-    parent_id int(11) default NULL , 
-    layout_id int(11) default NULL , 
-    behavior_id varchar(25) NOT NULL , 
-    status_id int(11) NOT NULL default '100' , 
-    created_on datetime default NULL , 
-    published_on datetime default NULL , 
-    updated_on datetime default NULL , 
-    created_by_id int(11) default NULL , 
-    updated_by_id int(11) default NULL , 
-    position mediumint(6) default NULL , 
+    title varchar(255) default NULL,
+    slug varchar(100) default NULL,
+    breadcrumb varchar(160) default NULL,
+    keywords varchar(255) default NULL,
+    description text,
+    parent_id int(11) default NULL,
+    layout_id int(11) default NULL,
+    behavior_id varchar(25) NOT NULL,
+    status_id int(11) NOT NULL default '100',
+    language char(2) default '{$_POST['config']['language']}',
+    created_on datetime default NULL,
+    published_on datetime default NULL,
+    updated_on datetime default NULL,
+    created_by_id int(11) default NULL,
+    updated_by_id int(11) default NULL,
+    position mediumint(6) default NULL,
     is_protected tinyint(1) NOT NULL default '0'
 )");
 

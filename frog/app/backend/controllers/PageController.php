@@ -42,7 +42,7 @@ class PageController extends Controller
 		$childrens = array();
 		
 		if ($root = Page::findRoot($this->language))
-			$childrens = $this->children($root->id, 0, true);
+			$childrens = $this->children($root, 0, true);
 		
 		$this->setLayout('backend');
 		$this->display('page/index', array(
@@ -111,9 +111,12 @@ class PageController extends Controller
 			redirect(get_url('page/add'));
 		}
 
+		$parent = Record::findByIdFrom('Page', $data['parent_id']);
+
 		$page = new Page($data);
 		$page->language = $this->language;
-
+		$page->level = $parent->level+1;
+		
 		// save page data
 		if ($page->save())
 		{
@@ -316,12 +319,17 @@ class PageController extends Controller
 		redirect(get_url('page'));
 	}
 	
-	public function children($parent_id, $level, $return=false)
+	public function children($parent, $level, $return=false)
 	{
 		$expanded_rows = isset($_COOKIE['expanded_rows']) ? explode(',', $_COOKIE['expanded_rows']): array();
 		
+		if (!($parent instanceof Page))
+			$parent = Record::findByIdFrom('Page', $parent);
+		
+		$parent->url = $parent->getUri();
+		
 		// get all children of the page (parent_id)
-		$childrens = Page::childrenOf($parent_id);
+		$childrens = Page::childrenOf($parent->id);
 		
 		foreach ($childrens as $index => $child)
 		{
@@ -333,8 +341,9 @@ class PageController extends Controller
 		}
 		
 		$content = new View('page/children', array(
-			'childrens' => $childrens,
-			'level'     => $level+1,
+			'parent'     => $parent,
+			'childrens'  => $childrens,
+			'level'      => $level+1,
 		));
 		
 		if ($return)
@@ -360,6 +369,7 @@ class PageController extends Controller
 			$page->parent_id = (int) $parent_id;
 			$page->save();
 		}
+		// need to fixe level for all subpage of this page
 	}
 	
 	public function language()

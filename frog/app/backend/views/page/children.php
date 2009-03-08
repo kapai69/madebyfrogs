@@ -7,7 +7,7 @@
 <?php if ( ! AuthUser::hasPermission('administrator') && ! AuthUser::hasPermission('developer') && $child->is_protected): ?>
 <img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title protected"><?php echo $child->title; ?></span> <img class="handle" src="app/backend/assets/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
 <?php else: ?>
-<a href="<?php echo get_url('page/edit/'.$child->id); ?>" title="<?php echo $child->slug; ?>/"><img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $child->title; ?></span></a> <img class="handle" src="app/backend/assets/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
+<a href="<?php echo get_url('page/edit/'.$child->id); ?>" title="/<?php echo ($parent->url === '' ? '': $parent->url.'/').$child->slug; ?>"><img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $child->title; ?></span></a> <img class="handle" src="app/backend/assets/images/drag.gif" alt="<?php echo __('Drag and Drop'); ?>" align="middle" />
 <?php endif; ?>
           <?php if (! empty($child->behavior_id)): ?> <small class="info">(<?php echo Inflector::humanize($child->behavior_id); ?>)</small><?php endif; ?> 
           <img align="middle" alt="" class="busy" id="busy-<?php echo $child->id; ?>" src="app/backend/assets/images/spinner.gif" style="display: none;" title="" />

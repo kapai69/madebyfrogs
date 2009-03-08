@@ -79,65 +79,123 @@ function explode_uri($uri)
 function find_page_by_uri($uri)
 {
 	global $__FROG_CONN__;
-	$page = false;
-	$parent = false;
-	$has_behavior = false;
+	$page = $parent = $has_behavior = false;
 	$url = '';
 	
 	$uri = trim($uri, '/');
 	$urls = explode_uri($uri);
 	
-	if (!empty($urls[0]) and $parent = find_page_by_slug($urls[0], $parent)) {
-		$page = $parent;
-		unset($urls[0]);
-	} else
-		$urls = array_merge(array(''), $urls); // adding the home root
-
-	foreach ($urls as $page_slug)
-	{
-		$url = ltrim($url . '/' . $page_slug, '/');
+	// if we are not at the default home page
+	if (!empty($urls[0])) {
+		// try to find the first slug somewhere in level 1
+		if ($page = find_page_by_slug($urls[0], $parent)) {
 		
-		if ($page = find_page_by_slug($page_slug, $parent))
-		{
+			$parent = find_page_by_id($page->parent_id);
+			$page->parent = $parent;
+			$page->setUrl();
+			
+			array_shift($urls); // remove the first slug
+			
 			// check for behavior
 			if ($page->behavior_id != '')
 			{
-				// add a instance of the behavior with the name of the behavior 
-				$params = explode_uri(substr($uri, strlen($url)));
-				$page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
-				
+				// add a instance of the behavior with the name of the behavior
+				$page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $urls);
 				return $page;
 			}
+			
+
+			//foreach ($urls as $page_slug)
+			while (($slug = array_shift($urls)) !== null)
+			{
+				//$url = ltrim($url . '/' . $page_slug, '/');
+
+				if ($page = find_page_by_slug($slug, $parent))
+				{
+					// check for behavior
+					if ($page->behavior_id != '')
+					{
+						// add a instance of the behavior with the name of the behavior 
+						//$params = explode_uri(substr($uri, strlen($url)));
+						$page->{$page->behavior_id} = Behavior::load($page->behavior_id, $page, $params);
+
+						return $page;
+					}
+				}
+				else break;
+
+				$parent = $page;
+
+			} // foreach
 		}
-		else
+		else // try to find a home page of a alternative language
 		{
-			break;
+			$page = find_page_by_slug($urls[0], $parent, 0);
 		}
-		
-		$parent = $page;
-		
-	} // foreach
+	}
+	else
+	{
+		//$urls = array_merge(array(''), $urls); // adding the home root
+		$page = find_page_by_slug('', $parent, 0);
+	}
 	
 	return ( ! $page && $has_behavior) ? $parent: $page;
-} // find_page_by_slug
+} // find_page_by_uri
 
-function find_page_by_slug($slug, &$parent)
+function find_page_by_id($id)
+{
+	global $__FROG_CONN__;
+	
+	$id = (int)$id;
+	$sql = 'SELECT page.*, author.name AS author, updator.name AS updator '
+		 . 'FROM '.TABLE_PREFIX.'page AS page '
+		 . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
+		 . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
+		 . 'WHERE page.id = '.$id.' AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
+	
+	$stmt = $__FROG_CONN__->prepare($sql);
+	$stmt->execute();
+	
+	if ($page = $stmt->fetchObject())
+	{
+		// create the object page
+		$page = new Page($page, false);
+		
+		// assign all is parts
+		$page->part = get_parts($page->id);
+		
+		return $page;
+	}
+	else return false;
+}
+
+function find_page_by_slug($slug, &$parent, $level=1)
 {
 	global $__FROG_CONN__;
 	
 	$page_class = 'Page';
 	
-	$parent_id = $parent ? $parent->id: 0;
+	if ($parent)
+	{
+		$field = 'parent_id';
+		$field_value = $parent instanceof Page ? $parent->id: $parent;
+	}
+	else
+	{
+		$field = 'level';
+		$field_value = $level;
+	}
+	//$parent_id = $parent ? $parent->id: 0;
 	
 	$sql = 'SELECT page.*, author.name AS author, updator.name AS updator '
 		 . 'FROM '.TABLE_PREFIX.'page AS page '
 		 . 'LEFT JOIN '.TABLE_PREFIX.'user AS author ON author.id = page.created_by_id '
 		 . 'LEFT JOIN '.TABLE_PREFIX.'user AS updator ON updator.id = page.updated_by_id '
-		 . 'WHERE slug = ? AND parent_id = ? AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
+		 . 'WHERE slug = ? AND '.$field.' = ? AND (status_id='.Page::STATUS_REVIEWED.' OR status_id='.Page::STATUS_PUBLISHED.' OR status_id='.Page::STATUS_HIDDEN.')';
 	
 	$stmt = $__FROG_CONN__->prepare($sql);
 	
-	$stmt->execute(array($slug, $parent_id));
+	$stmt->execute(array($slug, $field_value));
 	
 	if ($page = $stmt->fetchObject())
 	{
@@ -201,17 +259,6 @@ function url_start_with($url)
 	return false;
 }
 
-function execution_time()
-{
-	return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME);
-}
-
-function get_microtime()
-{
-	$time = explode(' ', microtime());
-	return doubleval($time[0]) + $time[1];
-}
-
 function convert_size($num)
 {
 	if ($num >= 1073741824) $num = round($num / 1073741824 * 100) / 100 .' gb';
@@ -221,10 +268,9 @@ function convert_size($num)
 	return $num;
 }
 
-function memory_usage()
-{
-	return convert_size(memory_get_usage());
-}
+function execution_time() { return sprintf("%01.4f", get_microtime() - FRAMEWORK_STARTING_MICROTIME); }
+function get_microtime() { $time = explode(' ', microtime()); return doubleval($time[0]) + $time[1]; }
+function memory_usage() { return convert_size(memory_get_usage()); }
 
 function page_not_found()
 {

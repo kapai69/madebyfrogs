@@ -19,10 +19,10 @@ define('DEBUG', false);
 
 // The full URL of your Frog CMS install
 
-define('URL_PUBLIC', 'http://'.dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']) .'/?/');
+define('URL_PUBLIC', 'http://<?php echo substr(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), 0, strrpos(dirname($_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME']), '/frog/')); ?>');
 
 // The directory name of your Frog CMS administration (you will need to change it manualy)
-define('ADMIN_DIR', 'admin');
+define('ADMIN_DIR', 'frog');
 
 // Change this setting to enable mod_rewrite. Set to "true" to remove the "?" in the URL.
 // To enable mod_rewrite, you must also change the name of "_.htaccess" in your

@@ -53,6 +53,7 @@ class Page extends Record
 	public $created_by_id;
 	public $updated_by_id;
 	public $position;
+	public $level;
 	public $is_protected;
 	
 	public function beforeInsert()

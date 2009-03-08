@@ -26,7 +26,7 @@
 <?php if ($root->is_protected && !AuthUser::hasPermission('administrator') && !AuthUser::hasPermission('developer')): ?>
           <img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span>
 <?php else: ?>
-          <a href="<?php echo get_url('page/edit/'.$root->id); ?>" title="/"><img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
+          <a href="<?php echo get_url('page/edit/'.$root->id); ?>" title="/<?php echo $root->slug; ?>"><img align="middle" class="icon" src="app/backend/assets/images/page.png" alt="page icon" /> <span class="title"><?php echo $root->title; ?></span></a>
 <?php endif; ?>
         </span>
       </div>

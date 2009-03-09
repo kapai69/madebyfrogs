@@ -55,6 +55,7 @@ $PDO->exec("CREATE TABLE ".TABLE_PREFIX."page (
   created_by_id int(11) default NULL,
   updated_by_id int(11) default NULL,
   position mediumint(6) unsigned default NULL,
+  level tinyint(2) unsigned NOT NULL default '0',
   is_protected tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8");

@@ -55,6 +55,7 @@ $PDO->exec("CREATE TABLE page (
     created_by_id int(11) default NULL,
     updated_by_id int(11) default NULL,
     position mediumint(6) default NULL,
+    level tinyint(4) NOT NULL default '0',
     is_protected tinyint(1) NOT NULL default '0'
 )");
 

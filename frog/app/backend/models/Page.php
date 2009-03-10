@@ -262,4 +262,47 @@ class Page extends Record
 		return (boolean) self::countFrom('Page', 'parent_id = '.(int)$id);
 	}
 	
+	public static function cloneTree($page, $parent_id)
+	{
+		// This will hold new id of root of cloned tree.
+		static $clone_root_id = false;
+		
+		// Clone passed in page.
+		$clone = Record::findByIdFrom('Page', $page->id);
+		$clone->parent_id = (int)$parent_id;
+		$clone->id = null;
+		// only set the copy to the root
+		if (!$clone_root_id)
+		{
+			$clone->title .= ' (copy)';
+			$clone->breadcrumb .= ' (copy)';
+			$clone->slug .= '_copy';
+		}
+		$clone->save();
+		
+		// Also clone the page parts.
+		$page_part = PagePart::findByPageId($page->id);
+		if (count($page_part))
+		{
+			foreach ($page_part as $part)
+			{
+				$part->page_id = $clone->id;
+				$part->id = null;
+				$part->save();
+			}
+		}
+		
+		// This gets set only once even when called recursively.
+		if (!$clone_root_id)
+			$clone_root_id = $clone->id;
+
+		// Clone and update childrens parent_id to clones new id.
+		if (Page::hasChildren($page->id))
+		{
+			foreach (Page::childrenOf($page->id) as $child)
+				Page::cloneTree($child, $clone->id);
+		}
+		
+		return $clone_root_id;
+	}
 } // end Page class

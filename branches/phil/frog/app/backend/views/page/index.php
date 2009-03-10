@@ -14,7 +14,7 @@
 
 <?php if ($root): ?>
 <div id="site-map-def">
-    <div class="page"><?php echo __('Page'); ?> (<a href="#" onclick="toggle_handle = !toggle_handle; $$('.handle').each(function(e) { e.style.display = toggle_handle ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a>)</div>
+    <div class="page"><?php echo __('Page'); ?> (<a href="#" id="toggle_sort" onclick="toggle_sort = !toggle_sort; $$('.handle_sort').each(function(e) { e.style.display = toggle_sort ? 'inline': 'none'; }); return false;"><?php echo __('reorder'); ?></a> or <a id="toggle_copy" href="#" onclick="toggle_copy = !toggle_copy; $$('.handle_copy').each(function(e) { e.style.display = toggle_copy ? 'inline': 'none'; }); return false;"><?php echo __('copy'); ?></a>)</div>
     <div class="status"><?php echo __('Status'); ?></div>
     <div class="modify"><?php echo __('Modify'); ?></div>
 </div>

@@ -371,6 +371,29 @@ class PageController extends Controller
 		}
 		// need to fixe level for all subpage of this page
 	}
+	/**
+	 * Ajax action to copy a page or page tree
+	 */
+	function copy($parent_id)
+	{
+		parse_str($_POST['data']);
+		
+		$page = Record::findByIdFrom('Page', $dragged_id);
+		$clone_id = Page::cloneTree($page, $parent_id);
+		
+		foreach ($pages as $position => $page_id)
+		{
+			// Move the cloned tree, not original.
+			if ($page_id == $dragged_id) {
+				$page = Record::findByIdFrom('Page', $clone_id);
+			} else {
+				$page = Record::findByIdFrom('Page', $page_id);
+			}
+			$page->position = (int)$position;
+			$page->parent_id = (int)$parent_id;
+			$page->save();
+		}
+	}
 	
 	public function language()
 	{

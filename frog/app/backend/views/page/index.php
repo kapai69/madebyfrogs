@@ -1,16 +1,16 @@
 <h1><?php echo __('Pages'); ?></h1>
 
 <?php $languages = explode(',', Setting::get('backend_language')); ?>
-<?php if (count($languages) > 1): ?>
+<?php /*if (count($languages) > 1): ?>
 <form id="form-backend_language" action="<?php echo get_url('page/language') ?>" method="post">
 	<label for="setting-backend_language"><?php echo __('Language'); ?></label>
 	<select id="setting-backend_language" name="language" onchange="$('form-backend_language').submit();">
 <?php foreach ($languages as $language): ?>
-		<option value="<?php echo $language; ?>"<?php if($language == $current_language) echo ' selected="selected"'; ?>><?php echo Language::nameOf($language); ?></option>
+		<option value="<?php echo $language; ?>"<?php if ($language == $current_language) echo ' selected="selected"'; ?>><?php echo Language::nameOf($language); ?></option>
 <?php endforeach; ?>
 	</select>
 </form>
-<?php endif; ?>
+<?php endif;*/ ?>
 
 <?php if ($root): ?>
 <div id="site-map-def">

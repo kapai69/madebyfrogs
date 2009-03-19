@@ -44,7 +44,6 @@ class Page extends Record
 	public $layout_id;
 	public $behavior_id;
 	public $status_id;
-	public $language = 'en';
 	public $comment_status;
 	
 	public $created_on;
@@ -53,7 +52,6 @@ class Page extends Record
 	public $created_by_id;
 	public $updated_by_id;
 	public $position;
-	public $level;
 	public $is_protected;
 	
 	public function beforeInsert()
@@ -238,18 +236,6 @@ class Page extends Record
 			'where' => 'page.id='.(int)$id,
 			'limit' => 1
 		));
-	}
-	
-	public static function findRoot($language = 'en')
-	{
-		$tablename = self::tableNameFromClassName('Page');
-		
-		$sql = "SELECT * FROM $tablename WHERE parent_id=0 AND language='{$language}'";
-		
-		$stmt = self::$__CONN__->prepare($sql);
-		$stmt->execute();
-		
-		return $stmt->fetchObject('Page');
 	}
 	
 	public static function childrenOf($id)

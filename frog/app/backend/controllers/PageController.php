@@ -26,27 +26,21 @@
 
 class PageController extends Controller
 {
-	public $language = DEFAULT_LANGUAGE;
-	
 	public function __construct()
 	{
 		if ( ! AuthUser::isLoggedIn())
 			redirect(get_url('login'));
-	
-		if (!empty($_SESSION['backend_language']))
-			$this->language = $_SESSION['backend_language'];
 	}
 	
 	public function index()
 	{
 		$childrens = array();
 		
-		if ($root = Page::findRoot($this->language))
+		if ($root = Record::findByIdFrom('Page', 1))
 			$childrens = $this->children($root, 0, true);
 		
 		$this->setLayout('backend');
 		$this->display('page/index', array(
-			'current_language' => $this->language,
 			'root'             => $root,
 			'content_children' => $childrens
 		));
@@ -60,7 +54,6 @@ class PageController extends Controller
 		
 		$data = Flash::get('post_data');
 		$page = new Page($data);
-		$page->language = $this->language;
 		$page->parent_id = $parent_id;
 		$page->status_id = Setting::get('default_status_id');
 		
@@ -114,8 +107,6 @@ class PageController extends Controller
 		$parent = Record::findByIdFrom('Page', $data['parent_id']);
 
 		$page = new Page($data);
-		$page->language = $this->language;
-		$page->level = $parent->level+1;
 		
 		// save page data
 		if ($page->save())
@@ -216,7 +207,7 @@ class PageController extends Controller
 		$data['is_protected'] = !empty($data['is_protected']) ? 1: 0;
 
 		// if it's THE root page of the default website language, remove the slug
-		if ($page->parent_id == 0 and $page->language == DEFAULT_LANGUAGE)
+		if ($page->parent_id == 0)
 			$data['slug'] = '';
 		
 		$page->setFromData($data);
@@ -343,7 +334,7 @@ class PageController extends Controller
 		$content = new View('page/children', array(
 			'parent'     => $parent,
 			'childrens'  => $childrens,
-			'level'      => $level+1,
+			'level'      => $level+1
 		));
 		
 		if ($return)
@@ -369,7 +360,6 @@ class PageController extends Controller
 			$page->parent_id = (int) $parent_id;
 			$page->save();
 		}
-		// need to fixe level for all subpage of this page
 	}
 	/**
 	 * Ajax action to copy a page or page tree
@@ -393,13 +383,6 @@ class PageController extends Controller
 			$page->parent_id = (int)$parent_id;
 			$page->save();
 		}
-	}
-	
-	public function language()
-	{
-		$_SESSION['backend_language'] = $_POST['language'];
-		
-		redirect(get_url('page'));
 	}
 	
 	//	Private methods	 -----------------------------------------------------

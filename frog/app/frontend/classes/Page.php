@@ -121,9 +121,9 @@ class Page
 	
 	public function level()
 	{
-		/*if ($this->level === false)
-			$this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;*/
-		
+		if ($this->level === false)
+			$this->level = empty($this->url) ? 0 : substr_count($this->url, '/')+1;
+
 		return $this->level;
 	}
 	
@@ -181,7 +181,18 @@ class Page
 		
 	}
 	
-	public function hasContent($part) { return !empty($this->part->$part); }
+	public function hasContent($part, $inherit=false)
+	{
+		if (!empty($this->part->$part))
+		{
+			return true;
+		}
+		else if ($inherit && $this->parent)
+		{
+			return $this->parent->hasContent($part, true);
+		}
+		else return false;
+	}
 	
 	public function content($part='body', $inherit=false)
 	{

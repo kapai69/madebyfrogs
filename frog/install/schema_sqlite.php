@@ -48,14 +48,12 @@ $PDO->exec("CREATE TABLE page (
     layout_id int(11) default NULL,
     behavior_id varchar(25) NOT NULL,
     status_id int(11) NOT NULL default '100',
-    language char(2) default '{$_POST['config']['language']}',
     created_on datetime default NULL,
     published_on datetime default NULL,
     updated_on datetime default NULL,
     created_by_id int(11) default NULL,
     updated_by_id int(11) default NULL,
     position mediumint(6) default NULL,
-    level tinyint(4) NOT NULL default '0',
     is_protected tinyint(1) NOT NULL default '0'
 )");
 
@@ -134,6 +132,7 @@ $PDO->exec("CREATE TABLE user (
     email varchar(255) default NULL ,
     username varchar(40) NOT NULL ,
     password varchar(40) default NULL ,
+    language char(2) default 'en',
     created_on datetime default NULL ,
     updated_on datetime default NULL ,
     created_by_id int(11) default NULL ,

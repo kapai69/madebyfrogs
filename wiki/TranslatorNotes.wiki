@@ -16,13 +16,13 @@ The following guidance and suggested procedures should help those who wish to (a
 
 == Translating ==
 
-=== In 0.9.4 (current as of 2008-09-29) ===
+=== In 0.9.4 (soon to be deprecated) ===
 
 For the moment, translators may use the (now deprecated) [http://madebyfrogs.googlecode.com/svn-history/r259/trunk/frog/app/backend/i18n/en-messages.php.template template] for the Frog core.
 
 As of r260, however, this system has been superseded (see next), and we *strongly recommend* anyone thinking of contributing a new translation to use the new system described below:
 
-=== In 0.9.5 (currently in development) and beyond ===
+=== In 0.9.5 (currently in RC1 - not yet stable) and beyond ===
 
 With the developments in 0.9.5, Frog's admin includes a translation template generator to help out translators with translating the Frog core and plugins.
 

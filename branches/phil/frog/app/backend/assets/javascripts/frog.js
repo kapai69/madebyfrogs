@@ -35,13 +35,14 @@ Object.extend(String.prototype, {
     return parseInt(this);
   },
 
-  /* TODO - the replace commands here should still be optimized. */
+  // TODO - the replace commands here should still be optimized.
   toSlug: function()
   {
     return this.strip().downcase()
-        .replace(/[àâä]/g,"a").replace(/[éèêë]/g,"e").replace(/[îï]/g,"i")
-        .replace(/[ôö]/g,"o").replace(/[ùûü]/g,"u")
-        .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-');
+        .replace(/[àâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[îï]/g,'i')
+        .replace(/[ôö]/g,'o').replace(/[ùûü]/g,'u')
+        .replace(/[^-a-z0-9~\s\.:;+=_]/g, '').replace(/[\s\.:;=+]+/g, '-')
+        .replace(/[-]+/g, '-').replace(/-$/g, '');
   }
 
 });

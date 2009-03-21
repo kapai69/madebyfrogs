@@ -115,14 +115,21 @@ class Page
 	public function updator() { return $this->updator; }
 	public function updatorId() { return $this->updator_id; }
 	public function slug() { return $this->slug; }
+	public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
+	
 	public function keywords($inherit=true) {
 		if (!$inherit)
 			return $this->keywords;
 		
 		return (empty($this->keywords) && $this->parent) ? $this->parent->keywords(): $this->keywords;
 	}
-	public function description() { return $this->description; }
-	public function url() { return BASE_URL . $this->url . ($this->url != '' ? URL_SUFFIX: ''); }
+	
+	public function description($inherit=true) {
+		if (!$inherit)
+			return $this->description;
+		
+		return (empty($this->description) && $this->parent) ? $this->parent->description(): $this->description;
+	}
 	
 	public function level()
 	{

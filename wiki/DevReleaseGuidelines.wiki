@@ -23,7 +23,7 @@ Frog v0.9.4 RC 1 - normal reference; Frog version 0.9.4 Release Candidate 1
 frog_v0.9.3_SP_1 - filename example; Frog version 0.9.3 Security Patch 1
 }}}
 
-What do all these numbers and letters mean? First, let us look at the <99>.<99>.<99> piece, which is divided into Major.Minor.Fix:
+What do all these numbers and letters mean? First, let us look at the {{{<99>.<99>.<99>}}} piece, which is divided into Major.Minor.Fix:
 
   * Major version; with a major version number change, almost anything goes. Generally, features will be added, removed, changed, renamed, etc... A Major version can offcourse also contain simple bugfixes.
   * Minor version; minor version changes should generally remain backwards compatible. Usually, features will only be added. They will only be changed if it doesn't impact on backwards compatibility.

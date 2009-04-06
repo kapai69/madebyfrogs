@@ -1,0 +1,34 @@
+# FROG CMS - INFORMATION ABOUT UPDATING
+
+## General
+
+Please be aware that we only support single version upgrades. That means you
+upgrade from 0.9.3 to 0.9.4 and only then to 0.9.5.
+
+## UPDATING FROM 0.9.4 to 0.9.5  -- TO BE CHECKED AND UPDATED --
+
+WARNING - The split between frontend and backend in the Frog code has been
+          removed in this version. This has led to significant code changes.
+
+          You will need to update *ALL* files.
+
+Please remember to MAKE BACKUPS of Frog and your DB before trying to update!
+
+The best and most comprehensive method of upgrading to Frog 0.9.5 is
+unfortunately to install Frog from scratch, including the database.
+
+You can then import pages, comments, etc. manually from the DB backup you made.
+
+Due to the large number of significant changes, this is the only recommended
+method of upgrading to 0.9.5.
+
+To prevent this from happening in next versions, an export/import function will
+be made available in post-0.9.5. releases.
+
+## NOTES
+
+- The public directory now contains a themes subdirectory.
+  It is advised that all themes for Frog follow the same approach as the
+  Normal theme.
+- It is advised to always use the htaccess file. You can dis/enable the url
+  rewriting by setting RewriteEngine to On/Off.

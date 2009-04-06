@@ -18,7 +18,7 @@ Frog v<99>.<99>.<99> [<<RC|SP> 99>]
 In filenames, spaces are replaced by underscores and the entire filename is lowercase. Possible examples of this syntax would be:
 
 {{{
-frog_v1.0.0      - filename example; Frog stable version 1.0.0
+frog_v100.zip    - filename example; Frog stable version 1.0.0
 Frog v0.9.4 RC 1 - normal reference; Frog version 0.9.4 Release Candidate 1
 frog_v0.9.3_SP_1 - filename example; Frog version 0.9.3 Security Patch 1
 }}}

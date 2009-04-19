@@ -50,9 +50,9 @@ Since Frog generates empty translation templates for you, and you always have th
 
 Here's a rough guideline:
 
-# Check out the latest Frog version from SVN [http://code.google.com/p/madebyfrogs/source/checkout here]
-# Generate a new translation template through Frog's interface. (direct url example: http://localhost/frog/admin/translate)
-# Use diff or a tool like beyondCompare to copy the old translation's entries into the new template
+  # Check out the latest Frog version from SVN [http://code.google.com/p/madebyfrogs/source/checkout here]
+  # Generate a new translation template through Frog's interface. (direct url example: http://localhost/frog/admin/translate)
+  # Use diff or a tool like beyondCompare to copy the old translation's entries into the new template
 
 Your diff tool should highlight any changes between the two files. Be sure to only change entries on the *right* side of the equals sign ('='). If your diff tool highlights any changes on the left side of the equals sign, that means Frog has changed the original text. In that case, be sure to double check your translation for that entry.
 

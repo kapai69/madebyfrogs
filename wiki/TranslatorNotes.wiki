@@ -43,3 +43,17 @@ Once you have finished your translation, then we suggest you:
 Everyone using Frog CMS is grateful for the i18n modules contributed by users. The more widely used Frog is, the larger the community will be. And that's good for everyone!
 
 So thank you for your contribution, and please consider keeping your work up-to-date as Frog continues to develop.
+
+=== How to use 'diff' to help update your work ===
+
+Since Frog generates empty translation templates for you, and you always have the most recent translation available from Frog's SVN, you can use tools like diff or beyondCompare to compare the old translation file with the new template.
+
+Here's a rough guideline:
+
+# Check out the latest Frog version from SVN [http://code.google.com/p/madebyfrogs/source/checkout here]
+# Generate a new translation template through Frog's interface. (direct url example: http://localhost/frog/admin/translate)
+# Use diff or a tool like beyondCompare to copy the old translation's entries into the new template
+
+Your diff tool should highlight any changes between the two files. Be sure to only change entries on the *right* side of the equals sign ('='). If your diff tool highlights any changes on the left side of the equals sign, that means Frog has changed the original text. In that case, be sure to double check your translation for that entry.
+
+When you're done, compare your new/updated translation file to a freshly (!) generated translation file with your diff tool. There should be no differences on the left side of the equals ('=') sign.

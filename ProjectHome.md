@@ -1,0 +1,1 @@
+Frog is a small and simple CMS for everyone that need only a CMS without all other big thing that we don't need. You can manage all you pages with a unlimited multi-level structure. The url is really nice displayed for search engine. This is a migration of Radiant CMS (in ruby).
